@@ -1,0 +1,23 @@
+import Link from 'next/link'
+
+export default function P_clases() {
+  return (
+    <>
+<section className="sec" style={{ paddingBottom: 48 }}><div className="in stack g16"><span className="eyebrow">Clases</span><h1 className="t1">Elige tu forma de parar</h1><p className="lead" style={{ maxWidth: 680 }}>Clases en directo de 20 minutos y biblioteca de v&iacute;deos de 45 minutos.</p></div></section>
+<section className="sec" style={{ paddingTop: 24 }}><div className="in grid c2" style={{ alignItems: "stretch" }}>
+<div className="card tint stack g16" style={{ padding: 36 }}><span className="chip coral" style={{ alignSelf: "flex-start" }}>En directo</span><h2 className="t2" style={{ fontSize: 32 }}>Clases en directo</h2><p style={{ fontSize: 17, color: "var(--soft)" }}>20 minutos, tres franjas al d&iacute;a y un m&aacute;ximo de 10 personas por clase, para que M&oacute;nica te vea y te corrija. Se reservan con antelaci&oacute;n y puedes cancelar hasta 24 horas antes.</p>
+<ul className="list stack g12"><li><span><b>Hora del caf&eacute;</b> &middot; pausa de media ma&ntilde;ana</span></li><li><span><b>Hora de la comida</b> &middot; en mitad del d&iacute;a</span></li><li><span><b>Despu&eacute;s del trabajo</b> &middot; para soltar la jornada</span></li></ul></div>
+<div className="card blush stack g16" style={{ padding: 36 }}><span className="chip" style={{ alignSelf: "flex-start" }}>Grabadas</span><h2 className="t2" style={{ fontSize: 32 }}>Clases grabadas</h2><p style={{ fontSize: 17, color: "#4A3B37" }}>Sesiones de 45 minutos por niveles, y los directos grabados, para practicar cuando te venga bien.</p>
+<ul className="list stack g12"><li>Filtra por duraci&oacute;n, nivel, disciplina y zona del cuerpo</li><li>Disponibles en los dos planes</li></ul></div></div></section>
+<section className="sec white"><div className="in stack g32"><h2 className="t2">Disciplinas</h2><div className="grid">
+<div className="card tint stack g12"><svg viewBox="0 0 96 96" width="72" height="72" aria-hidden="true"><path d="M48 26.1 L48 70.49" stroke="#FF9782" strokeWidth={8} strokeLinecap="round" /><circle cx="48" cy="48" r="40" fill="none" stroke="#00A28F" strokeWidth={8} /></svg><h3 className="t3" style={{ fontSize: 26 }}>Pilates</h3><p style={{ fontSize: 17, color: "var(--soft)" }}>Fuerza, control y postura.</p></div>
+<div className="card blush stack g12"><svg viewBox="0 0 96 96" width="72" height="72" aria-hidden="true"><path d="M12 76 H84" stroke="#0E2F2B" strokeWidth={8} strokeLinecap="round" /><path d="M26 62 C30 38 66 38 70 62" fill="none" stroke="#FF9782" strokeWidth={8} strokeLinecap="round" /><circle cx="48" cy="22" r="9" fill="#FF9782" /></svg><h3 className="t3" style={{ fontSize: 26 }}>Total Barre</h3><p style={{ fontSize: 17, color: "#4A3B37" }}>Tonificaci&oacute;n sin impacto de forma din&aacute;mica.</p></div>
+<div className="card sand stack g12"><svg viewBox="0 0 96 96" width="72" height="72" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="none" stroke="#00A28F" strokeWidth={6} /><circle cx="48" cy="48" r="24" fill="none" stroke="#00A28F" strokeWidth={6} strokeOpacity="0.55" /><circle cx="48" cy="48" r="9" fill="#FF9782" /></svg><h3 className="t3" style={{ fontSize: 26 }}>Mindfulness</h3><p style={{ fontSize: 17, color: "#3F403B" }}>Respiraci&oacute;n y atenci&oacute;n plena.</p></div></div></div></section>
+<section className="sec"><div className="in stack g32"><div className="stack g12"><h2 className="t2">Niveles</h2><p className="lead">Los niveles est&aacute;n disponibles en Pilates y Total Barre. Mindfulness no tiene niveles.</p></div><div className="grid">
+<div className="card stack g12"><span className="eyebrow">Pilates y Total Barre</span><h3 className="t3">Nivel 1</h3><p className="muted" style={{ fontSize: 17 }}>Empieza a conocer estas disciplinas y a desarrollar tu t&eacute;cnica desde la base.</p></div>
+<div className="card stack g12"><span className="eyebrow">Pilates y Total Barre</span><h3 className="t3">Nivel 2</h3><p className="muted" style={{ fontSize: 17 }}>Profundiza en tu pr&aacute;ctica con ejercicios m&aacute;s exigentes y gana control, fuerza y precisi&oacute;n.</p></div>
+<div className="card stack g12"><span className="eyebrow">Pilates y Total Barre</span><h3 className="t3">Rehabilitaci&oacute;n</h3><p className="muted" style={{ fontSize: 17 }}>Movimientos suaves y adaptados para cuidar tu cuerpo si tienes dolores o te recuperas de una lesi&oacute;n. Consulta antes con tu m&eacute;dico o fisioterapeuta.</p></div></div>
+<Link className="btn b1" href="/precios" style={{ alignSelf: "flex-start" }}>Ver planes</Link></div></section>
+    </>
+  )
+}
