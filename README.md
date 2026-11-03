@@ -29,6 +29,8 @@ cancelar hasta 24 h antes devuelve el crédito (con menos de 24 h se pierde) · 
 
 ## Pendiente (no incluido todavía)
 
+El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
+
 - Pagos con Stripe (alta de suscripción, cambio de plan con cobro, método de pago y baja).
 - Panel de administración para Mónica (crear clases, cancelar una clase y devolver créditos, subir vídeos).
 - Emails (recordatorios, aviso a las tres primeras personas de la lista de espera, cancelación por parte de Mónica).
