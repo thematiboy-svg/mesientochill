@@ -55,7 +55,7 @@ export function RegisterForm() {
           <div className="field"><label htmlFor="r-n">Nombre</label><input id="r-n" name="nombre" className="in-t" type="text" autoComplete="given-name" placeholder="Tu nombre" required /></div>
           <div className="field"><label htmlFor="r-a">Apellidos</label><input id="r-a" name="apellidos" className="in-t" type="text" autoComplete="family-name" placeholder="Tus apellidos" required /></div>
           <div className="field"><label htmlFor="r-e">Email</label><input id="r-e" name="email" className="in-t" type="email" autoComplete="email" placeholder="tu@email.com" required /></div>
-          <div className="field"><label htmlFor="r-t">Teléfono móvil</label><input id="r-t" name="telefono" className="in-t" type="tel" inputMode="tel" autoComplete="tel" placeholder="600 123 456" /></div>
+          <div className="field"><label htmlFor="r-t">WhatsApp</label><input id="r-t" name="telefono" className="in-t" type="tel" inputMode="tel" autoComplete="tel" placeholder="600 123 456" /></div>
           <div className="field"><label htmlFor="r-p">Contraseña</label><input id="r-p" name="password" className="in-t" type="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
           <label className="opt" style={{ alignItems: 'flex-start', fontSize: 14 }}><input type="checkbox" name="privacidad" /><span>He leído y acepto la <Link href="/ayuda" style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link> y los términos del servicio.</span></label>
           <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Creando tu cuenta…' : 'Crear mi cuenta'}</button>
