@@ -1,0 +1,17 @@
+/* Estilos de la landing del piloto (/landing), limitados a .lp */
+.lp{margin:0}
+.lp *{box-sizing:border-box}
+.lp a{color:#006B5E}.lp a:hover{color:#0E2F2B}
+@media (max-width:600px){
+.lp section,.lp footer,.lp header{padding-left:20px!important;padding-right:20px!important}
+.lp #eventos{padding-left:12px!important;padding-right:12px!important}
+.lp #eventos>div{padding:24px 8px!important;border-radius:28px!important;gap:24px!important}
+.lp #eventos>div>div{flex-basis:100%!important}
+.lp #eventos>div>div+div{padding:20px 16px!important}
+.lp .lp-badge{left:0!important;bottom:-90px!important}
+.lp #inicio{padding-bottom:140px!important}
+.lp #eventos a{white-space:nowrap;padding-left:16px!important;padding-right:16px!important;width:100%}
+.lp #inicio .lp-badge{bottom:-60px!important;left:0!important}
+}
+@media (max-width:600px){.lp .ev-sec{padding:64px 12px !important}.lp .ev-box{padding:24px 8px !important;border-radius:28px !important;gap:24px !important}.lp .ev-box>div{flex-basis:100% !important}.lp .ev-box h2,.lp .ev-box>div:first-child>*{padding-left:8px;padding-right:8px}.lp .ev-card{padding:20px 16px !important}.lp .ev-card .ev-dis{font-size:15px !important;line-height:1.45 !important}.lp .ev-btn{width:100% !important;white-space:nowrap !important;padding:14px 16px !important}}
+.lp .lp-in{height:52px;border:1.5px solid #5E7B76;border-radius:14px;padding:0 16px;font-family:'Britanica','Montserrat',sans-serif;font-size:16px;color:#0E2F2B;background:#FFFFFF}
