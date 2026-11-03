@@ -1,9 +1,10 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { supabaseUrl, supabaseAnonKey } from './lib/supabase/env'
 
 export async function middleware(request: NextRequest) {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const url = supabaseUrl
+  const key = supabaseAnonKey
   let response = NextResponse.next({ request })
   if (!url || !key) {
     if (request.nextUrl.pathname.startsWith('/app')) {

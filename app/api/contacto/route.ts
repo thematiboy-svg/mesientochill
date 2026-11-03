@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 // Envía el mensaje de contacto por email con Resend.
-// Requiere RESEND_API_KEY y CONTACT_TO_EMAIL (y opcionalmente CONTACT_FROM_EMAIL).
+// Requiere RESEND_API_KEY. Destino: CONTACT_TO_EMAIL (por defecto info@mesientochill.com); remitente opcional: CONTACT_FROM_EMAIL.
 // Si no están configuradas devuelve 503 y el formulario muestra un error.
 export async function POST(req: Request) {
   let body: { nombre?: string; email?: string; mensaje?: string }
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Datos incompletos' }, { status: 400 })
   }
   const key = process.env.RESEND_API_KEY
-  const to = process.env.CONTACT_TO_EMAIL
+  const to = process.env.CONTACT_TO_EMAIL || 'info@mesientochill.com'
   if (!key || !to) {
     return NextResponse.json({ error: 'Envío no configurado' }, { status: 503 })
   }

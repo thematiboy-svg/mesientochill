@@ -5,7 +5,7 @@ import { createClient } from '../lib/supabase/server'
 
 export type FormState = { error?: string; ok?: string } | undefined
 
-const NO_CONFIG = 'Falta configurar Supabase (variables NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY).'
+const NO_CONFIG = 'Falta configurar Supabase (variables NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY, o las de la integración de Vercel).'
 
 export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   const supabase = await createClient()
