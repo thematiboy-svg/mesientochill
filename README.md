@@ -23,7 +23,7 @@ cancelar hasta 24 h antes devuelve el crédito (con menos de 24 h se pierde) · 
 
 1. Crea un proyecto en [Supabase](https://supabase.com).
 2. En el editor SQL ejecuta `supabase/schema.sql` y después `supabase/seed.sql` (clases de ejemplo y vídeos).
-3. Copia `.env.example` a `.env.local` y rellena `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+3. Copia `.env.example` a `.env.local` y rellena `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`. En Vercel también valen las variables que crea la integración de Supabase (`NEXT_PUBLIC_mesientochill_SUPABASE_URL` y `NEXT_PUBLIC_mesientochill_SUPABASE_ANON_KEY`).
 4. En Supabase → Authentication, decide si exiges confirmar el email (si lo exiges, tras registrarse se avisa de que hay que confirmarlo).
 5. `npm install` y `npm run dev` → http://localhost:3000
 
