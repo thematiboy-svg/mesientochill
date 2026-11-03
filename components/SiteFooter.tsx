@@ -1,5 +1,29 @@
 import Link from 'next/link'
 
+// TODO: sustituir por los perfiles reales de MeSientoChill.
+const SOCIAL = [
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/',
+    icon: (<><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r=".6" fill="currentColor" /></>),
+  },
+  {
+    name: 'TikTok',
+    href: 'https://www.tiktok.com/',
+    icon: (<><path d="M14 3v11.2a3.7 3.7 0 1 1-3.7-3.7" /><path d="M14 3c.3 2.5 2 4.2 4.6 4.4" /></>),
+  },
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/',
+    icon: (<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />),
+  },
+  {
+    name: 'YouTube',
+    href: 'https://www.youtube.com/',
+    icon: (<><rect x="2.5" y="5.5" width="19" height="13" rx="4" /><path d="M10 9.2v5.6l5-2.8z" fill="currentColor" /></>),
+  },
+]
+
 export default function SiteFooter({ helpHref = '/ayuda' }: { helpHref?: string }) {
   return (
     <>
@@ -20,7 +44,13 @@ export default function SiteFooter({ helpHref = '/ayuda' }: { helpHref?: string 
               <Link href="/cookies">Cookies</Link>
               <Link href="/accesibilidad">Accesibilidad</Link>
               <Link href="/contacto">Contacto</Link>
-              <Link href="/">[Redes sociales]</Link>
+              <span className="soc" style={{ display: 'inline-flex', alignItems: 'center', marginLeft: -10 }}>
+                {SOCIAL.map((n) => (
+                  <a key={n.name} href={n.href} target="_blank" rel="noopener noreferrer" aria-label={n.name} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, color: '#fff', textDecoration: 'none', padding: 0 }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{n.icon}</svg>
+                  </a>
+                ))}
+              </span>
             </nav>
           </div>
         </div>
