@@ -4,7 +4,7 @@ export default function P_eventos() {
   return (
     <>
 <section className="sec blush"><div className="in wrapr center" style={{ gap: "40px 64px" }}><div className="stack g20" style={{ flex: "1 1 420px", minWidth: "0", alignItems: "flex-start" }}><span className="eyebrow" style={{ color: "#8A3A26" }}>Cuatro eventos al a&ntilde;o</span><h1 className="t1" style={{ fontSize: "clamp(34px,4vw,52px)" }}>Un d&iacute;a para ti y para la comunidad</h1>
-<p className="lead" style={{ color: "#4A3B37" }}>Con sesiones del DJ Mr.Matt para relajarte y disfrutar despu&eacute;s de comer, mindfulness, actividades, comida sana y gente con la que compartirlo.</p></div>
+<p className="lead" style={{ color: "#4A3B37" }}>Con 2 sesiones en directo de Mr.Matt, una pensada para la relajaci&oacute;n y otra para disfrutar despu&eacute;s de comer, mindfulness, actividades, comida sana y gente con la que compartirlo.</p></div>
 <div className="card stack g16" style={{ flex: "1 1 320px", minWidth: "0" }}><span className="small muted" style={{ fontWeight: "700" }}>Pr&oacute;ximo evento: [fecha, lugar y aforo]</span>
 <p style={{ display: "flex", alignItems: "baseline", gap: 10 }}><span style={{ fontSize: 52, fontWeight: "800", lineHeight: "1" }}>38 &euro;</span><span className="muted" style={{ fontWeight: "600" }}>por persona</span></p>
 <p style={{ fontSize: 17, fontWeight: "700", color: "var(--teal)" }}>Si est&aacute;s suscrita o suscrito: 30,40 &euro; con el plan Directo y v&iacute;deos (20 % de descuento) y 34,20 &euro; con Solo v&iacute;deos (10 % de descuento)</p>
