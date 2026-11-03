@@ -204,3 +204,13 @@ body{margin:0}
 .mk .alert.ok{background:var(--tint);color:var(--teal);border:1px solid var(--line2)}
 .mk button.btn{font-family:inherit}
 .mk button.linkbtn{background:none;border:0;padding:0;font:inherit;font-size:15px;font-weight:700;color:var(--teal);cursor:pointer;text-decoration:underline}
+
+/* Política de privacidad */
+.ptoc a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;padding:6px 0;line-height:1.4}
+.ptoc a:hover{color:var(--teal);text-decoration:underline}
+.dtb{display:flex;flex-direction:column;border:1px solid #E3DED8;border-radius:20px;overflow:hidden;background:#fff}
+.dtb .row{display:flex;flex-wrap:wrap;gap:4px 24px;padding:16px 20px;justify-content:space-between}
+.dtb .row+.row{border-top:1px solid #E3DED8}
+.dtb .row b{flex:1 1 260px;font-weight:600}
+.dtb .row span{flex:1 1 200px;color:var(--muted);font-size:15px}
+@media (min-width:901px){.ptoc{position:sticky;top:96px}}

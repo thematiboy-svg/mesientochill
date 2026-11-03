@@ -16,7 +16,7 @@ export default function SiteFooter({ helpHref = '/ayuda' }: { helpHref?: string 
             </nav>
             <nav aria-label="Legal">
               <Link href="/ayuda">Aviso legal</Link>
-              <Link href="/ayuda">Privacidad</Link>
+              <Link href="/privacidad">Privacidad</Link>
               <Link href="/ayuda">Cookies</Link>
               <Link href="/ayuda">Accesibilidad</Link>
               <Link href="/ayuda">Contacto</Link>

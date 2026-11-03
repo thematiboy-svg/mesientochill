@@ -27,7 +27,7 @@ export default function P_ayuda() {
 <form className="card tint stack g20" style={{ flex: "1 1 420px", minWidth: "0" }}><div className="field"><label htmlFor="c-n">Nombre</label><input id="c-n" className="in-t" type="text" placeholder="Tu nombre" /></div>
 <div className="field"><label htmlFor="c-e">Email</label><input id="c-e" className="in-t" type="email" placeholder="tu@email.com" /></div>
 <div className="field"><label htmlFor="c-m">Mensaje</label><textarea id="c-m" className="in-t" placeholder="Cu\xE9ntanos qu\xE9 necesitas" /></div>
-<label className="opt" style={{ alignItems: "flex-start", fontSize: 14 }}><input type="checkbox" /><span>He le&iacute;do y acepto la <Link href="/ayuda" style={{ color: "inherit", textDecoration: "underline" }}>pol&iacute;tica de privacidad</Link>.</span></label><button className="btn b1" type="submit">Enviar mensaje</button></form></div></section>
+<label className="opt" style={{ alignItems: "flex-start", fontSize: 14 }}><input type="checkbox" /><span>He le&iacute;do y acepto la <Link href="/privacidad" style={{ color: "inherit", textDecoration: "underline" }}>pol&iacute;tica de privacidad</Link>.</span></label><button className="btn b1" type="submit">Enviar mensaje</button></form></div></section>
     </>
   )
 }
