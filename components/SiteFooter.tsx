@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Copyright from './Copyright'
 
 // TODO: sustituir por los perfiles reales de MeSientoChill.
 const SOCIAL = [
@@ -55,6 +56,7 @@ export default function SiteFooter({ helpHref = '/ayuda' }: { helpHref?: string 
           </div>
         </div>
         <p className="ft-note">Las clases de MeSientoChill no sustituyen el consejo médico ni la fisioterapia. Si tienes una lesión o una condición de salud, consulta antes con tu médico.</p>
+        <Copyright className="ft-copy" />
       </footer>
       <Link className="fab" href={helpHref} aria-label="Ayuda: hablar con Chillsi, el asistente">
         <span className="fab-ic">

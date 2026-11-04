@@ -34,3 +34,4 @@
 /* El fondo de la última sección llega por detrás de las esquinas del footer */
 .lp section:has(+ footer)::after{content:"";display:block;height:40px}
 .lp section:has(+ footer) + footer{margin-top:-40px;position:relative}
+.lp footer a[href="https://wabisabu.com"]:hover{color:#FF9782!important}
