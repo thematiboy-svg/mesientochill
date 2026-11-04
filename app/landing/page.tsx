@@ -23,7 +23,7 @@ export default function Landing() {
 <a href="#precios" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>Precios</a>
 <a href="#eventos" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>Eventos</a>
 <a href="#apuntate" style={{ color: "#006B5E", textDecoration: "none", padding: "12px 8px" }}>Iniciar sesi&oacute;n</a>
-<a href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "12px 24px", borderRadius: 999, fontWeight: "700", minHeight: 44, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar</a>
+<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "12px 24px", borderRadius: 999, fontWeight: "700", minHeight: 44, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar</a>
 </nav>
 </div>
 </header>
@@ -35,8 +35,8 @@ export default function Landing() {
 <h1 style={{ margin: "0", fontSize: "clamp(36px, 4.4vw, 60px)", fontWeight: "600", lineHeight: "1.08", letterSpacing: "-0.02em" }}>20 minutos para <span style={{ color: "#00A28F", fontWeight: "600" }}>cambiar tu energ&iacute;a</span></h1>
 <p style={{ margin: "0", fontSize: 20, maxWidth: 560, color: "#3B5753" }}>Pilates, Total Barre y Mindfulness en directo con M&oacute;nica Mu&ntilde;oz. Una pausa en mitad del d&iacute;a para volver al trabajo con la cabeza clara.</p>
 <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center" }}>
-<a href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Quiero mi plaza en el piloto</a>
-<a href="#como" style={{ background: "transparent", color: "#006B5E", textDecoration: "none", padding: "14px 30px", borderRadius: 999, fontWeight: "700", fontSize: 17, border: "2px solid #006B5E", minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Ver c&oacute;mo funciona</a>
+<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Quiero mi plaza en el piloto</a>
+<a className="lp-btn lp-b2" href="#como" style={{ background: "transparent", color: "#006B5E", textDecoration: "none", padding: "14px 30px", borderRadius: 999, fontWeight: "700", fontSize: 17, border: "2px solid #006B5E", minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Ver c&oacute;mo funciona</a>
 </div>
 <p style={{ margin: "0", fontSize: 15, fontWeight: "600", color: "#006B5E" }}>Plazas limitadas</p>
 <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 28px", fontSize: 15, fontWeight: "500", color: "#3B5753" }}>
@@ -161,7 +161,7 @@ export default function Landing() {
 <li style={{ display: "flex", gap: 12, alignItems: "center" }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF9782", flex: "none" }} />Pilates, Total Barre, Yoga, Mindfulness y gesti&oacute;n emocional</li>
 <li style={{ display: "flex", gap: 12, alignItems: "center" }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF9782", flex: "none" }} />Empat&iacute;a y energ&iacute;a positiva para lograr cambios visibles</li>
 </ul>
-<a href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Reservar mi pausa</a>
+<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Reservar mi pausa</a>
 </div>
 </div>
 </section>
@@ -181,7 +181,7 @@ export default function Landing() {
 <li style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#00A28F", flex: "none", marginTop: 9 }} />Clases de 45 minutos por niveles</li>
 <li style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#00A28F", flex: "none", marginTop: 9 }} />Directos grabados</li>
 </ul>
-<a href="#apuntate" style={{ background: "transparent", color: "#006B5E", textDecoration: "none", padding: "14px 30px", borderRadius: 999, fontWeight: "700", fontSize: 17, border: "2px solid #006B5E", minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar con v&iacute;deos</a>
+<a className="lp-btn lp-b2" href="#apuntate" style={{ background: "transparent", color: "#006B5E", textDecoration: "none", padding: "14px 30px", borderRadius: 999, fontWeight: "700", fontSize: 17, border: "2px solid #006B5E", minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar con v&iacute;deos</a>
 </div>
 <div style={{ flex: "1 1 340px", minWidth: "0", background: "#FFFFFF", border: "3px solid #006B5E", borderRadius: 32, padding: 40, display: "flex", flexDirection: "column", gap: 24 }}>
 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
@@ -195,7 +195,7 @@ export default function Landing() {
 <li style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#00A28F", flex: "none", marginTop: 9 }} />8 cr&eacute;ditos al mes para reservar</li>
 <li style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#00A28F", flex: "none", marginTop: 9 }} />M&aacute;ximo 10 personas por clase</li>
 </ul>
-<a href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar con directos</a>
+<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar con directos</a>
 </div>
 </div>
 <div style={{ background: "#FFFFFF", border: "1px solid #BFDCD6", borderRadius: 32, padding: 40, display: "flex", flexDirection: "column", gap: 24 }}>
@@ -228,7 +228,7 @@ export default function Landing() {
 <span style={{ fontSize: 15, fontWeight: "700", color: "#3B5753" }}>Pr&oacute;ximo evento: [fecha, lugar y aforo]</span>
 <p style={{ margin: "0", display: "flex", alignItems: "baseline", gap: 10 }}><span style={{ fontSize: 48, fontWeight: "800", lineHeight: "1" }}>38 &euro;</span><span style={{ fontSize: 16, fontWeight: "600", color: "#3B5753" }}>por persona</span></p>
 <p className="ev-dis" style={{ margin: "0", fontSize: 17, fontWeight: "700", color: "#006B5E" }}>Si est&aacute;s suscrita o suscrito: 30,40 &euro; con el plan Directo y v&iacute;deos (20 % de descuento) y 34,20 &euro; con Solo v&iacute;deos (10 % de descuento)</p>
-<a className="ev-btn" href="#apuntate" style={{ background: "#0E2F2B", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Av&iacute;same del pr&oacute;ximo</a>
+<a className="lp-btn lp-b3 ev-btn" href="#apuntate" style={{ background: "#0E2F2B", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Av&iacute;same del pr&oacute;ximo</a>
 </div>
 </div>
 </section>
