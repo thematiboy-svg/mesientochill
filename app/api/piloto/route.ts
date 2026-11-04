@@ -17,6 +17,7 @@ export async function POST(req: Request) {
   const email = get('email', 200)
   const whatsapp = get('whatsapp', 40)
   const franja = get('franja', 60)
+  const plan = get('plan', 60)
   if (!nombre || !/^\S+@\S+\.\S+$/.test(email)) {
     return NextResponse.json({ error: 'Datos incompletos' }, { status: 400 })
   }
@@ -37,6 +38,7 @@ export async function POST(req: Request) {
         `Nombre: ${nombre} ${apellidos}`.trim(),
         `Email: ${email}`,
         `WhatsApp: ${whatsapp || '—'}`,
+        `Plan que solicita: ${plan || '—'}`,
         `Franja preferida: ${franja || '—'}`,
       ].join('\n'),
     }),

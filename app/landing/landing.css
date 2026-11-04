@@ -35,3 +35,5 @@
 .lp section:has(+ footer)::after{content:"";display:block;height:40px}
 .lp section:has(+ footer) + footer{margin-top:-40px;position:relative}
 .lp footer a[href="https://wabisabu.com"]:hover{color:#FF9782!important}
+/* Menú de la landing: en móvil se cambia por el desplegable (LandingMenu) */
+@media (max-width:900px){.lp .lp-nav{display:none!important}.lp header > div{flex-wrap:nowrap!important;position:relative}.lp .lp-mnav .mnav-list a:not(.btn){color:#0E2F2B}}
