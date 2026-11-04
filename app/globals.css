@@ -214,3 +214,6 @@ body{margin:0}
 .dtb .row b{flex:1 1 260px;font-weight:600}
 .dtb .row span{flex:1 1 200px;color:var(--muted);font-size:15px}
 @media (min-width:901px){.ptoc{position:sticky;top:96px}}
+
+/* Hero de la Home en móvil: el cuadro «Elige tu pausa» baja para no tapar la sonrisa del símbolo */
+@media (max-width:600px){.hero-badge{left:0!important;bottom:-64px!important}.hero-art{margin-bottom:64px}}
