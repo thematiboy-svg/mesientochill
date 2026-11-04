@@ -26,7 +26,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             <div className="field"><label htmlFor="p-n">Nombre</label><input id="p-n" name="nombre" className="in-t" type="text" defaultValue={p?.nombre ?? ''} /></div>
             <div className="field"><label htmlFor="p-a">Apellidos</label><input id="p-a" name="apellidos" className="in-t" type="text" defaultValue={p?.apellidos ?? ''} /></div>
             <div className="field"><label htmlFor="p-e">Email</label><input id="p-e" className="in-t" type="email" value={user.email ?? ''} readOnly /></div>
-            <div className="field"><label htmlFor="p-t">Teléfono móvil</label><input id="p-t" name="telefono" className="in-t" type="tel" defaultValue={p?.telefono ?? ''} /></div>
+            <div className="field"><label htmlFor="p-t">WhatsApp</label><input id="p-t" name="telefono" className="in-t" type="tel" inputMode="tel" autoComplete="tel" placeholder="+34 600 000 000" defaultValue={p?.telefono ?? ''} /></div>
           </div>
         </section>
         <section className="card stack g20">
