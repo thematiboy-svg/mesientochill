@@ -19,6 +19,12 @@ Next.js 15 (App Router) + Supabase (login, base de datos y seguridad por filas).
 8 créditos al mes que caducan a fin de mes · máximo 10 personas por clase · una clase al día ·
 cancelar hasta 24 h antes devuelve el crédito (con menos de 24 h se pierde) · reservar y no asistir pierde el crédito.
 
+## Landing publicada y web oculta
+
+Mientras solo esté publicada la landing (`/landing`), `middleware.ts` manda a `/landing` a quien entre en cualquier página de la web (también a `mesientochill.com`).
+Para ver y trabajar en la web, entra en **`/web1`**: el navegador guarda un permiso durante 90 días y ya puedes navegar por la web con sus direcciones normales (`/web1/precios` abre directamente Precios). `/web1/salir` quita el permiso.
+Siempre quedan abiertos `/landing/*`, `/api/*` (formularios) y los archivos (iconos, imágenes). Para publicar la web, cambia `WEB_PUBLICA` a `true` en `middleware.ts`.
+
 ## Puesta en marcha
 
 1. Crea un proyecto en [Supabase](https://supabase.com).
