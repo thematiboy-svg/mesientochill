@@ -32,6 +32,7 @@ Es el mayor bloque de desarrollo.
 3. Pantallas: Inicio, Clases en directo, Mis reservas y créditos, Biblioteca de vídeos, Eventos, Mi perfil y cuestionario, Suscripción y facturas, Ayuda con Chillsi.
 4. Reglas de negocio: 8 créditos al mes, máximo 10 personas por clase, precios de eventos según plan (38 € / 30,40 € / 34,20 €).
 5. Permisos de acceso a datos (RLS) para que cada usuaria solo vea lo suyo.
+6. **Horario de las clases en directo (pendiente de decidir).** Fijar días y horas de las tres franjas (hora del café, de la comida y después del trabajo). Las 11:00, 14:00 y 19:00 de `supabase/seed.sql` son solo de ejemplo. Cuando estén decididas: crear las clases reales en Supabase y añadir las horas a la respuesta «Horarios» de Chillsi (`lib/chillsi.ts`), que ahora no da horas concretas.
 
 ## Fase 3 · Pagos y suscripciones
 
