@@ -7,7 +7,6 @@ const LINKS = [
   { href: '#monica', label: 'Mónica' },
   { href: '#precios', label: 'Precios' },
   { href: '#eventos', label: 'Eventos' },
-  { href: '#apuntate', label: 'Iniciar sesión' },
 ]
 
 // Menú desplegable de la landing para móvil (en escritorio se ve el menú normal).
