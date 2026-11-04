@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import LandingForm from './LandingForm'
 import Copyright from '../../components/Copyright'
+import Faqs from '../../components/Faqs'
 import './landing.css'
 
 export const metadata: Metadata = {
@@ -237,31 +238,8 @@ export default function Landing() {
 <section style={{ padding: "96px 40px", background: "#FFFFFF" }}>
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "flex-start", gap: "40px 72px" }}>
 <h2 style={{ margin: "0", flex: "1 1 320px", minWidth: "0", fontSize: "clamp(30px, 3.4vw, 44px)", fontWeight: "600", lineHeight: "1.15", letterSpacing: "-0.01em" }}>Preguntas frecuentes</h2>
-<div style={{ flex: "2 1 520px", minWidth: "0", display: "flex", flexDirection: "column" }}>
-<div style={{ padding: "24px 0", borderTop: "1px solid #D9CFC9", display: "flex", flexDirection: "column", gap: 8 }}>
-<h3 style={{ margin: "0", fontSize: 19, fontWeight: "800" }}>&iquest;Necesito experiencia?</h3>
-<p style={{ margin: "0", fontSize: 17, color: "#3B5753" }}>No. En cada clase se explica el ejercicio y se proponen alternativas.</p>
-</div>
-<div style={{ padding: "24px 0", borderTop: "1px solid #D9CFC9", display: "flex", flexDirection: "column", gap: 8 }}>
-<h3 style={{ margin: "0", fontSize: 19, fontWeight: "800" }}>&iquest;Qu&eacute; necesito?</h3>
-<p style={{ margin: "0", fontSize: 17, color: "#3B5753" }}>Un espacio para moverte, ropa c&oacute;moda y conexi&oacute;n a internet. En el caso de Total Barre puedes utilizar una silla.</p>
-</div>
-<div style={{ padding: "24px 0", borderTop: "1px solid #D9CFC9", display: "flex", flexDirection: "column", gap: 8 }}>
-<h3 style={{ margin: "0", fontSize: 19, fontWeight: "800" }}>&iquest;Y si no puedo conectarme en directo?</h3>
-<p style={{ margin: "0", fontSize: 17, color: "#3B5753" }}>Las clases se graban para verlas cuando quieras. Puedes cancelar tu reserva hasta 24 horas antes sin perder el cr&eacute;dito. Si no asistes a una clase reservada, pierdes el cr&eacute;dito de esa clase.</p>
-</div>
-<div style={{ padding: "24px 0", borderTop: "1px solid #D9CFC9", display: "flex", flexDirection: "column", gap: 8 }}>
-<h3 style={{ margin: "0", fontSize: 19, fontWeight: "800" }}>&iquest;Qu&eacute; pasa si la clase est&aacute; completa?</h3>
-<p style={{ margin: "0", fontSize: 17, color: "#3B5753" }}>El m&aacute;ximo es de 10 personas. Puedes apuntarte a la lista de espera y, si se libera una plaza, avisamos por email a las tres primeras personas en espera. Se la queda quien la reserve primero.</p>
-</div>
-<div style={{ padding: "24px 0", borderTop: "1px solid #D9CFC9", display: "flex", flexDirection: "column", gap: 8 }}>
-<h3 style={{ margin: "0", fontSize: 19, fontWeight: "800" }}>&iquest;Puedo hacerlo si tengo molestias o una lesi&oacute;n?</h3>
-<p style={{ margin: "0", fontSize: 17, color: "#3B5753" }}>Consulta antes con tu m&eacute;dico. Las clases no sustituyen un tratamiento m&eacute;dico ni fisioterapia.</p>
-</div>
-<div style={{ padding: "24px 0", borderTop: "1px solid #D9CFC9", borderBottom: "1px solid #D9CFC9", display: "flex", flexDirection: "column", gap: 8 }}>
-<h3 style={{ margin: "0", fontSize: 19, fontWeight: "800" }}>&iquest;C&oacute;mo me doy de baja?</h3>
-<p style={{ margin: "0", fontSize: 17, color: "#3B5753" }}>Desde tu cuenta, cuando quieras.</p>
-</div>
+<div style={{ flex: "2 1 520px", minWidth: "0" }}>
+<Faqs />
 </div>
 </div>
 </section>
