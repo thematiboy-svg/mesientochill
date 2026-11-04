@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 const LINKS = [
+  { href: '/', label: 'Inicio' },
   { href: '/clases', label: 'Clases' },
   { href: '/metodo', label: 'Método' },
   { href: '/monica', label: 'Mónica' },
@@ -15,7 +16,7 @@ export default function SiteHeader({ loggedIn = false }: { loggedIn?: boolean })
   const path = usePathname()
   const menu = useRef<HTMLDetailsElement>(null)
   useEffect(() => { if (menu.current) menu.current.open = false }, [path])
-  const on = (h: string) => path === h || path.startsWith(h + '/')
+  const on = (h: string) => path === h || (h !== '/' && path.startsWith(h + '/'))
   return (
     <header className="hd">
       <div className="hd-in">
