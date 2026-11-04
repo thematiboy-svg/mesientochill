@@ -251,3 +251,5 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 .ft-logo{display:block;line-height:0;border-radius:12px;transition:opacity .18s ease}
 .ft-logo:hover{opacity:.8}
 .ft-logo:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+.mk .ft-copy{max-width:1200px;margin:16px auto 0;font-size:13px;line-height:1.6;color:#D5E8E4}
+.ft .ft-copy a:hover{color:var(--coral)!important}

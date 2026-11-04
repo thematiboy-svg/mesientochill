@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import LandingForm from './LandingForm'
+import Copyright from '../../components/Copyright'
 import './landing.css'
 
 export const metadata: Metadata = {
@@ -288,6 +289,7 @@ export default function Landing() {
 </nav>
 </div>
 <div style={{ maxWidth: 1200, margin: "32px auto 0", paddingTop: 24, borderTop: "1px solid rgba(255, 255, 255, 0.25)", fontSize: 13, lineHeight: "1.6", color: "#D5E8E4" }}>Las clases de MeSientoChill no sustituyen el consejo m&eacute;dico ni la fisioterapia. Si tienes una lesi&oacute;n o una condici&oacute;n de salud, consulta antes con tu m&eacute;dico.</div>
+<Copyright style={{ maxWidth: 1200, margin: "16px auto 0", fontSize: 13, lineHeight: "1.6", color: "#D5E8E4" }} />
 </footer>
 
 </div>
