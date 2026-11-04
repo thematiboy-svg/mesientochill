@@ -236,13 +236,14 @@ export type Respuesta = { texto: string; enlaces: Enlace[]; sugerencias: string[
 const FALLBACK =
   'No estoy seguro de haberte entendido. Prueba a preguntarlo con otras palabras o elige uno de estos temas. Si prefieres, escríbenos desde Contacto y te responde una persona.'
 
-export function responder(pregunta: string, conSesion: boolean): Respuesta {
+// temas: lista donde buscar (la landing añade los suyos delante para que tengan prioridad)
+export function responder(pregunta: string, conSesion: boolean, temas: Tema[] = TEMAS, sugerencias: string[] = SUGERENCIAS): Respuesta {
   const t = normalizar(pregunta)
   const filtrar = (e: Enlace[] = []) => e.filter((x) => conSesion || !x.privado)
 
   let mejor: Tema | null = null
   let puntos = 0
-  for (const tema of TEMAS) {
+  for (const tema of temas) {
     // Cada coincidencia suma; las frases de varias palabras pesan más.
     const p = tema.claves.reduce((acc, c) => (contiene(t, c) ? acc + c.split(' ').length + 1 : acc), 0)
     if (p > puntos) {
@@ -255,16 +256,16 @@ export function responder(pregunta: string, conSesion: boolean): Respuesta {
     return {
       texto: mejor.respuesta,
       enlaces: filtrar(mejor.enlaces),
-      sugerencias: mejor.relacionados ?? SUGERENCIAS.filter((id) => id !== mejor!.id).slice(0, 3),
+      sugerencias: mejor.relacionados ?? sugerencias.filter((id) => id !== mejor!.id).slice(0, 3),
     }
   }
   if (GRACIAS.some((g) => contiene(t, g))) {
-    return { texto: '¡De nada! Si necesitas algo más, aquí estoy.', enlaces: [], sugerencias: SUGERENCIAS }
+    return { texto: '¡De nada! Si necesitas algo más, aquí estoy.', enlaces: [], sugerencias }
   }
   if (SALUDOS.some((g) => contiene(t, g))) {
-    return { texto: '¡Hola! ¿En qué te ayudo? Puedes escribir tu pregunta o elegir un tema.', enlaces: [], sugerencias: SUGERENCIAS }
+    return { texto: '¡Hola! ¿En qué te ayudo? Puedes escribir tu pregunta o elegir un tema.', enlaces: [], sugerencias }
   }
-  return { texto: FALLBACK, enlaces: [{ texto: 'Ir a Contacto', href: '/contacto' }], sugerencias: SUGERENCIAS }
+  return { texto: FALLBACK, enlaces: [{ texto: 'Ir a Contacto', href: '/contacto' }], sugerencias }
 }
 
-export const temaPorId = (id: string) => TEMAS.find((t) => t.id === id)
+export const temaPorId = (id: string, temas: Tema[] = TEMAS) => temas.find((t) => t.id === id)
