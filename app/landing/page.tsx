@@ -131,19 +131,19 @@ export default function Landing() {
 </div>
 <div style={{ display: "flex", flexWrap: "wrap", gap: 24 }}>
 <div style={{ flex: "1 1 280px", minWidth: "0", border: "1.5px solid rgba(255, 255, 255, 0.55)", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 12 }}>
-<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>01</span>
-<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Respiraci&oacute;n</h3>
-<p style={{ margin: "0", fontSize: 17 }}>Empezamos respirando para bajar el ritmo.</p>
+<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>1</span>
+<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Reserva tu pausa</h3>
+<p style={{ margin: "0", fontSize: 17 }}>Elige entre la hora del caf&eacute;, la de la comida o despu&eacute;s del trabajo.</p>
 </div>
 <div style={{ flex: "1 1 280px", minWidth: "0", border: "1.5px solid rgba(255, 255, 255, 0.55)", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 12 }}>
-<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>02</span>
-<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Foco</h3>
-<p style={{ margin: "0", fontSize: 17 }}>Llevamos la atenci&oacute;n hacia una parte del cuerpo.</p>
+<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>2</span>
+<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Con&eacute;ctate</h3>
+<p style={{ margin: "0", fontSize: 17 }}>20 minutos en directo desde casa o la oficina. Solo necesitas un hueco y ropa c&oacute;moda.</p>
 </div>
 <div style={{ flex: "1 1 280px", minWidth: "0", border: "1.5px solid rgba(255, 255, 255, 0.55)", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 12 }}>
-<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>03</span>
-<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Atenci&oacute;n plena</h3>
-<p style={{ margin: "0", fontSize: 17 }}>Volvemos a lo que te rodea, aqu&iacute; y ahora.</p>
+<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>3</span>
+<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Vuelve al trabajo</h3>
+<p style={{ margin: "0", fontSize: 17 }}>Con el cuerpo m&aacute;s suelto y la mente m&aacute;s clara.</p>
 </div>
 </div>
 <p style={{ margin: "0", fontSize: 22, fontWeight: "700" }}>Cuando llevas la atenci&oacute;n al cuerpo, el estr&eacute;s afloja y la mente se despeja. Una pausa tan breve como un caf&eacute;, pensada solo para ti.</p>
