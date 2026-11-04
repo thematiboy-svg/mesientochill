@@ -80,7 +80,7 @@ export default function LandingForm() {
       </fieldset>
       <label style={{ display: 'flex', alignItems: 'flex-start', gap: 12, fontSize: 14, fontWeight: 500, color: '#3B5753', lineHeight: 1.5 }}>
         <input type="checkbox" name="privacidad" style={{ ...check, flex: 'none', marginTop: 2 }} />
-        <span>He leído y acepto la <Link href="/privacidad" style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link>.</span>
+        <span>He leído y acepto la <Link href="/landing/privacidad" style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link>.</span>
       </label>
       {error && <p role="alert" style={err}>{error}</p>}
       {state === 'error' && <p role="alert" style={err}>No hemos podido apuntarte. Inténtalo de nuevo en unos minutos.</p>}

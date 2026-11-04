@@ -5,7 +5,9 @@ import { responder, SUGERENCIAS, temaPorId, type Enlace } from '../lib/chillsi'
 
 type Msg = { de: 'bot' | 'yo'; texto: string; enlaces?: Enlace[] }
 
-export default function Chillsi({ nombre, conSesion = false, style }: { nombre?: string; conSesion?: boolean; style?: React.CSSProperties }) {
+export default function Chillsi({ nombre, conSesion = false, style, mapEnlace }: { nombre?: string; conSesion?: boolean; style?: React.CSSProperties; mapEnlace?: (e: Enlace) => Enlace | null }) {
+  // mapEnlace permite cambiar o quitar enlaces (la landing los lleva a sus propias secciones)
+  const ajustar = (es: Enlace[] = []) => es.map((e) => (mapEnlace ? mapEnlace(e) : e)).filter((e): e is Enlace => !!e)
   const saludo = `Hola${nombre ? `, ${nombre}` : ''}, soy Chillsi, el asistente de MeSientoChill. Te ayudo con horarios, reservas, créditos y tarifas. ¿Qué necesitas?`
   const [msgs, setMsgs] = useState<Msg[]>([{ de: 'bot', texto: saludo }])
   const [sug, setSug] = useState<string[]>(SUGERENCIAS)
@@ -23,7 +25,7 @@ export default function Chillsi({ nombre, conSesion = false, style }: { nombre?:
     const q = pregunta.trim()
     if (!q) return
     const r = responder(q, conSesion)
-    setMsgs((m) => [...m, { de: 'yo', texto: mostrar }, { de: 'bot', texto: r.texto, enlaces: r.enlaces }])
+    setMsgs((m) => [...m, { de: 'yo', texto: mostrar }, { de: 'bot', texto: r.texto, enlaces: ajustar(r.enlaces) }])
     setSug(r.sugerencias)
   }
 
@@ -31,7 +33,7 @@ export default function Chillsi({ nombre, conSesion = false, style }: { nombre?:
     const t = temaPorId(id)
     if (!t) return
     // Pregunta con el título del tema para que gane ese tema
-    const r = { texto: t.respuesta, enlaces: (t.enlaces ?? []).filter((e) => conSesion || !e.privado) }
+    const r = { texto: t.respuesta, enlaces: ajustar((t.enlaces ?? []).filter((e) => conSesion || !e.privado)) }
     setMsgs((m) => [...m, { de: 'yo', texto: t.titulo }, { de: 'bot', ...r }])
     setSug(t.relacionados ?? SUGERENCIAS.filter((x) => x !== id).slice(0, 3))
   }

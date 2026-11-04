@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
-export default function ContactForm() {
+export default function ContactForm({ privacidadHref = '/privacidad' }: { privacidadHref?: string }) {
   const [state, setState] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
   const [error, setError] = useState('')
 
@@ -53,7 +53,7 @@ export default function ContactForm() {
       <div className="field"><label htmlFor="c-m">Mensaje</label><textarea id="c-m" name="mensaje" className="in-t" placeholder="Cuéntanos qué necesitas" /></div>
       <label className="opt" style={{ alignItems: 'flex-start', fontSize: 14 }}>
         <input type="checkbox" name="privacidad" />
-        <span>He leído y acepto la <Link href="/privacidad" style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link>.</span>
+        <span>He leído y acepto la <Link href={privacidadHref} style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link>.</span>
       </label>
       {error && <p role="alert" style={{ color: '#B3261E', fontSize: 15, fontWeight: 600 }}>{error}</p>}
       {state === 'error' && <p role="alert" style={{ color: '#B3261E', fontSize: 15, fontWeight: 600 }}>No hemos podido enviar tu mensaje. Inténtalo de nuevo en unos minutos.</p>}

@@ -3,7 +3,7 @@
 .lp *{box-sizing:border-box}
 .lp a{color:#006B5E}.lp a:hover{color:#0E2F2B}
 @media (max-width:600px){
-.lp section,.lp footer,.lp header{padding-left:20px!important;padding-right:20px!important}
+.lp > div > section,.lp > div > footer,.lp > div > header{padding-left:20px!important;padding-right:20px!important}
 .lp #eventos{padding-left:12px!important;padding-right:12px!important}
 .lp #eventos>div{padding:24px 8px!important;border-radius:28px!important;gap:24px!important}
 .lp #eventos>div>div{flex-basis:100%!important}
@@ -38,3 +38,10 @@
 @media (max-width:900px){.lp .lp-nav{display:none!important}.lp header > div{flex-wrap:nowrap!important;position:relative}.lp .lp-mnav .mnav-list a:not(.btn){color:#0E2F2B}}
 /* Menú sticky como en la web: al saltar a una sección, el título no queda debajo del menú */
 .lp section[id]{scroll-margin-top:96px}
+/* Chillsi en la landing: ventana flotante sobre el botón «Ayuda» */
+.lp-chat{position:fixed;right:20px;bottom:104px;z-index:60;width:min(400px,calc(100vw - 24px));max-height:calc(100vh - 140px);display:flex;flex-direction:column;border-radius:28px;box-shadow:0 16px 40px rgba(14,47,43,.25)}
+.lp-chat .chat{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.lp-chat .chat-b{max-height:none!important;flex:1 1 auto;min-height:0}
+.lp-chat-x{position:absolute;top:10px;right:12px;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.lp-chat-x:hover{background:rgba(255,255,255,.32)}
+@media (max-width:560px){.lp-chat{right:12px;bottom:88px;max-height:calc(100vh - 110px)}}
