@@ -201,7 +201,7 @@ export default function Landing() {
 <div style={{ flex: "1 1 420px", minWidth: "0", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20 }}>
 <span style={{ fontSize: 13, fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: "#8A3A26" }}>Cuatro eventos al a&ntilde;o</span>
 <h2 style={{ margin: "0", fontSize: "clamp(30px, 3.4vw, 44px)", fontWeight: "600", lineHeight: "1.15", letterSpacing: "-0.01em" }}>Un d&iacute;a para ti y para la comunidad</h2>
-<p style={{ margin: "0", fontSize: 19, color: "#4A3B37" }}>Con 2 sesiones en directo de Mr.Matt, una pensada para la relajaci&oacute;n y otra para disfrutar despu&eacute;s de comer, mindfulness, actividades, comida sana y gente con la que compartirlo.</p>
+<p style={{ margin: "0", fontSize: 19, color: "#4A3B37" }}>Con 2 sesiones en directo de Mr.Matt DJ, una pensada para la relajaci&oacute;n y otra para disfrutar despu&eacute;s de comer, mindfulness, actividades, comida sana y gente con la que compartirlo.</p>
 <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
 <span style={{ background: "#FFFFFF", border: "1px solid #F0C9BE", borderRadius: 999, padding: "8px 18px", fontSize: 15, fontWeight: "700" }}>Primavera</span>
 <span style={{ background: "#FFFFFF", border: "1px solid #F0C9BE", borderRadius: 999, padding: "8px 18px", fontSize: 15, fontWeight: "700" }}>Verano</span>
