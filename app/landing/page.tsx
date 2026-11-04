@@ -37,7 +37,7 @@ export default function Landing() {
 <h1 style={{ margin: "0", fontSize: "clamp(36px, 4.4vw, 60px)", fontWeight: "600", lineHeight: "1.08", letterSpacing: "-0.02em" }}>20 minutos para <span style={{ color: "#00A28F", fontWeight: "600" }}>cambiar tu energ&iacute;a</span></h1>
 <p style={{ margin: "0", fontSize: 20, maxWidth: 560, color: "#3B5753" }}>Pilates, Total Barre y Mindfulness en directo con M&oacute;nica Mu&ntilde;oz. Una pausa en mitad del d&iacute;a para volver al trabajo con la cabeza clara.</p>
 <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center" }}>
-<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Quiero mi plaza en el piloto</a>
+<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Quiero reservar mi plaza</a>
 <a className="lp-btn lp-b2" href="#como" style={{ background: "transparent", color: "#006B5E", textDecoration: "none", padding: "14px 30px", borderRadius: 999, fontWeight: "700", fontSize: 17, border: "2px solid #006B5E", minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Ver c&oacute;mo funciona</a>
 </div>
 <p style={{ margin: "0", fontSize: 15, fontWeight: "600", color: "#006B5E" }}>Plazas limitadas</p>
