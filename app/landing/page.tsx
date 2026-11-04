@@ -131,19 +131,19 @@ export default function Landing() {
 </div>
 <div style={{ display: "flex", flexWrap: "wrap", gap: 24 }}>
 <div style={{ flex: "1 1 280px", minWidth: "0", border: "1.5px solid rgba(255, 255, 255, 0.55)", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 12 }}>
-<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>01</span>
-<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Respiraci&oacute;n</h3>
-<p style={{ margin: "0", fontSize: 17 }}>Empezamos respirando para bajar el ritmo.</p>
+<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>1</span>
+<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Reserva tu pausa</h3>
+<p style={{ margin: "0", fontSize: 17 }}>Elige entre la hora del caf&eacute;, la de la comida o despu&eacute;s del trabajo.</p>
 </div>
 <div style={{ flex: "1 1 280px", minWidth: "0", border: "1.5px solid rgba(255, 255, 255, 0.55)", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 12 }}>
-<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>02</span>
-<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Foco</h3>
-<p style={{ margin: "0", fontSize: 17 }}>Llevamos la atenci&oacute;n hacia una parte del cuerpo.</p>
+<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>2</span>
+<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Con&eacute;ctate</h3>
+<p style={{ margin: "0", fontSize: 17 }}>20 minutos en directo desde casa o la oficina. Solo necesitas un hueco y ropa c&oacute;moda.</p>
 </div>
 <div style={{ flex: "1 1 280px", minWidth: "0", border: "1.5px solid rgba(255, 255, 255, 0.55)", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 12 }}>
-<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>03</span>
-<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Atenci&oacute;n plena</h3>
-<p style={{ margin: "0", fontSize: 17 }}>Volvemos a lo que te rodea, aqu&iacute; y ahora.</p>
+<span style={{ fontSize: 44, fontWeight: "800", color: "#FF9782", lineHeight: "1" }}>3</span>
+<h3 style={{ margin: "0", fontSize: 24, fontWeight: "600" }}>Vuelve al trabajo</h3>
+<p style={{ margin: "0", fontSize: 17 }}>Con el cuerpo m&aacute;s suelto y la mente m&aacute;s clara.</p>
 </div>
 </div>
 <p style={{ margin: "0", fontSize: 22, fontWeight: "700" }}>Cuando llevas la atenci&oacute;n al cuerpo, el estr&eacute;s afloja y la mente se despeja. Una pausa tan breve como un caf&eacute;, pensada solo para ti.</p>
@@ -168,6 +168,8 @@ export default function Landing() {
 </div>
 </div>
 </section>
+
+<section id="trayectoria" className="sec tint"><div className="in stack g32"><div className="stack g12"><h2 className="t2">Su trayectoria</h2><p className="lead" style={{ maxWidth: 780 }}>Un camino que me ha permitido entender a fondo c&oacute;mo transformar la vida y los h&aacute;bitos de las personas. Hoy mi foco est&aacute; en aportar esa madurez profesional para ayudar a quien se enfrenta al estr&eacute;s, las dolencias o la apat&iacute;a.</p></div><div className="grid c2"><div className="card stack g16"><h3 className="t3">Formaci&oacute;n</h3><ul className="list stack g12"><li>Instructora de Pilates suelo y reformer &middot; Centro de Formaci&oacute;n Pilates de Le&oacute;n</li><li>Profesora de Total Barre &middot; Acrostudio Madrid</li><li>Profesora de Mindfulness, gesti&oacute;n emocional, psiconutrici&oacute;n y terapias frente al estr&eacute;s &middot; UNED</li><li>Estudios de macrobi&oacute;tica &middot; Saint-Gaudens (Francia)</li></ul></div><div className="card stack g16"><h3 className="t3">Experiencia</h3><ul className="list stack g12"><li>Terapeuta y profesora de Yoga en Wellness Resorts y espacios de salud en Palma de Mallorca, Andorra y Alicante</li><li>Profesora de Yoga, Pilates y Total Barre en varios gimnasios de Zamora</li><li>Ponencias de salud y bienestar en centros de formaci&oacute;n, asociaciones de mujeres y Torgurvi (Castilla y Le&oacute;n)</li></ul></div></div></div></section>
 
 <section id="precios" style={{ padding: "96px 40px", background: "#E6F6F3" }}>
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexDirection: "column", gap: 48 }}>
