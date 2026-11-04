@@ -67,7 +67,7 @@ export default function LandingForm() {
       <div style={field}><label htmlFor="f-email" style={lbl}>Email</label><input id="f-email" name="email" className="lp-in" type="email" autoComplete="email" placeholder="tu@email.com" /></div>
       <div style={field}><label htmlFor="f-whatsapp" style={lbl}>WhatsApp</label><input id="f-whatsapp" name="whatsapp" className="lp-in" type="tel" autoComplete="tel" placeholder="+34 600 000 000" /></div>
       <fieldset style={{ margin: 0, padding: 0, border: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <legend style={{ padding: 0, marginBottom: 8, ...lbl }}>Plan que solicito</legend>
+        <legend style={{ padding: 0, marginBottom: 8, ...lbl }}>Plan que solicito <span style={{ fontWeight: 500 }}>(Ahora no pagas nada)</span></legend>
         {PLANES.map((pl, i) => (
           <label key={pl} style={opt}><input type="radio" name="plan" value={pl} defaultChecked={i === 0} style={check} />{pl}</label>
         ))}
