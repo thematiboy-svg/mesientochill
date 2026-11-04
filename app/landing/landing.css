@@ -31,3 +31,6 @@
 .lp footer nav a:not([aria-label]):hover{text-decoration:underline!important;text-underline-offset:4px}
 .lp footer nav a[aria-label]:hover{color:#FF9782!important}
 .lp form a:hover{color:#006B5E!important}
+/* El fondo de la última sección llega por detrás de las esquinas del footer */
+.lp section:has(+ footer)::after{content:"";display:block;height:40px}
+.lp section:has(+ footer) + footer{margin-top:-40px;position:relative}
