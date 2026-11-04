@@ -16,8 +16,8 @@ export default function Landing() {
     <div className="lp">
 <div style={{ width: "100%", background: "#FFF9F6", color: "#0E2F2B", fontFamily: "'Britanica', 'Montserrat', sans-serif", fontSize: 18, lineHeight: "1.65" }}>
 
-<header style={{ padding: "16px 40px", borderBottom: "1px solid #E8DDD7" }}>
-<div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+<header className="hd">
+<div className="hd-in">
 <a href="#inicio" style={{ display: "block", lineHeight: "0" }}><img src="/logo.svg" alt="MeSientoChill" style={{ height: 56, width: "auto", display: "block", marginLeft: "-10px" }} /></a>
 <nav className="lp-nav" aria-label="Principal" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4px 20px", fontSize: 15, fontWeight: "600" }}>
 <a href="#clases" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>Clases</a>
