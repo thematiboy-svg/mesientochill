@@ -29,7 +29,7 @@ export default function SiteFooter({ helpHref = '/ayuda' }: { helpHref?: string 
     <>
       <footer className="ft">
         <div className="ft-in">
-          <img src="/logo-blanco.svg" alt="MeSientoChill" />
+          <Link className="ft-logo" href="/"><img src="/logo-blanco.svg" alt="MeSientoChill, inicio" /></Link>
           <div className="ft-nav">
             <nav className="ft-main" aria-label="Principal">
               <Link href="/clases">Clases</Link>

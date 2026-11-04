@@ -248,3 +248,6 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 /* El color de la última sección llega hasta el footer (también detrás de sus esquinas redondeadas) */
 .sec:has(+ .ft)::after{content:"";display:block;height:40px}
 .sec:has(+ .ft) + .ft{margin-top:-40px;position:relative}
+.ft-logo{display:block;line-height:0;border-radius:12px;transition:opacity .18s ease}
+.ft-logo:hover{opacity:.8}
+.ft-logo:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
