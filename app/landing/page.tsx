@@ -250,7 +250,7 @@ export default function Landing() {
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "flex-start", gap: "40px 72px" }}>
 <div style={{ flex: "1 1 380px", minWidth: "0", display: "flex", flexDirection: "column", gap: 20 }}>
 <h2 style={{ margin: "0", fontSize: "clamp(32px, 3.8vw, 52px)", fontWeight: "600", lineHeight: "1.12", letterSpacing: "-0.015em" }}>Tu pausa de 20 minutos te est&aacute; esperando</h2>
-<p style={{ margin: "0", fontSize: 19, color: "#2F4B47" }}>Ap&uacute;ntate ya y te avisamos en cuanto abramos las plazas. Plazas limitadas.</p>
+<p style={{ margin: "0", fontSize: 19, color: "#2F4B47" }}>Ap&uacute;ntate ya y te avisamos en cuanto empecemos para que te suscribas con tu plaza reservada. <strong style={{ fontWeight: 700 }}>Plazas limitadas.</strong></p>
 <p style={{ margin: "0", fontSize: 19, color: "#2F4B47" }}>Seguramente ser&aacute; en el mes de diciembre, te vamos informando por email.</p>
 </div>
 <LandingForm />
