@@ -253,3 +253,10 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 .ft-logo:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
 .mk .ft-copy{max-width:1200px;margin:16px auto 0;font-size:13px;line-height:1.6;color:#D5E8E4}
 .ft .ft-copy a:hover{color:var(--coral)!important}
+
+/* Hover de las preguntas frecuentes desplegables */
+.faq summary::after{transition:background-color .18s ease,transform .18s ease}
+.faq summary h3{transition:color .18s ease}
+.faq summary:hover::after{background:var(--ink);transform:scale(1.08)}
+.faq summary:hover h3{color:var(--teal)}
+@media (prefers-reduced-motion:reduce){.faq summary::after{transition:none}.faq summary:hover::after{transform:none}}
