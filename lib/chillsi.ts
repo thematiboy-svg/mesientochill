@@ -68,6 +68,7 @@ export const TEMAS: Tema[] = [
     titulo: 'Horarios de las clases',
     claves: ['horario', 'horarios', 'hora', 'a que hora', 'cuando son', 'que dias', 'franja', 'cafe', 'comida', 'despues del trabajo', 'duracion', 'cuanto dura', 'minutos'],
     respuesta:
+      // PENDIENTE: añadir días y horas cuando estén decididos (ver ROADMAP.md, Fase 2).
       'Las clases en directo duran 20 minutos y hay tres franjas para elegir: la hora del café, la hora de la comida y después del trabajo. Puedes ver los días y horas exactos en el calendario de Clases en directo.',
     enlaces: [
       { texto: 'Ver el calendario', href: '/app/directos', privado: true },

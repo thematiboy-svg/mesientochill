@@ -31,6 +31,7 @@ cancelar hasta 24 h antes devuelve el crédito (con menos de 24 h se pierde) · 
 
 El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
 
+- **Horario de las clases en directo**: días y horas aún por decidir. Las de `supabase/seed.sql` son de ejemplo; cuando se fijen, crear las clases reales y añadir las horas a Chillsi (`lib/chillsi.ts`, tema «horarios»).
 - Pagos con Stripe (alta de suscripción, cambio de plan con cobro, método de pago y baja).
 - Panel de administración para Mónica (crear clases, cancelar una clase y devolver créditos, subir vídeos).
 - Emails (recordatorios, aviso a las tres primeras personas de la lista de espera, cancelación por parte de Mónica).
