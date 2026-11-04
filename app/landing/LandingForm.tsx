@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 const FRANJAS = ['Hora del café', 'Hora de la comida', 'Después del trabajo']
+const PLANES = ['Directo y vídeos (49 €/mes)', 'Solo vídeos (39 €/mes)']
 const field = { display: 'flex', flexDirection: 'column', gap: 8 } as const
 const lbl = { fontSize: 15, fontWeight: 700 } as const
 const opt = { display: 'flex', alignItems: 'center', gap: 12, fontSize: 16, fontWeight: 500, minHeight: 44 } as const
@@ -24,6 +25,7 @@ export default function LandingForm() {
       email: String(fd.get('email') || '').trim(),
       whatsapp: String(fd.get('whatsapp') || '').trim(),
       franja: String(fd.get('franja') || ''),
+      plan: String(fd.get('plan') || ''),
     }
     if (!data.nombre || !/^\S+@\S+\.\S+$/.test(data.email)) {
       setError('Escribe tu nombre y un email válido.')
@@ -64,6 +66,12 @@ export default function LandingForm() {
       <div style={field}><label htmlFor="f-apellidos" style={lbl}>Apellidos</label><input id="f-apellidos" name="apellidos" className="lp-in" type="text" autoComplete="family-name" placeholder="Tus apellidos" /></div>
       <div style={field}><label htmlFor="f-email" style={lbl}>Email</label><input id="f-email" name="email" className="lp-in" type="email" autoComplete="email" placeholder="tu@email.com" /></div>
       <div style={field}><label htmlFor="f-whatsapp" style={lbl}>WhatsApp</label><input id="f-whatsapp" name="whatsapp" className="lp-in" type="tel" autoComplete="tel" placeholder="+34 600 000 000" /></div>
+      <fieldset style={{ margin: 0, padding: 0, border: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <legend style={{ padding: 0, marginBottom: 8, ...lbl }}>Plan que solicito</legend>
+        {PLANES.map((pl, i) => (
+          <label key={pl} style={opt}><input type="radio" name="plan" value={pl} defaultChecked={i === 0} style={check} />{pl}</label>
+        ))}
+      </fieldset>
       <fieldset style={{ margin: 0, padding: 0, border: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
         <legend style={{ padding: 0, marginBottom: 8, ...lbl }}>Franja preferida</legend>
         {FRANJAS.map((fr, i) => (

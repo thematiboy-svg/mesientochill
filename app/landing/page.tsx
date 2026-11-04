@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import LandingForm from './LandingForm'
+import LandingMenu from './LandingMenu'
 import Copyright from '../../components/Copyright'
 import Faqs from '../../components/Faqs'
 import './landing.css'
@@ -18,15 +19,16 @@ export default function Landing() {
 <header style={{ padding: "16px 40px", borderBottom: "1px solid #E8DDD7" }}>
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
 <a href="#inicio" style={{ display: "block", lineHeight: "0" }}><img src="/logo.svg" alt="MeSientoChill" style={{ height: 56, width: "auto", display: "block", marginLeft: "-10px" }} /></a>
-<nav style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4px 20px", fontSize: 15, fontWeight: "600" }}>
+<nav className="lp-nav" aria-label="Principal" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4px 20px", fontSize: 15, fontWeight: "600" }}>
 <a href="#clases" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>Clases</a>
 <a href="#metodo" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>M&eacute;todo</a>
 <a href="#monica" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>M&oacute;nica</a>
 <a href="#precios" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>Precios</a>
 <a href="#eventos" style={{ color: "#0E2F2B", textDecoration: "none", padding: "12px 4px" }}>Eventos</a>
 <a href="#apuntate" style={{ color: "#006B5E", textDecoration: "none", padding: "12px 8px" }}>Iniciar sesi&oacute;n</a>
-<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "12px 24px", borderRadius: 999, fontWeight: "700", minHeight: 44, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Empezar</a>
+<a className="lp-btn lp-b1" href="#apuntate" style={{ background: "#006B5E", color: "#FFFFFF", textDecoration: "none", padding: "12px 24px", borderRadius: 999, fontWeight: "700", minHeight: 44, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Reservar plaza</a>
 </nav>
+<LandingMenu />
 </div>
 </header>
 
