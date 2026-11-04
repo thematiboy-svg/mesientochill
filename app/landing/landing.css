@@ -15,3 +15,19 @@
 }
 @media (max-width:600px){.lp .ev-sec{padding:64px 12px !important}.lp .ev-box{padding:24px 8px !important;border-radius:28px !important;gap:24px !important}.lp .ev-box>div{flex-basis:100% !important}.lp .ev-box h2,.lp .ev-box>div:first-child>*{padding-left:8px;padding-right:8px}.lp .ev-card{padding:20px 16px !important}.lp .ev-card .ev-dis{font-size:15px !important;line-height:1.45 !important}.lp .ev-btn{width:100% !important;white-space:nowrap !important;padding:14px 16px !important}}
 .lp .lp-in{height:52px;border:1.5px solid #5E7B76;border-radius:14px;padding:0 16px;font-family:'Britanica','Montserrat',sans-serif;font-size:16px;color:#0E2F2B;background:#FFFFFF}
+/* Hover de botones de la landing (los estilos base van en línea, por eso !important) */
+.lp .lp-btn{transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.lp .lp-btn:not([disabled]):hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(14,47,43,.18)}
+.lp .lp-btn:not([disabled]):active{transform:translateY(0);box-shadow:none}
+.lp .lp-b1:not([disabled]):hover{background:#0E2F2B!important;color:#FFFFFF!important}
+.lp .lp-b2:hover{background:#006B5E!important;color:#FFFFFF!important}
+.lp .lp-b3:hover{background:#006B5E!important;color:#FFFFFF!important}
+.lp .lp-btn:focus-visible{outline:3px solid #FF9782;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.lp .lp-btn{transition:none}.lp .lp-btn:hover{transform:none!important}}
+/* Hover de enlaces de la landing: menú, footer y legales */
+.lp header nav a:not(.lp-btn),.lp footer a{transition:color .18s ease}
+.lp header nav a:not(.lp-btn):hover{color:#006B5E!important}
+.lp header nav a[href="#apuntate"]:not(.lp-btn):hover{color:#0E2F2B!important;text-decoration:underline!important;text-underline-offset:4px}
+.lp footer nav a:not([aria-label]):hover{text-decoration:underline!important;text-underline-offset:4px}
+.lp footer nav a[aria-label]:hover{color:#FF9782!important}
+.lp form a:hover{color:#006B5E!important}

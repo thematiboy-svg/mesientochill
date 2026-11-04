@@ -217,3 +217,30 @@ body{margin:0}
 
 /* Hero de la Home en móvil: el cuadro «Elige tu pausa» baja para no tapar la sonrisa del símbolo */
 @media (max-width:600px){.hero-badge{left:0!important;bottom:-64px!important}.hero-art{margin-bottom:64px}}
+
+/* Hover de botones */
+.btn{transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.btn:not([disabled]):not(.off):hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(14,47,43,.18)}
+.btn:not([disabled]):not(.off):active{transform:translateY(0);box-shadow:none}
+.mk a.b1:hover,.b1:not([disabled]):not(.off):hover{background:var(--ink);color:#fff}
+.mk a.b2:hover,.b2:not([disabled]):not(.off):hover{background:var(--teal);color:#fff}
+.mk a.b3:hover,.b3:not([disabled]):not(.off):hover{background:var(--teal);color:#fff}
+.mk a.b4:hover,.b4:not([disabled]):not(.off):hover{background:var(--teal);color:#fff}
+.btn:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+button.chip{transition:background-color .18s ease,color .18s ease,border-color .18s ease}
+button.chip:hover{background:var(--tint);border-color:var(--teal)}
+button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none!important}}
+
+/* Hover de enlaces: menús, footer y textos legales */
+.nav a,.mnav-list a,.side a,.ft a,.mnav summary{transition:color .18s ease,background-color .18s ease,border-color .18s ease}
+.nav a:not(.btn):hover{color:var(--teal);border-bottom-color:var(--line2)}
+.nav a.on:hover{border-bottom-color:var(--mint)}
+.nav a.link:hover{color:var(--ink)}
+.mnav summary:hover{background:var(--teal);color:#fff}
+.mnav-list a:not(.btn):hover{background:var(--tint);color:var(--teal)}
+.side a:not(.on):hover{background:var(--sand);color:var(--teal)}
+.ft nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.ft .soc a:hover{color:var(--coral)!important;text-decoration:none}
+.mk a[style*="text-decoration:underline"]:hover{color:var(--teal)!important}
+.ft a[style*="text-decoration:underline"]:hover{color:var(--coral)!important}

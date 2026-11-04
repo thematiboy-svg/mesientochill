@@ -76,7 +76,7 @@ export default function LandingForm() {
       </label>
       {error && <p role="alert" style={err}>{error}</p>}
       {state === 'error' && <p role="alert" style={err}>No hemos podido apuntarte. Inténtalo de nuevo en unos minutos.</p>}
-      <button type="submit" disabled={state === 'sending'} style={{ background: '#006B5E', color: '#FFFFFF', border: 0, padding: '16px 32px', borderRadius: 999, fontFamily: "'Britanica', 'Montserrat', sans-serif", fontWeight: 700, fontSize: 17, minHeight: 52, cursor: 'pointer', textAlign: 'center' }}>
+      <button className="lp-btn lp-b1" type="submit" disabled={state === 'sending'} style={{ background: '#006B5E', color: '#FFFFFF', border: 0, padding: '16px 32px', borderRadius: 999, fontFamily: "'Britanica', 'Montserrat', sans-serif", fontWeight: 700, fontSize: 17, minHeight: 52, cursor: 'pointer', textAlign: 'center' }}>
         {state === 'sending' ? 'Enviando…' : 'Apuntarme'}
       </button>
     </form>
