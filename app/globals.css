@@ -244,3 +244,7 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 .ft .soc a:hover{color:var(--coral)!important;text-decoration:none}
 .mk a[style*="text-decoration:underline"]:hover{color:var(--teal)!important}
 .ft a[style*="text-decoration:underline"]:hover{color:var(--coral)!important}
+
+/* El color de la última sección llega hasta el footer (también detrás de sus esquinas redondeadas) */
+.sec:has(+ .ft)::after{content:"";display:block;height:40px}
+.sec:has(+ .ft) + .ft{margin-top:-40px;position:relative}
