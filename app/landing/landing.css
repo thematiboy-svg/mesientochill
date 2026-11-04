@@ -27,7 +27,6 @@
 /* Hover de enlaces de la landing: menú, footer y legales */
 .lp header nav a:not(.lp-btn),.lp footer a{transition:color .18s ease}
 .lp header nav a:not(.lp-btn):hover{color:#006B5E!important}
-.lp header nav a[href="#apuntate"]:not(.lp-btn):hover{color:#0E2F2B!important;text-decoration:underline!important;text-underline-offset:4px}
 .lp footer nav a:not([aria-label]):hover{text-decoration:underline!important;text-underline-offset:4px}
 .lp footer nav a[aria-label]:hover{color:#FF9782!important}
 .lp form a:hover{color:#006B5E!important}
