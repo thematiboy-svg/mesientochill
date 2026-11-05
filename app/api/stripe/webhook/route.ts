@@ -7,6 +7,7 @@ import { sincronizarSuscripcion } from '../../../../lib/suscripcion'
 //   checkout.session.completed
 //   customer.subscription.created, customer.subscription.updated, customer.subscription.deleted
 //   customer.subscription.paused, customer.subscription.resumed
+//   invoice.paid, invoice.payment_failed
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
@@ -41,6 +42,13 @@ export async function POST(req: Request) {
       case 'customer.subscription.resumed':
         await sincronizarSuscripcion(event.data.object.id)
         break
+      case 'invoice.paid':
+      case 'invoice.payment_failed': {
+        // Renovación cobrada o fallida: el estado (active / past_due) se lee de la suscripción.
+        const sub = event.data.object.parent?.subscription_details?.subscription
+        if (sub) await sincronizarSuscripcion(typeof sub === 'string' ? sub : sub.id)
+        break
+      }
     }
   } catch (e) {
     console.error(`[stripe] Error al procesar ${event.type} (${event.id})`, e)

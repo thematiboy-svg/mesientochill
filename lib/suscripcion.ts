@@ -39,7 +39,7 @@ export async function crearCheckout(opts: { userId: string; email?: string; nomb
     customer,
     client_reference_id: opts.userId,
     line_items: [{ price: precioDe(opts.plan), quantity: 1 }],
-    subscription_data: { metadata: { user_id: opts.userId } },
+    subscription_data: { metadata: { user_id: opts.userId }, billing_mode: { type: 'flexible' } },
     metadata: { user_id: opts.userId },
     locale: 'es',
     automatic_tax: { enabled: tax },
