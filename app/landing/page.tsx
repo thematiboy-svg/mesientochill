@@ -22,11 +22,7 @@ export default function Landing() {
 <a className="lp-btn lp-b2" href="#como" style={{ background: "transparent", color: "#006B5E", textDecoration: "none", padding: "14px 30px", borderRadius: 999, fontWeight: "700", fontSize: 17, border: "2px solid #006B5E", minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Ver c&oacute;mo funciona</a>
 </div>
 <p style={{ margin: "0", fontSize: 15, fontWeight: "600", color: "#006B5E" }}>Plazas limitadas.<span style={{ display: "block", fontWeight: "500" }}>Ap&uacute;ntate ya y te avisamos cuando empecemos, no pierdas tu plaza.</span></p>
-<div className="lp-facts" style={{ display: "flex", flexWrap: "wrap", gap: "8px 28px", fontSize: 15, fontWeight: "500", color: "#3B5753" }}>
-<span>Clases de 20 minutos</span>
-<span>M&aacute;ximo 10 personas por clase</span>
-<span>Desde casa o la oficina</span>
-</div>
+<p className="lp-facts" style={{ margin: "0", fontSize: 15, fontWeight: "500", color: "#3B5753" }}>Clases de 20 minutos &middot; M&aacute;ximo 10 personas por clase &middot; Desde casa o la oficina</p>
 </div>
 <div style={{ flex: "1 1 420px", minWidth: "0", display: "flex", justifyContent: "center" }}>
 <div style={{ position: "relative", width: "min(480px, 100%)", aspectRatio: "1 / 1" }}>

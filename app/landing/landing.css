@@ -46,4 +46,4 @@
 .lp-chat-x:hover{background:rgba(255,255,255,.32)}
 @media (max-width:560px){.lp-chat{right:12px;bottom:88px;max-height:calc(100vh - 110px)}}
 /* Hero: las tres características en una sola línea en escritorio */
-@media (min-width:1200px){.lp .lp-facts{flex-wrap:nowrap!important;gap:8px 20px!important;white-space:nowrap}}
+@media (min-width:1200px){.lp .lp-facts{white-space:nowrap}}
