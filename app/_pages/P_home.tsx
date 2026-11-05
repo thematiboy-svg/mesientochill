@@ -9,7 +9,7 @@ export default function P_home() {
 <h1 className="t1">20 minutos para <span className="accent">cambiar tu energ&iacute;a</span></h1>
 <p className="lead" style={{ maxWidth: 560 }}>Pilates, Total Barre y Mindfulness en directo con M&oacute;nica Mu&ntilde;oz. Una pausa en mitad del d&iacute;a para volver al trabajo con la cabeza clara.</p>
 <div className="wrapr g16 center"><Link className="btn b1" href="/registro">Quiero mi plaza</Link><Link className="btn b2" href="/clases">Ver las clases</Link></div>
-<p className="small" style={{ fontWeight: "600", color: "var(--teal)" }}>Plazas limitadas &middot; M&aacute;ximo 10 personas por clase &middot; Desde casa o la oficina</p></div>
+<div className="stack g8"><p className="small" style={{ fontWeight: "600", color: "var(--teal)" }}>Plazas limitadas.</p><p className="small hero-facts" style={{ fontWeight: "500", color: "var(--muted)" }}>Clases de 20 minutos &middot; M&aacute;ximo 10 personas por clase &middot; Desde casa o la oficina</p></div></div>
 <div style={{ flex: "1 1 380px", minWidth: "0", display: "flex", justifyContent: "center" }}><div className="hero-art" style={{ position: "relative", width: "min(460px,100%)", aspectRatio: "1/1" }}>
 <div className="ha-bg" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "var(--blush)" }} />
 <img className="ha-sym" src="/simbolo.svg" alt="S\xEDmbolo de MeSientoChill: un c\xEDrculo con una sonrisa" style={{ position: "absolute", left: "14%", top: "12%", width: "72%", height: "72%" }} />

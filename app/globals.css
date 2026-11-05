@@ -281,3 +281,5 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 .nav a.on,.nav a.on:hover{border-bottom-color:transparent}
 .nav-bar{position:absolute;left:0;bottom:0;height:2px;border-radius:2px;background:var(--mint);pointer-events:none;transition:transform .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1),opacity .2s ease}
 @media (prefers-reduced-motion:reduce){.nav-bar{transition:none}}
+/* Hero de la home: las tres características en una línea en escritorio */
+@media (min-width:1200px){.hero-facts{white-space:nowrap}}
