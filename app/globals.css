@@ -283,3 +283,10 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 @media (prefers-reduced-motion:reduce){.nav-bar{transition:none}}
 /* Hero de la home: las tres características en una línea en escritorio */
 @media (min-width:1200px){.hero-facts{white-space:nowrap}}
+
+/* Menú sticky en móvil (web y landing): el logo encoge para que «Menú» quepa dentro de la píldora */
+@media (max-width:900px){
+.hd-in > .logo,.lp .hd-in > a:first-child{flex:0 1 230px;min-width:0}
+.hd-in > .logo img,.lp .hd-in > a:first-child img{width:100%!important;height:auto!important;max-width:230px}
+.hd-in > .mnav,.lp .hd-in > .lp-mnav{flex:none}
+}
