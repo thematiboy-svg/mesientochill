@@ -30,13 +30,13 @@ export default function Landing() {
 </div>
 <div style={{ flex: "1 1 420px", minWidth: "0", display: "flex", justifyContent: "center" }}>
 <div style={{ position: "relative", width: "min(480px, 100%)", aspectRatio: "1 / 1" }}>
-<div style={{ position: "absolute", left: "0", top: "0", right: "0", bottom: "0", borderRadius: "50%", background: "#FFEDE8" }} />
-<img src="/simbolo.svg" alt="S\xEDmbolo de MeSientoChill: un c\xEDrculo con una sonrisa" style={{ position: "absolute", left: "14%", top: "12%", width: "72%", height: "72%" }} />
-<div style={{ position: "absolute", top: "2%", right: "0", width: 116, height: 116, borderRadius: "50%", background: "#FF9782", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: "1.1" }}>
+<div className="ha-bg" style={{ position: "absolute", left: "0", top: "0", right: "0", bottom: "0", borderRadius: "50%", background: "#FFEDE8" }} />
+<img className="ha-sym" src="/simbolo.svg" alt="S\xEDmbolo de MeSientoChill: un c\xEDrculo con una sonrisa" style={{ position: "absolute", left: "14%", top: "12%", width: "72%", height: "72%" }} />
+<div className="ha-20" style={{ position: "absolute", top: "2%", right: "0", width: 116, height: 116, borderRadius: "50%", background: "#FF9782", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: "1.1" }}>
 <span style={{ fontSize: 38, fontWeight: "800" }}>20</span>
 <span style={{ fontSize: 13, fontWeight: "700" }}>minutos</span>
 </div>
-<div className="lp-badge" style={{ position: "absolute", left: "-2%", bottom: "4%", width: 270, maxWidth: "80%", background: "#FFFFFF", border: "1px solid #CFE3DF", borderRadius: 20, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
+<div className="ha-card lp-badge" style={{ position: "absolute", left: "-2%", bottom: "4%", width: 270, maxWidth: "80%", background: "#FFFFFF", border: "1px solid #CFE3DF", borderRadius: 20, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
 <span style={{ fontSize: 14, fontWeight: "800" }}>Elige tu pausa</span>
 <span style={{ fontSize: 14, fontWeight: "500", lineHeight: "1.3", display: "flex", alignItems: "center", gap: 10 }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#00A28F", flex: "none" }} />Hora del caf&eacute;</span>
 <span style={{ fontSize: 14, fontWeight: "500", lineHeight: "1.3", display: "flex", alignItems: "center", gap: 10 }}><span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF9782", flex: "none" }} />Hora de la comida</span>

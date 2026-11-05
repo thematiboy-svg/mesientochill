@@ -260,3 +260,18 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 .faq summary:hover::after{background:var(--ink);transform:scale(1.08)}
 .faq summary:hover h3{color:var(--teal)}
 @media (prefers-reduced-motion:reduce){.faq summary::after{transition:none}.faq summary:hover::after{transform:none}}
+
+/* Animación de entrada del hero (web y landing): círculo, símbolo, «20 minutos» y «Elige tu pausa» */
+@keyframes ha-bg{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@keyframes ha-sym{from{opacity:0;transform:scale(.75) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes ha-pop{0%{opacity:0;transform:scale(0)}65%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
+@keyframes ha-up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ha-in{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+.ha-bg{animation:ha-bg .55s cubic-bezier(.2,.8,.2,1) both}
+.ha-sym{animation:ha-sym .65s cubic-bezier(.2,.8,.2,1) .08s both}
+.ha-20{animation:ha-pop .5s cubic-bezier(.3,1.4,.5,1) .32s both}
+.ha-card{animation:ha-up .5s cubic-bezier(.2,.8,.2,1) .4s both}
+.ha-card > span:nth-child(2){animation:ha-in .35s ease-out .62s both}
+.ha-card > span:nth-child(3){animation:ha-in .35s ease-out .7s both}
+.ha-card > span:nth-child(4){animation:ha-in .35s ease-out .78s both}
+@media (prefers-reduced-motion:reduce){.ha-bg,.ha-sym,.ha-20,.ha-card,.ha-card > span{animation:none!important}}
