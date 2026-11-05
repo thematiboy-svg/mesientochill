@@ -17,3 +17,14 @@ insert into public.videos (titulo, disciplina, nivel, minutos, zona) values
   ('Total Barre día 3','Total Barre','Nivel 2',45,'Glúteos'),
   ('Respiración y calma','Mindfulness',null,45,'Mente'),
   ('Movimiento suave para la espalda','Pilates','Rehabilitación',45,'Espalda');
+
+-- Evento y audio de ejemplo (para probar los pagos sueltos). El audio necesita un archivo subido al espacio «audios».
+insert into public.eventos (titulo, descripcion, lugar, starts_at, aforo, precio_cents)
+select 'Encuentro de primavera (ejemplo)',
+       'Dos sesiones en directo de Mr.Matt, mindfulness, actividades, comida sana y gente con la que compartirlo.',
+       '[Lugar]', ((current_date + 30)::timestamp + time '10:00') at time zone 'Europe/Madrid', 30, 3800
+where not exists (select 1 from public.eventos);
+
+insert into public.audios (titulo, descripcion, minutos, archivo)
+select 'Respiración para dormir (ejemplo)', 'Una práctica guiada para soltar el día.', 15, 'ejemplo/respiracion-para-dormir.mp3'
+where not exists (select 1 from public.audios);

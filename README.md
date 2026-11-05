@@ -37,10 +37,12 @@ Siempre quedan abiertos `/landing/*`, `/api/*` (formularios) y los archivos (ico
 
 Sin las variables de Stripe la web funciona igual que antes, pero sin cobros. Para activarlos (primero en modo de prueba):
 
-1. **Base de datos.** Si la base se creó con una versión anterior de `schema.sql`, ejecuta `supabase/migraciones/001_stripe.sql` en el editor SQL. Añade las columnas de facturación, impide que cada usuaria se cambie el plan o el estado de pago por su cuenta y exige una suscripción activa para reservar clases.
+1. **Base de datos.** Si la base se creó con una versión anterior de `schema.sql`, ejecuta en el editor SQL, por orden:
+   - `supabase/migraciones/001_stripe.sql`: añade las columnas de facturación, impide que cada usuaria se cambie el plan o el estado de pago por su cuenta y exige una suscripción activa para reservar clases.
+   - `supabase/migraciones/002_compras.sql`: crea las tablas de eventos, audios y compras, y el espacio privado `audios` de Supabase Storage.
 2. **Productos.** En Stripe, crea dos productos con un precio mensual recurrente en euros: Solo vídeos (39 €) y Directo y vídeos (49 €). Copia los dos `price_…`.
 3. **Portal de cliente.** En Stripe → Settings → Billing → Customer portal, activa el cambio de método de pago, el historial de facturas y la cancelación al final del periodo.
-4. **Webhook.** En Stripe → Developers → Webhooks, crea un endpoint `https://TU-DOMINIO/api/stripe/webhook` con los eventos `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused` y `customer.subscription.resumed`. Copia el `whsec_…`. En local: `stripe listen --forward-to localhost:3000/api/stripe/webhook`.
+4. **Webhook.** En Stripe → Developers → Webhooks, crea un endpoint `https://TU-DOMINIO/api/stripe/webhook` con los eventos `checkout.session.completed`, `checkout.session.expired`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, `charge.refunded`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused` y `customer.subscription.resumed`. Copia el `whsec_…`. En local: `stripe listen --forward-to localhost:3000/api/stripe/webhook`.
 5. **Variables** (en Vercel, marcadas como «Sensitive»): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_VIDEOS`, `STRIPE_PRICE_DIRECTO` y `SUPABASE_SERVICE_ROLE_KEY`. Opcionales: `STRIPE_TAX=on` (Stripe Tax) y `NEXT_PUBLIC_SITE_URL`.
 
 Cómo funciona:
@@ -49,14 +51,24 @@ Cómo funciona:
 - Al pasar a Directo y vídeos se cobra al momento la parte proporcional. Si el banco pide confirmación (3D Secure), se abre la factura de Stripe y el cambio se aplica al pagarla. Al pasar a Solo vídeos, lo pagado de más se descuenta del siguiente recibo.
 - Si falla un cobro (`past_due`), el acceso sigue mientras Stripe reintenta y se avisa a la usuaria para que cambie la tarjeta.
 
+### Eventos y audios (pago único)
+
+- **Precios**, calculados siempre en el servidor (`lib/compras.ts`):
+  - Eventos: el precio general del evento (`eventos.precio_cents`, 38 € por defecto); −10 % con Solo vídeos (34,20 €) y −20 % con Directo y vídeos (30,40 €).
+  - Audios: 17 € con suscripción activa y 19 € sin ella.
+- **Cómo se compra.** Al pulsar *Reservar mi plaza* o *Comprar*, se aparta la plaza (o el audio) durante 31 minutos y se abre la página de pago de Stripe, que caduca a los 30. Dos personas no pueden llevarse la última plaza a la vez. Si la usuaria sale sin pagar, la plaza vuelve a quedar libre.
+- **Al pagar**, el webhook marca la compra como pagada y Stripe envía el recibo y la factura por email. Las facturas aparecen también en el portal de cliente. Con los pagos que tardan en confirmarse (p. ej. adeudo SEPA), la plaza queda guardada hasta que el banco confirme o rechace el cobro.
+- **Devoluciones.** Se hacen desde el Dashboard de Stripe (pago → *Reembolsar*). Con una devolución total la compra queda como reembolsada y la plaza se libera.
+- **Crear eventos y audios.** Por ahora, desde el editor de tablas de Supabase (`eventos` y `audios`). Cada audio se sube al espacio `audios` de Storage y en `audios.archivo` se pone su ruta (p. ej. `respiracion/dormir.mp3`). La descarga (`/api/audios/ID/descarga`) solo funciona con una compra pagada y genera un enlace temporal de 60 segundos.
+- **Coste.** Las facturas de los pagos sueltos (`invoice_creation`) usan Stripe Invoicing, que puede tener su propia comisión, distinta de la de Billing. Si prefieres solo el recibo por email, quita `invoice_creation` en `lib/compras.ts`, pero antes consulta con la gestoría qué factura necesitas emitir.
+
 ## Pendiente (no incluido todavía)
 
 El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
 
 - **Horario de las clases en directo**: días y horas aún por decidir. Las de `supabase/seed.sql` son de ejemplo; cuando se fijen, crear las clases reales y añadir las horas a Chillsi (`lib/chillsi.ts`, tema «horarios»).
-- Pagos con Stripe de eventos (con descuento según el plan) y audios de Mindfulness. Las suscripciones ya están hechas.
 - Panel de administración para Mónica (crear clases, cancelar una clase y devolver créditos, subir vídeos).
 - Emails (recordatorios, aviso a las tres primeras personas de la lista de espera, cancelación por parte de Mónica).
 - Marcar asistencia (`asistio` / `no_asistio`) tras cada clase y avisar a la lista de espera al liberarse una plaza.
-- Biblioteca de vídeos con filtros y reproductor reales, página de eventos con reserva y chatbot Chillsi.
+- Biblioteca de vídeos con filtros y reproductor reales, y chatbot Chillsi.
 - Textos legales (aviso legal, privacidad, cookies, términos) y revisión legal antes de cobrar.

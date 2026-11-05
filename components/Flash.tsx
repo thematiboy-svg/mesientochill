@@ -6,6 +6,7 @@ const OK: Record<string, string> = {
   guardado: 'Cambios guardados.',
   plan: 'Plan actualizado.',
   pago: 'Pago completado. ¡Bienvenida a MeSientoChill!',
+  compra: 'Pago completado. Ya lo tienes en tu cuenta y te llegará el recibo por email.',
 }
 export default function Flash({ ok, error }: { ok?: string; error?: string }) {
   if (error) return <p className="alert err" role="alert">{error}</p>

@@ -20,6 +20,11 @@ export const SIDE_ITEMS = [
     "svg": "<circle cx=\"12\" cy=\"12\" r=\"9\"></circle><path d=\"m10 8.5 5 3.5-5 3.5z\"></path>"
   },
   {
+    "href": "/app/audios",
+    "label": "Audios de Mindfulness",
+    "svg": "<path d=\"M4 14v-2a8 8 0 0 1 16 0v2\"></path><rect x=\"3\" y=\"14\" width=\"5\" height=\"7\" rx=\"2\"></rect><rect x=\"16\" y=\"14\" width=\"5\" height=\"7\" rx=\"2\"></rect>"
+  },
+  {
     "href": "/app/eventos",
     "label": "Eventos",
     "svg": "<path d=\"M12 3l2.2 5.2 5.6.5-4.3 3.7 1.3 5.5L12 15l-4.8 2.9 1.3-5.5L4.2 8.7l5.6-.5z\"></path>"

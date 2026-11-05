@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { createClient } from '../lib/supabase/server'
 import { getStripe, hayStripe, precioDe, type Plan } from '../lib/stripe'
 import { clienteStripe, crearCheckout, sincronizarSuscripcion, urlBase } from '../lib/suscripcion'
+import { ErrorCompra, iniciarCompra, type Tipo } from '../lib/compras'
 
 export type FormState = { error?: string; ok?: string } | undefined
 
@@ -195,6 +196,28 @@ export async function abrirPortal() {
     unstable_rethrow(e)
     console.error('[stripe] Portal', e)
     return conError('No hemos podido abrir la gestión de pagos. Inténtalo de nuevo en unos minutos.')
+  }
+  redirect(url)
+}
+
+/** Compra suelta (plaza de evento o audio): lleva a la página de pago de Stripe. */
+export async function comprar(fd: FormData) {
+  const supabase = await createClient()
+  if (!supabase) return
+  const { data: u } = await supabase.auth.getUser()
+  if (!u.user) redirect('/login')
+  const tipo: Tipo = fd.get('tipo') === 'audio' ? 'audio' : 'evento'
+  const back = tipo === 'evento' ? '/app/eventos' : '/app/audios'
+  const fallo = (msg: string) => redirect(`${back}?error=${encodeURIComponent(msg)}`)
+  if (!hayStripe()) return fallo(SIN_STRIPE)
+  let url: string
+  try {
+    url = await iniciarCompra({ userId: u.user.id, email: u.user.email, tipo, id: String(fd.get('id') || '') })
+  } catch (e) {
+    unstable_rethrow(e)
+    if (e instanceof ErrorCompra) return fallo(e.message)
+    console.error('[stripe] Compra', e)
+    return fallo('No hemos podido abrir la página de pago. Inténtalo de nuevo en unos minutos.')
   }
   redirect(url)
 }

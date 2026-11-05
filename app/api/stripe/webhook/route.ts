@@ -1,12 +1,15 @@
 import type Stripe from 'stripe'
 import { getStripe } from '../../../../lib/stripe'
 import { sincronizarSuscripcion } from '../../../../lib/suscripcion'
+import { compraFallida, compraReembolsada, cumplirCompra } from '../../../../lib/compras'
 
 // Endpoint de webhooks de Stripe: https://TU-DOMINIO/api/stripe/webhook
 // Eventos que hay que activar en Stripe:
 //   checkout.session.completed
 //   customer.subscription.created, customer.subscription.updated, customer.subscription.deleted
 //   customer.subscription.paused, customer.subscription.resumed
+//   checkout.session.expired, checkout.session.async_payment_succeeded, checkout.session.async_payment_failed
+//   charge.refunded
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
@@ -31,9 +34,22 @@ export async function POST(req: Request) {
         const s = event.data.object
         if (s.mode === 'subscription' && s.subscription) {
           await sincronizarSuscripcion(typeof s.subscription === 'string' ? s.subscription : s.subscription.id)
+        } else if (s.mode === 'payment') {
+          await cumplirCompra(s)
         }
         break
       }
+      // Pagos sueltos (eventos y audios)
+      case 'checkout.session.expired':
+      case 'checkout.session.async_payment_succeeded':
+        await cumplirCompra(event.data.object)
+        break
+      case 'checkout.session.async_payment_failed':
+        await compraFallida(event.data.object)
+        break
+      case 'charge.refunded':
+        await compraReembolsada(event.data.object)
+        break
       case 'customer.subscription.created':
       case 'customer.subscription.updated':
       case 'customer.subscription.deleted':
