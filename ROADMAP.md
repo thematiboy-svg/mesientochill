@@ -40,7 +40,10 @@ Es el mayor bloque de desarrollo.
 2. Cobro de eventos con el descuento según plan.
 3. Facturas y portal de pago.
 4. Avisos por email: confirmaciones de reserva, recibos y recordatorios.
-5. Audios de Mindfulness descargables a 18 € para las personas usuarias de MeSientoChill: pago y descarga desde su cuenta.
+5. Audios de Mindfulness descargables, a la venta sueltos (más adelante, quizá algún pack):
+   - Precio: 17 € para personas suscritas y 19 € para quien no tenga suscripción.
+   - Pago con Stripe y descarga desde la cuenta.
+   - Almacenamiento propuesto: Supabase Storage, en un espacio privado; la descarga se hace con un enlace temporal que solo se genera si la compra está registrada.
 
 ## Fase 4 · Calidad y lanzamiento
 
