@@ -1,7 +1,9 @@
 'use server'
-import { redirect } from 'next/navigation'
+import { redirect, unstable_rethrow } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { createClient } from '../lib/supabase/server'
+import { getStripe, hayStripe, precioDe, type Plan } from '../lib/stripe'
+import { clienteStripe, crearCheckout, sincronizarSuscripcion, urlBase } from '../lib/suscripcion'
 
 export type FormState = { error?: string; ok?: string } | undefined
 
@@ -22,7 +24,17 @@ export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   if (!fd.get('privacidad')) return { error: 'Debes aceptar la política de privacidad y los términos del servicio.' }
   const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { nombre, apellidos, telefono, plan } } })
   if (error) return { error: error.message }
-  if (!data.session) return { ok: 'Te hemos enviado un email para confirmar tu cuenta. Después podrás iniciar sesión.' }
+  if (!data.session) return { ok: 'Te hemos enviado un email para confirmar tu cuenta. Después podrás iniciar sesión y activar tu suscripción.' }
+  if (hayStripe() && data.user) {
+    let url: string
+    try {
+      url = await crearCheckout({ userId: data.user.id, email, nombre: `${nombre} ${apellidos}`, plan })
+    } catch (e) {
+      console.error('[stripe] Checkout tras el registro', e)
+      redirect('/app/suscripcion?error=' + encodeURIComponent('Tu cuenta está creada, pero no hemos podido abrir el pago. Inténtalo de nuevo desde aquí.'))
+    }
+    redirect(url)
+  }
   redirect('/app/perfil?bienvenida=1')
 }
 
@@ -100,13 +112,89 @@ export async function guardarPerfil(fd: FormData) {
   redirect('/app/perfil?ok=guardado')
 }
 
+const volver = (q: string) => redirect('/app/suscripcion?' + q)
+const conError = (msg: string) => volver('error=' + encodeURIComponent(msg))
+const SIN_STRIPE = 'Los pagos todavía no están activados.'
+
+/** Empieza una suscripción: lleva a la página de pago de Stripe. */
+export async function iniciarSuscripcion(fd: FormData) {
+  const supabase = await createClient()
+  if (!supabase) return
+  const { data: u } = await supabase.auth.getUser()
+  if (!u.user) redirect('/login')
+  if (!hayStripe()) conError(SIN_STRIPE)
+  const { data: p } = await supabase.from('profiles').select('nombre, apellidos, estado_suscripcion').eq('id', u.user.id).single()
+  if (p && ['active', 'trialing', 'past_due'].includes(p.estado_suscripcion ?? '')) conError('Ya tienes una suscripción activa.')
+  const plan: Plan = fd.get('plan') === 'videos' ? 'videos' : 'directo'
+  let url: string
+  try {
+    url = await crearCheckout({ userId: u.user.id, email: u.user.email, nombre: `${p?.nombre ?? ''} ${p?.apellidos ?? ''}`.trim(), plan })
+  } catch (e) {
+    unstable_rethrow(e)
+    console.error('[stripe] Checkout', e)
+    return conError('No hemos podido abrir la página de pago. Inténtalo de nuevo en unos minutos.')
+  }
+  redirect(url)
+}
+
+/** Cambia de plan en Stripe. Al subir se cobra ya la diferencia; al bajar, la diferencia se descuenta del siguiente recibo. */
 export async function cambiarPlan(fd: FormData) {
   const supabase = await createClient()
   if (!supabase) return
   const { data: u } = await supabase.auth.getUser()
   if (!u.user) redirect('/login')
-  const plan = fd.get('plan') === 'videos' ? 'videos' : 'directo'
-  await supabase.from('profiles').update({ plan }).eq('id', u.user.id)
+  const stripe = getStripe()
+  if (!stripe) return conError(SIN_STRIPE)
+  const { data: p } = await supabase.from('profiles').select('plan, stripe_subscription_id').eq('id', u.user.id).single()
+  if (!p?.stripe_subscription_id) return conError('No tienes ninguna suscripción activa.')
+  const plan: Plan = fd.get('plan') === 'videos' ? 'videos' : 'directo'
+  if (plan === p.plan) return volver('ok=plan')
+  const sube = plan === 'directo'
+  let destino: string | null = null
+  try {
+    const sub = await stripe.subscriptions.retrieve(p.stripe_subscription_id)
+    if (!['active', 'trialing'].includes(sub.status)) return conError('Antes de cambiar de plan, actualiza tu método de pago.')
+    const nueva = await stripe.subscriptions.update(sub.id, {
+      items: [{ id: sub.items.data[0].id, price: precioDe(plan) }],
+      proration_behavior: sube ? 'always_invoice' : 'create_prorations',
+      ...(sube ? { payment_behavior: 'pending_if_incomplete' as const } : {}),
+      expand: ['latest_invoice'],
+    })
+    if (nueva.pending_update) {
+      // El cobro de la diferencia necesita confirmación (p. ej. 3D Secure) o ha fallado: se paga en la factura de Stripe.
+      const inv = nueva.latest_invoice
+      destino = typeof inv === 'object' && inv?.hosted_invoice_url ? inv.hosted_invoice_url : null
+      if (!destino) return conError('No hemos podido cobrar la diferencia. Revisa tu método de pago y vuelve a intentarlo.')
+    } else {
+      await sincronizarSuscripcion(nueva.id)
+    }
+  } catch (e) {
+    unstable_rethrow(e)
+    console.error('[stripe] Cambio de plan', e)
+    return conError('No hemos podido cambiar tu plan. Inténtalo de nuevo en unos minutos.')
+  }
   revalidatePath('/app', 'layout')
-  redirect('/app/suscripcion?ok=plan')
+  if (destino) redirect(destino)
+  volver('ok=plan')
+}
+
+/** Abre el portal de cliente de Stripe: método de pago, facturas y baja. */
+export async function abrirPortal() {
+  const supabase = await createClient()
+  if (!supabase) return
+  const { data: u } = await supabase.auth.getUser()
+  if (!u.user) redirect('/login')
+  const stripe = getStripe()
+  if (!stripe) return conError(SIN_STRIPE)
+  let url: string
+  try {
+    const customer = await clienteStripe(u.user.id, u.user.email)
+    const s = await stripe.billingPortal.sessions.create({ customer, locale: 'es', return_url: `${await urlBase()}/app/suscripcion` })
+    url = s.url
+  } catch (e) {
+    unstable_rethrow(e)
+    console.error('[stripe] Portal', e)
+    return conError('No hemos podido abrir la gestión de pagos. Inténtalo de nuevo en unos minutos.')
+  }
+  redirect(url)
 }

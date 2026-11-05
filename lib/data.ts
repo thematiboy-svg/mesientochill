@@ -13,6 +13,11 @@ export type Profile = {
   consentimiento_salud: boolean
   objetivos: string[]
   franjas: string[]
+  stripe_customer_id: string | null
+  stripe_subscription_id: string | null
+  estado_suscripcion: string | null
+  periodo_fin: string | null
+  cancela_al_final: boolean
 }
 export type Session = { id: string; disciplina: 'Pilates' | 'Total Barre' | 'Mindfulness'; starts_at: string; capacidad: number; cancelada: boolean }
 export type Reservation = { id: string; session_id: string; estado: string; class_sessions: Session }

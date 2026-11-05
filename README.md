@@ -13,7 +13,7 @@ Next.js 15 (App Router) + Supabase (login, base de datos y seguridad por filas).
 - Mis reservas y créditos: próximas reservas, cancelación, historial y créditos (disponibles, usados, perdidos).
 - Biblioteca de vídeos, Eventos y Ayuda (maquetas estáticas por ahora).
 - Mi perfil y cuestionario (con consentimiento explícito para datos de salud).
-- Suscripción: plan actual y cambio entre Solo vídeos (39 €) y Directo y vídeos (49 €).
+- Suscripción con Stripe: alta con Stripe Checkout, cambio entre Solo vídeos (39 €) y Directo y vídeos (49 €), y método de pago, facturas y baja en el portal de cliente de Stripe.
 
 **Reglas de negocio** (en `supabase/schema.sql`, funciones `reservar_clase`, `cancelar_reserva`, `unirse_lista`, `creditos_mes`):
 8 créditos al mes que caducan a fin de mes · máximo 10 personas por clase · una clase al día ·
@@ -33,12 +33,28 @@ Siempre quedan abiertos `/landing/*`, `/api/*` (formularios) y los archivos (ico
 4. En Supabase → Authentication, decide si exiges confirmar el email (si lo exiges, tras registrarse se avisa de que hay que confirmarlo).
 5. `npm install` y `npm run dev` → http://localhost:3000
 
+## Pagos con Stripe
+
+Sin las variables de Stripe la web funciona igual que antes, pero sin cobros. Para activarlos (primero en modo de prueba):
+
+1. **Base de datos.** Si la base se creó con una versión anterior de `schema.sql`, ejecuta `supabase/migraciones/001_stripe.sql` en el editor SQL. Añade las columnas de facturación, impide que cada usuaria se cambie el plan o el estado de pago por su cuenta y exige una suscripción activa para reservar clases.
+2. **Productos.** En Stripe, crea dos productos con un precio mensual recurrente en euros: Solo vídeos (39 €) y Directo y vídeos (49 €). Copia los dos `price_…`.
+3. **Portal de cliente.** En Stripe → Settings → Billing → Customer portal, activa el cambio de método de pago, el historial de facturas y la cancelación al final del periodo.
+4. **Webhook.** En Stripe → Developers → Webhooks, crea un endpoint `https://TU-DOMINIO/api/stripe/webhook` con los eventos `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused` y `customer.subscription.resumed`. Copia el `whsec_…`. En local: `stripe listen --forward-to localhost:3000/api/stripe/webhook`.
+5. **Variables** (en Vercel, marcadas como «Sensitive»): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_VIDEOS`, `STRIPE_PRICE_DIRECTO` y `SUPABASE_SERVICE_ROLE_KEY`. Opcionales: `STRIPE_TAX=on` (Stripe Tax) y `NEXT_PUBLIC_SITE_URL`.
+
+Cómo funciona:
+- Al registrarse se abre el pago de Stripe con el plan elegido. Quien aún no tenga suscripción la activa desde *Suscripción*.
+- El webhook (`app/api/stripe/webhook/route.ts`) vuelve a leer cada suscripción de Stripe y la copia en `profiles` (`plan`, `estado_suscripcion`, `periodo_fin`, `cancela_al_final`), así que no importa el orden en que lleguen los eventos.
+- Al pasar a Directo y vídeos se cobra al momento la parte proporcional. Si el banco pide confirmación (3D Secure), se abre la factura de Stripe y el cambio se aplica al pagarla. Al pasar a Solo vídeos, lo pagado de más se descuenta del siguiente recibo.
+- Si falla un cobro (`past_due`), el acceso sigue mientras Stripe reintenta y se avisa a la usuaria para que cambie la tarjeta.
+
 ## Pendiente (no incluido todavía)
 
 El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
 
 - **Horario de las clases en directo**: días y horas aún por decidir. Las de `supabase/seed.sql` son de ejemplo; cuando se fijen, crear las clases reales y añadir las horas a Chillsi (`lib/chillsi.ts`, tema «horarios»).
-- Pagos con Stripe (alta de suscripción, cambio de plan con cobro, método de pago y baja).
+- Pagos con Stripe de eventos (con descuento según el plan) y audios de Mindfulness. Las suscripciones ya están hechas.
 - Panel de administración para Mónica (crear clases, cancelar una clase y devolver créditos, subir vídeos).
 - Emails (recordatorios, aviso a las tres primeras personas de la lista de espera, cancelación por parte de Mónica).
 - Marcar asistencia (`asistio` / `no_asistio`) tras cada clase y avisar a la lista de espera al liberarse una plaza.

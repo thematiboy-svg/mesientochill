@@ -36,9 +36,9 @@ Es el mayor bloque de desarrollo.
 
 ## Fase 3 · Pagos y suscripciones
 
-1. Integración con Stripe: planes Solo vídeos (39 €) y Directo y vídeos (49 €), cambio de plan y cancelación.
+1. ✅ Integración con Stripe Billing: planes Solo vídeos (39 €) y Directo y vídeos (49 €), cambio de plan y cancelación (programada; falta configurarla en Stripe y probarla en modo de prueba, ver README).
 2. Cobro de eventos con el descuento según plan.
-3. Facturas y portal de pago.
+3. Facturas y portal de pago: el portal de cliente de Stripe ya está enlazado. Pendiente: revisar con la gestoría los requisitos de las facturas en España (Verifactu) y decidir si se activa Stripe Tax.
 4. Avisos por email: confirmaciones de reserva, recibos y recordatorios.
 5. Audios de Mindfulness descargables, a la venta sueltos (más adelante, quizá algún pack):
    - Precio: 17 € para personas suscritas y 19 € para quien no tenga suscripción.

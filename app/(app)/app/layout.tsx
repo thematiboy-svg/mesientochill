@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import AppSide from '../../../components/AppSide'
 import SiteFooter from '../../../components/SiteFooter'
 import { getContext } from '../../../lib/data'
+import { hayStripe, tieneAcceso } from '../../../lib/stripe'
 import { signOut } from '../../actions'
 
 export const dynamic = 'force-dynamic'
@@ -26,7 +27,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       </header>
       <div className="app">
         <AppSide />
-        <main className="main">{children}</main>
+        <main className="main">
+          {hayStripe() && ctx.profile && !tieneAcceso(ctx.profile.estado_suscripcion) && (
+            <p className="alert err" role="status">Tu suscripción no está activa. <Link href="/app/suscripcion" style={{ fontWeight: 700, color: 'inherit' }}>Actívala aquí</Link> para reservar clases y acceder a todo el contenido.</p>
+          )}
+          {ctx.profile?.estado_suscripcion === 'past_due' && (
+            <p className="alert err" role="alert">No hemos podido cobrar tu última cuota. <Link href="/app/suscripcion" style={{ fontWeight: 700, color: 'inherit' }}>Actualiza tu método de pago</Link> para no perder el acceso.</p>
+          )}
+          {children}
+        </main>
       </div>
       <SiteFooter helpHref="/app/ayuda" />
     </>

@@ -17,6 +17,12 @@ create table if not exists public.profiles (
   consentimiento_salud boolean not null default false,
   objetivos text[] not null default '{}',
   franjas text[] not null default '{}',
+  -- Facturación (Stripe). Solo las escribe el servidor con la clave service_role.
+  stripe_customer_id text unique,
+  stripe_subscription_id text unique,
+  estado_suscripcion text,          -- estado de Stripe: active, trialing, past_due, canceled, incomplete…
+  periodo_fin timestamptz,          -- fin del periodo pagado (próximo cobro)
+  cancela_al_final boolean not null default false,
   created_at timestamptz not null default now()
 );
 
@@ -63,6 +69,12 @@ create policy "perfil propio: actualizar" on public.profiles for update using (a
 create policy "clases: leer (autenticadas)" on public.class_sessions for select to authenticated using (true);
 create policy "reservas propias: leer" on public.reservations for select using (auth.uid() = user_id);
 create policy "vídeos: leer (autenticadas)" on public.videos for select to authenticated using (true);
+
+-- Cada usuaria solo puede editar sus datos personales; el plan y la facturación los escribe el servidor
+-- (webhook de Stripe con service_role). El perfil lo crea el trigger handle_new_user.
+revoke insert, update on public.profiles from anon, authenticated;
+grant update (nombre, apellidos, telefono, nivel, molestias, notas_salud, consentimiento_salud, objetivos, franjas)
+  on public.profiles to authenticated;
 
 -- Crear el perfil automáticamente al registrarse (usa los metadatos del formulario)
 create or replace function public.handle_new_user() returns trigger
@@ -113,6 +125,9 @@ declare
 begin
   if uid is null then return 'No has iniciado sesión.'; end if;
   select * into p from profiles where id = uid;
+  if coalesce(p.estado_suscripcion, '') not in ('active','trialing','past_due') then
+    return 'Necesitas una suscripción activa para reservar clases.';
+  end if;
   if p.plan <> 'directo' then return 'Tu plan Solo vídeos no incluye clases en directo.'; end if;
   select * into s from class_sessions where id = p_session and not cancelada;
   if not found then return 'Esa clase no está disponible.'; end if;

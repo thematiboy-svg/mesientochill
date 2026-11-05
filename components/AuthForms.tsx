@@ -59,7 +59,7 @@ export function RegisterForm() {
           <div className="field"><label htmlFor="r-p">Contraseña</label><input id="r-p" name="password" className="in-t" type="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
           <label className="opt" style={{ alignItems: 'flex-start', fontSize: 14 }}><input type="checkbox" name="privacidad" /><span>He leído y acepto la <Link href="/privacidad" style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link> y los términos del servicio.</span></label>
           <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Creando tu cuenta…' : 'Crear mi cuenta'}</button>
-          <p className="small muted" style={{ textAlign: 'center' }}>El pago con Stripe se activará en la siguiente fase. ¿Ya tienes cuenta? <Link href="/login">Inicia sesión</Link></p>
+          <p className="small muted" style={{ textAlign: 'center' }}>Después pagarás de forma segura con Stripe. ¿Ya tienes cuenta? <Link href="/login">Inicia sesión</Link></p>
         </div>
       </div>
     </form>
