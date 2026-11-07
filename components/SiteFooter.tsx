@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Copyright from './Copyright'
 
-// Instagram: @mesientochill_. TODO: sustituir TikTok, Facebook y YouTube por los perfiles reales.
+// Instagram: @mesientochill_ · TikTok: @mesientochill. TODO: sustituir Facebook y YouTube por los perfiles reales.
 const SOCIAL = [
   {
     name: 'Instagram de MeSientoChill (@mesientochill_)',
@@ -9,8 +9,8 @@ const SOCIAL = [
     icon: (<><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r=".6" fill="currentColor" /></>),
   },
   {
-    name: 'TikTok',
-    href: 'https://www.tiktok.com/',
+    name: 'TikTok de MeSientoChill (@mesientochill)',
+    href: 'https://www.tiktok.com/@mesientochill',
     icon: (<><path d="M14 3v11.2a3.7 3.7 0 1 1-3.7-3.7" /><path d="M14 3c.3 2.5 2 4.2 4.6 4.4" /></>),
   },
   {
