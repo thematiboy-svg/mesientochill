@@ -1,16 +1,27 @@
 import type { Metadata } from 'next'
 import LandingForm from './LandingForm'
-import Faqs from '../../components/Faqs'
+import Faqs, { FAQS } from '../../components/Faqs'
+import JsonLd from '../../components/JsonLd'
+import { orgJsonLd, faqJsonLd } from '../../lib/site'
 
 export const metadata: Metadata = {
-  title: 'Piloto · 20 minutos para cambiar tu energía',
-  description: 'Pilates, Total Barre y Mindfulness en directo con Mónica Muñoz. Apúntate al piloto: clases de 20 minutos, máximo 10 personas.',
+  title: { absolute: 'Pilates, Total Barre y Mindfulness online en directo · MeSientoChill' },
+  description: 'Clases online en directo de Pilates, Total Barre y Mindfulness con Mónica Muñoz: pausas de 20 minutos, máximo 10 personas. Apúntate al piloto.',
+  alternates: { canonical: '/landing' },
+  openGraph: {
+    type: 'website', locale: 'es_ES', siteName: 'MeSientoChill', url: '/landing',
+    title: '20 minutos para cambiar tu energía · MeSientoChill',
+    description: 'Pilates, Total Barre y Mindfulness en directo con Mónica Muñoz. Apúntate al piloto: clases de 20 minutos, máximo 10 personas.',
+    images: [{ url: '/monica-estudio.jpg', alt: 'Mónica Muñoz, instructora de MeSientoChill' }],
+  },
 }
 
 // Landing del piloto, convertida del diseño «MeSientoChill: landing page».
 export default function Landing() {
   return (
     <>
+<JsonLd data={orgJsonLd()} />
+<JsonLd data={faqJsonLd(FAQS)} />
 <section id="inicio" style={{ padding: "56px 40px 96px" }}>
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 48 }}>
 <div style={{ flex: "1 1 480px", minWidth: "0", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 24 }}>
@@ -27,7 +38,7 @@ export default function Landing() {
 <div style={{ flex: "1 1 420px", minWidth: "0", display: "flex", justifyContent: "center" }}>
 <div style={{ position: "relative", width: "min(480px, 100%)", aspectRatio: "1 / 1" }}>
 <div className="ha-bg" style={{ position: "absolute", left: "0", top: "0", right: "0", bottom: "0", borderRadius: "50%", background: "#FFEDE8" }} />
-<img className="ha-sym" src="/simbolo.svg" alt="S\xEDmbolo de MeSientoChill: un c\xEDrculo con una sonrisa" style={{ position: "absolute", left: "14%", top: "12%", width: "72%", height: "72%" }} />
+<img className="ha-sym" src="/simbolo.svg" alt="Símbolo de MeSientoChill: un círculo con una sonrisa" style={{ position: "absolute", left: "14%", top: "12%", width: "72%", height: "72%" }} />
 <div className="ha-20" style={{ position: "absolute", top: "2%", right: "0", width: 116, height: 116, borderRadius: "50%", background: "#FF9782", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: "1.1" }}>
 <span style={{ fontSize: 38, fontWeight: "800" }}>20</span>
 <span style={{ fontSize: 13, fontWeight: "700" }}>minutos</span>
@@ -129,7 +140,7 @@ export default function Landing() {
 <section id="monica" style={{ padding: "96px 40px" }}>
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "48px 72px" }}>
 <div style={{ flex: "1 1 360px", minWidth: "0", minHeight: 480, aspectRatio: "4 / 5", borderRadius: 36, background: "#E6F6F3", overflow: "hidden" }}>
-<img src="/monica-estudio.jpg" alt="M\xF3nica Mu\xF1oz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "55% 40%", display: "block" }} />
+<img src="/monica-estudio.jpg" alt="Mónica Muñoz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "55% 40%", display: "block" }} />
 </div>
 <div style={{ flex: "1 1 420px", minWidth: "0", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20 }}>
 <span style={{ fontSize: 13, fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: "#006B5E" }}>Tu instructora</span>

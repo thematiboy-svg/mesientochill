@@ -24,7 +24,15 @@ cancelar hasta 24 h antes devuelve el crédito (con menos de 24 h se pierde) · 
 
 Mientras solo esté publicada la landing (`/landing`), `middleware.ts` manda a `/landing` a quien entre en cualquier página de la web (también a `mesientochill.com`).
 Para ver y trabajar en la web, entra en **`/web1`**: el navegador guarda un permiso durante 90 días y ya puedes navegar por la web con sus direcciones normales (`/web1/precios` abre directamente Precios). `/web1/salir` quita el permiso.
-Siempre quedan abiertos `/landing/*`, `/api/*` (formularios) y los archivos (iconos, imágenes). Para publicar la web, cambia `WEB_PUBLICA` a `true` en `middleware.ts`.
+Siempre quedan abiertos `/landing/*`, `/api/*` (formularios) y los archivos (iconos, imágenes). Para publicar la web, cambia `WEB_PUBLICA` a `true` en `lib/site.ts`.
+
+## SEO (Google)
+
+- `app/robots.ts` → `/robots.txt` y `app/sitemap.ts` → `/sitemap.xml`. El sitemap solo lista la landing mientras `WEB_PUBLICA` sea `false`; al ponerlo a `true` lista las páginas de la web.
+- Títulos, descripciones, enlace canónico y vista previa para redes (Open Graph) en `app/layout.tsx` y en cada `page.tsx`. Dominio: `NEXT_PUBLIC_SITE_URL` (por defecto `https://www.mesientochill.com`).
+- Datos estructurados (schema.org: organización, Mónica y preguntas frecuentes) en `lib/site.ts`.
+- Login, registro, recuperar contraseña y la zona privada llevan `noindex`.
+- **Google Search Console:** añade la propiedad `mesientochill.com`, verifica (DNS, o pon el código de la «Etiqueta HTML» en la variable `GOOGLE_SITE_VERIFICATION` de Vercel y redespliega) y envía `https://www.mesientochill.com/sitemap.xml`.
 
 ## Puesta en marcha
 

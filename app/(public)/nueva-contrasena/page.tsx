@@ -1,6 +1,6 @@
 import { NuevaContrasenaForm } from '../../../components/AuthForms'
 
-export const metadata = { title: 'Nueva contraseña' }
+export const metadata = { title: 'Nueva contraseña', robots: { index: false, follow: true } }
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const sp = await searchParams

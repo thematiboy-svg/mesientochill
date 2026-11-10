@@ -1,6 +1,6 @@
 import { LoginForm } from '../../../components/AuthForms'
 
-export const metadata = { title: 'Iniciar sesión' }
+export const metadata = { title: 'Iniciar sesión', robots: { index: false, follow: true } }
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const sp = await searchParams
