@@ -11,7 +11,8 @@ Next.js 15 (App Router) + Supabase (login, base de datos y seguridad por filas).
 - Inicio: próxima clase, créditos del mes y vídeos.
 - Clases en directo: calendario semanal con filtros, reserva, lista de espera (solo plan Directo y vídeos).
 - Mis reservas y créditos: próximas reservas, cancelación, historial y créditos (disponibles, usados, perdidos).
-- Biblioteca de vídeos, Eventos y Ayuda (maquetas estáticas por ahora).
+- Biblioteca de vídeos: vídeos de YouTube «No listados», con filtro por disciplina y reproductor dentro de la web (ver «Añadir vídeos»).
+- Eventos y Ayuda (maquetas estáticas por ahora).
 - Mi perfil y cuestionario (con consentimiento explícito para datos de salud).
 - Suscripción: plan actual y cambio entre Solo vídeos (39 €) y Directo y vídeos (49 €).
 
@@ -33,6 +34,15 @@ Siempre quedan abiertos `/landing/*`, `/api/*` (formularios) y los archivos (ico
 4. En Supabase → Authentication, decide si exiges confirmar el email (si lo exiges, tras registrarse se avisa de que hay que confirmarlo).
 5. `npm install` y `npm run dev` → http://localhost:3000
 
+## Añadir vídeos
+
+Los vídeos están en YouTube como **No listado** (los «Privados» no se pueden ver dentro de otra web). Para añadir uno:
+
+1. En YouTube Studio sube el vídeo con visibilidad **No listado** y copia su enlace.
+2. En Supabase → Table Editor → `videos` → **Insert row**: `titulo`, `disciplina` (`Pilates`, `Total Barre` o `Mindfulness`), `nivel`, `minutos`, `zona` y en `url` el enlace de YouTube.
+
+Solo las personas con sesión iniciada pueden leer los enlaces (RLS). Un vídeo sin `url` sale como «Próximamente».
+
 ## Pendiente (no incluido todavía)
 
 El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
@@ -42,5 +52,5 @@ El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
 - Panel de administración para Mónica (crear clases, cancelar una clase y devolver créditos, subir vídeos).
 - Emails (recordatorios, aviso a las tres primeras personas de la lista de espera, cancelación por parte de Mónica).
 - Marcar asistencia (`asistio` / `no_asistio`) tras cada clase y avisar a la lista de espera al liberarse una plaza.
-- Biblioteca de vídeos con filtros y reproductor reales, página de eventos con reserva y chatbot Chillsi.
+- Página de eventos con reserva.
 - Textos legales (aviso legal, privacidad, cookies, términos) y revisión legal antes de cobrar.
