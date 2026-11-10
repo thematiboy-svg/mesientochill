@@ -25,7 +25,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </header>
       <div className="app">
-        <AppSide />
+        <AppSide admin={ctx.admin} />
         <main className="main">{children}</main>
       </div>
       <SiteFooter helpHref="/app/ayuda" />

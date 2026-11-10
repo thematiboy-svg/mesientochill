@@ -7,6 +7,7 @@ import { cap, fmtDiaMes, fmtHora } from '../lib/data'
 import { emailReserva, enviarEmail } from '../lib/email'
 import { asegurarZoom } from '../lib/zoom'
 import { avisarListaEspera } from '../lib/avisos'
+import { createAdminClient } from '../lib/supabase/admin'
 import { createClient } from '../lib/supabase/server'
 
 export type FormState = { error?: string; ok?: string; enlace?: { texto: string; href: string } } | undefined
@@ -184,4 +185,19 @@ export async function cambiarPlan(fd: FormData) {
   await supabase.from('profiles').update({ plan }).eq('id', u.user.id)
   revalidatePath('/app', 'layout')
   redirect('/app/suscripcion?ok=plan')
+}
+
+// Mónica cancela una clase desde «Gestionar clases». El trigger de la base de datos devuelve los créditos
+// y llama a /api/clases/cancelada, que envía los emails y borra la reunión de Zoom.
+export async function cancelarClase(fd: FormData) {
+  const supabase = await createClient()
+  if (!supabase) return
+  const { data: esAdmin } = await supabase.rpc('es_admin')
+  if (esAdmin !== true) redirect('/app/inicio')
+  const admin = createAdminClient()
+  if (!admin) redirect('/app/gestion?error=' + encodeURIComponent('Falta la clave de servicio de Supabase.'))
+  const id = String(fd.get('session'))
+  const { data } = await admin.from('class_sessions').update({ cancelada: true }).eq('id', id).eq('cancelada', false).gt('starts_at', new Date().toISOString()).select('id')
+  revalidatePath('/app', 'layout')
+  redirect(data && data.length ? '/app/gestion?ok=clase_cancelada' : '/app/gestion?error=' + encodeURIComponent('No se ha podido cancelar: la clase ya estaba cancelada o ya ha empezado.'))
 }
