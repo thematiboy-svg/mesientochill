@@ -43,6 +43,12 @@ Los vídeos están en YouTube como **No listado** (los «Privados» no se pueden
 
 Solo las personas con sesión iniciada pueden leer los enlaces (RLS). Un vídeo sin `url` sale como «Próximamente».
 
+## Zoom (clases en directo)
+
+Al reservar una clase, la web crea la reunión de Zoom de esa clase (solo la primera vez) y envía a la persona un email con el botón «Entrar al directo» y la clase para su calendario (.ics). El enlace también aparece en Inicio y en Mis reservas, solo para quien tiene plaza (tabla `class_zoom`, con RLS).
+
+Configuración (una vez): en marketplace.zoom.us → Develop → Build App → **Server-to-Server OAuth**, con los permisos `meeting:write:meeting:admin` y `meeting:delete:meeting:admin`, y activarla. Después, en Vercel (marcadas como Sensitive): `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET` y, si la app no la crea la cuenta de Mónica, `ZOOM_USER` con su email de Zoom. Sin estas variables las reservas funcionan y el email dice que el enlace estará en Mis reservas.
+
 ## Pendiente (no incluido todavía)
 
 El plan completo por fases está en [ROADMAP.md](ROADMAP.md).

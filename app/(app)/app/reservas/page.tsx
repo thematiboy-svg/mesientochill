@@ -1,6 +1,7 @@
 import Flash from '../../../../components/Flash'
 import { cancelarReserva } from '../../../actions'
 import { cap, fmtDiaMes, fmtHora, getContext, type Reservation } from '../../../../lib/data'
+import { enlacesZoom } from '../../../../lib/zoom'
 
 export const metadata = { title: 'Mis reservas y créditos' }
 
@@ -22,6 +23,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   const all = (data ?? []) as unknown as Reservation[]
   const now = Date.now()
   const proximas = all.filter((r) => ['reservada', 'lista_espera'].includes(r.estado) && new Date(r.class_sessions.starts_at).getTime() >= now)
+  const zoom = await enlacesZoom(supabase, proximas.filter((r) => r.estado === 'reservada').map((r) => r.class_sessions))
   const historial = all.filter((r) => !proximas.includes(r)).reverse()
   const fecha = (iso: string) => `${cap(fmtDiaMes(iso))} · ${fmtHora(iso)}`
   const caduca = credits.caducan ? new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short' }).format(new Date(credits.caducan)).replace('.', '') : ''
@@ -38,7 +40,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
       <section className="card stack g16">
         <h2 className="t3">Próximas reservas</h2>
         {proximas.length === 0 ? <p className="muted" style={{ fontSize: 17 }}>No tienes reservas próximas.</p> : (
-          <div className="scroll-x"><table className="tbl" style={{ minWidth: 560 }}>
+          <div className="scroll-x"><table className="tbl" style={{ minWidth: 640 }}>
             <thead><tr><th>Clase</th><th>Fecha</th><th>Estado</th><th></th></tr></thead>
             <tbody>
               {proximas.map((r) => (
@@ -46,7 +48,10 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
                   <td><b>{r.class_sessions.disciplina}</b></td>
                   <td>{fecha(r.class_sessions.starts_at)}</td>
                   <td>{r.estado === 'reservada' ? <span className="chip tint">Reservada</span> : <span className="chip warn">En lista de espera</span>}</td>
-                  <td><form action={cancelarReserva}><input type="hidden" name="reserva" value={r.id} /><button className="linkbtn" type="submit">{r.estado === 'reservada' ? 'Cancelar' : 'Salir de la lista'}</button></form></td>
+                  <td><span className="wrapr g16 center">
+                    {zoom[r.session_id] && <a className="btn b1 sm" href={zoom[r.session_id]} target="_blank" rel="noopener noreferrer">Entrar al directo</a>}
+                    <form action={cancelarReserva}><input type="hidden" name="reserva" value={r.id} /><button className="linkbtn" type="submit">{r.estado === 'reservada' ? 'Cancelar' : 'Salir de la lista'}</button></form>
+                  </span></td>
                 </tr>
               ))}
             </tbody>
