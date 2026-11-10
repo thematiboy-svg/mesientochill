@@ -22,6 +22,8 @@ export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   if (!fd.get('privacidad')) return { error: 'Debes aceptar la política de privacidad y los términos del servicio.' }
   const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { nombre, apellidos, telefono, plan } } })
   if (error) return { error: error.message }
+  // Si el email ya tiene cuenta, Supabase responde sin error pero no envía ningún email (identities vacío)
+  if (data.user && !data.session && data.user.identities?.length === 0) return { error: 'Ya hay una cuenta con este email. Inicia sesión con tu contraseña o escríbenos si no la recuerdas.' }
   if (!data.session) return { ok: 'Te hemos enviado un email para confirmar tu cuenta. Después podrás iniciar sesión.' }
   redirect('/app/perfil?bienvenida=1')
 }
