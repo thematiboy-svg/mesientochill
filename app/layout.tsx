@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image', title: 'MeSientoChill · 20 minutos para cambiar tu energía', description: SITE_DESCRIPTION, images: ['/monica-estudio.jpg'] },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
-  // Pega aquí el código de Google Search Console (opción «Etiqueta HTML») o ponlo en GOOGLE_SITE_VERIFICATION.
-  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
+  // Código de Google Search Console (opción «Etiqueta HTML»). No lo borres: Google lo comprueba de vez en cuando.
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || 'oIDSYhrQ5Xjkb_RC2vPdA3C2Fgd87KqzL3ZxIyZrA_c' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
