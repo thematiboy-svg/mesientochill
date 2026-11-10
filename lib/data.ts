@@ -36,7 +36,10 @@ export async function getContext() {
   const { data } = await supabase.auth.getUser()
   if (!data.user) return null
   const { data: profile } = await supabase.from('profiles').select('*').eq('id', data.user.id).single()
-  const { data: cr } = await supabase.rpc('creditos_mes', { p_user: data.user.id })
+  const [{ data: cr }, { data: admin }] = await Promise.all([
+    supabase.rpc('creditos_mes', { p_user: data.user.id }),
+    supabase.rpc('es_admin'),
+  ])
   const credits: Credits = (Array.isArray(cr) ? cr[0] : cr) ?? { disponibles: 8, usados: 0, perdidos: 0, caducan: '' }
-  return { supabase, user: data.user, profile: profile as Profile | null, credits }
+  return { supabase, user: data.user, profile: profile as Profile | null, credits, admin: admin === true }
 }

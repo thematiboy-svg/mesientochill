@@ -5,6 +5,7 @@ const OK: Record<string, string> = {
   cancelada_tarde: 'Faltaban menos de 24 horas: la reserva se ha cancelado y pierdes el crédito de esta clase.',
   guardado: 'Cambios guardados.',
   plan: 'Plan actualizado.',
+  clase_cancelada: 'Clase cancelada. Estamos avisando por email a las personas apuntadas y se les devuelve el crédito.',
 }
 export default function Flash({ ok, error }: { ok?: string; error?: string }) {
   if (error) return <p className="alert err" role="alert">{error}</p>

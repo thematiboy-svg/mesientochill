@@ -49,9 +49,12 @@ Al reservar una clase, la web crea la reunión de Zoom de esa clase (solo la pri
 
 Configuración (una vez): en marketplace.zoom.us → Develop → Build App → **Server-to-Server OAuth**, con los permisos `meeting:write:meeting:admin` y `meeting:delete:meeting:admin`, y activarla. Después, en Vercel (marcadas como Sensitive): `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET` y, si la app no la crea la cuenta de Mónica, `ZOOM_USER` con su email de Zoom. Sin estas variables las reservas funcionan y el email dice que el enlace estará en Mis reservas.
 
-## Cancelar una clase (Mónica) y lista de espera
+## Panel de Mónica, cancelar una clase y lista de espera
 
-- **Cancelar una clase:** en Supabase → Table Editor → `class_sessions`, marca `cancelada` en la clase. Las reservas pasan a «Cancelada por Mónica» (el crédito se devuelve), a quien tenía plaza o estaba en lista de espera le llega un email, la lista se vacía y se borra la reunión de Zoom. No borres la fila: márcala como cancelada.
+Los emails de la tabla `admins` (hoy, monica@mesientochill.com, con el email confirmado) ven en la zona privada **Gestionar clases**: las clases de las próximas 4 semanas, quién tiene plaza, la lista de espera y el botón para cancelar.
+
+
+- **Cancelar una clase:** Mónica entra en la web con monica@mesientochill.com → **Gestionar clases** → «Cancelar clase» (también se puede marcar `cancelada` en Supabase → `class_sessions`). Las reservas pasan a «Cancelada por Mónica» (el crédito se devuelve), a quien tenía plaza o estaba en lista de espera le llega un email, la lista se vacía y se borra la reunión de Zoom. No borres la fila: márcala como cancelada.
 - **Plaza libre:** cuando alguien cancela su reserva, las tres primeras personas de la lista de espera reciben un email con el enlace para reservar; se la queda quien reserve primero.
 
 ## Pendiente (no incluido todavía)

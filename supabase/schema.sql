@@ -221,3 +221,16 @@ end $$;
 drop trigger if exists on_class_cancelada on public.class_sessions;
 create trigger on_class_cancelada after update of cancelada on public.class_sessions
   for each row execute function public.al_cancelar_clase();
+
+-- Administración: emails con acceso al panel «Gestionar clases» (Mónica). Sin políticas: no se lee desde la API.
+create table if not exists public.admins (email text primary key);
+alter table public.admins enable row level security;
+insert into public.admins (email) values ('monica@mesientochill.com') on conflict do nothing;
+create or replace function public.es_admin() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (
+    select 1 from admins a join auth.users u on lower(u.email) = lower(a.email)
+    where u.id = auth.uid() and u.email_confirmed_at is not null
+  )
+$$;
+revoke execute on function public.es_admin() from anon;
