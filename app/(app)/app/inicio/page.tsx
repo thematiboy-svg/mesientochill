@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import VideoCard, { type Video } from '../../../../components/VideoCard'
 import { cap, fmtDiaMes, fmtHora, franja, getContext, type Reservation } from '../../../../lib/data'
+import { enlacesZoom } from '../../../../lib/zoom'
 
 export const metadata = { title: 'Inicio' }
 
@@ -16,6 +17,7 @@ export default async function Page() {
     .order('starts_at', { referencedTable: 'class_sessions', ascending: true })
     .limit(1)
   const prox = (next as unknown as Reservation[] | null)?.[0]
+  const zoomProx = prox ? (await enlacesZoom(supabase, [prox.class_sessions]))[prox.session_id] : undefined
   const { data: videos } = await supabase.from('videos').select('id, titulo, disciplina, nivel, minutos, zona, url').not('url', 'is', null).limit(4)
   const total = 8
   return (
@@ -43,7 +45,8 @@ export default async function Page() {
                   </div>
                 </div>
                 <div className="wrapr g12">
-                  <Link className="btn b1 sm" href="/app/reservas">Ver detalles</Link>
+                  {zoomProx && <a className="btn b1 sm" href={zoomProx} target="_blank" rel="noopener noreferrer">Entrar al directo</a>}
+                  <Link className={'btn sm ' + (zoomProx ? 'b4' : 'b1')} href="/app/reservas">Ver detalles</Link>
                   <Link className="btn b4 sm" href="/app/reservas">Cancelar (hasta 24 h antes)</Link>
                 </div>
               </>

@@ -2,6 +2,10 @@
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
+import { after } from 'next/server'
+import { cap, fmtDiaMes, fmtHora } from '../lib/data'
+import { emailReserva, enviarEmail } from '../lib/email'
+import { asegurarZoom } from '../lib/zoom'
 import { createClient } from '../lib/supabase/server'
 
 export type FormState = { error?: string; ok?: string; enlace?: { texto: string; href: string } } | undefined
@@ -84,11 +88,32 @@ export async function signOut() {
   redirect('/')
 }
 
+// Tras reservar: crea (si hace falta) la reunión de Zoom y envía el email de confirmación con el enlace.
+// Se hace después de responder, para que la reserva no espere a Zoom ni al email.
+async function avisarReserva(supabase: NonNullable<Awaited<ReturnType<typeof createClient>>>, sessionId: string) {
+  const [{ data: u }, { data: s }] = await Promise.all([
+    supabase.auth.getUser(),
+    supabase.from('class_sessions').select('id, disciplina, starts_at').eq('id', sessionId).single(),
+  ])
+  if (!u.user?.email || !s) return
+  const { data: p } = await supabase.from('profiles').select('nombre').eq('id', u.user.id).maybeSingle()
+  const h = await headers()
+  const web = h.get('origin') || `https://${h.get('host')}`
+  const email = u.user.email
+  after(async () => {
+    const zoom = await asegurarZoom(s)
+    const cuando = `${fmtDiaMes(s.starts_at)} a las ${fmtHora(s.starts_at)}`
+    const m = emailReserva({ nombre: p?.nombre ?? '', disciplina: s.disciplina, cuando, inicio: s.starts_at, zoom, web })
+    await enviarEmail({ to: email, subject: `Reserva confirmada: ${s.disciplina}, ${cap(cuando)}`, ...m })
+  })
+}
+
 export async function reservar(fd: FormData) {
   const supabase = await createClient()
   if (!supabase) return
   const session = String(fd.get('session'))
   const { data } = await supabase.rpc('reservar_clase', { p_session: session })
+  if (data === 'ok') await avisarReserva(supabase, session)
   const back = String(fd.get('back') || '/app/directos')
   revalidatePath('/app', 'layout')
   redirect(`${back}${back.includes('?') ? '&' : '?'}${data === 'ok' ? 'ok=reservada' : 'error=' + encodeURIComponent(String(data))}&sel=${session}`)

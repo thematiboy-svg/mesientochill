@@ -186,3 +186,16 @@ language sql stable security definer set search_path = public as $$
   group by session_id
 $$;
 grant execute on function public.ocupacion(uuid[]) to authenticated;
+
+-- Enlaces de Zoom de cada clase (los crea el servidor con la API de Zoom al primer reservar)
+create table if not exists public.class_zoom (
+  session_id uuid primary key references public.class_sessions(id) on delete cascade,
+  meeting_id text not null,
+  join_url text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.class_zoom enable row level security;
+-- Solo quien tiene plaza reservada ve el enlace; solo el servidor (clave de servicio) lo escribe
+drop policy if exists "zoom: leer con reserva" on public.class_zoom;
+create policy "zoom: leer con reserva" on public.class_zoom for select to authenticated
+  using (exists (select 1 from public.reservations r where r.session_id = class_zoom.session_id and r.user_id = auth.uid() and r.estado = 'reservada'));
