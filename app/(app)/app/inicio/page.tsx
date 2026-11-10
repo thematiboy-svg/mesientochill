@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import PlayIcon from '../../../../components/PlayIcon'
+import VideoCard, { type Video } from '../../../../components/VideoCard'
 import { cap, fmtDiaMes, fmtHora, franja, getContext, type Reservation } from '../../../../lib/data'
 
 export const metadata = { title: 'Inicio' }
-
-const TH: Record<string, string> = { Pilates: '', 'Total Barre': 'c', Mindfulness: 's' }
 
 export default async function Page() {
   const ctx = (await getContext())!
@@ -18,7 +16,7 @@ export default async function Page() {
     .order('starts_at', { referencedTable: 'class_sessions', ascending: true })
     .limit(1)
   const prox = (next as unknown as Reservation[] | null)?.[0]
-  const { data: videos } = await supabase.from('videos').select('id, titulo, disciplina, nivel, minutos').limit(3)
+  const { data: videos } = await supabase.from('videos').select('id, titulo, disciplina, nivel, minutos, zona, url').not('url', 'is', null).limit(4)
   const total = 8
   return (
     <>
@@ -62,17 +60,14 @@ export default async function Page() {
           </div>
         </div>
       )}
-      <section className="stack g16">
-        <div className="wrapr between center g12"><h2 className="t3">Sigue practicando</h2><Link href="/app/biblioteca" className="small" style={{ fontWeight: 700 }}>Ir a la biblioteca</Link></div>
-        <div className="grid c4">
-          {(videos ?? []).map((v) => (
-            <article className="vid" key={v.id}>
-              <div className={'th ' + (TH[v.disciplina] ?? '')}><PlayIcon /><span className="chip">{v.minutos} min</span></div>
-              <div className="bd"><span className="eyebrow" style={{ fontSize: 12 }}>{v.disciplina}</span><h3 className="t4" style={{ fontSize: 17 }}>{v.titulo}</h3><p className="small muted">{v.nivel ?? 'Todos los niveles'}</p></div>
-            </article>
-          ))}
-        </div>
-      </section>
+      {(videos ?? []).length > 0 && (
+        <section className="stack g16">
+          <div className="wrapr between center g12"><h2 className="t3">Sigue practicando</h2><Link href="/app/biblioteca" className="small" style={{ fontWeight: 700 }}>Ir a la biblioteca</Link></div>
+          <div className="grid c4">
+            {((videos ?? []) as Video[]).map((v) => <VideoCard key={v.id} v={v} />)}
+          </div>
+        </section>
+      )}
       <div className="grid c2">
         <Link className="card sand stack g8" href="/app/eventos" style={{ textDecoration: 'none', color: 'var(--ink)' }}><span className="eyebrow">Eventos</span><h3 className="t3">Próximo evento: [fecha y lugar]</h3><p className="small muted">{directo ? '30,40 €' : '34,20 €'} para suscriptoras y suscriptores.</p></Link>
         <Link className="card blush stack g8" href="/app/ayuda" style={{ textDecoration: 'none', color: 'var(--ink)' }}><span className="eyebrow" style={{ color: '#8A3A26' }}>Ayuda</span><h3 className="t3">¿Tienes dudas?</h3><p className="small" style={{ color: '#4A3B37' }}>Pregunta a Chillsi o escríbenos por el formulario de Contacto.</p></Link>
