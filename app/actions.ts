@@ -8,6 +8,18 @@ export type FormState = { error?: string; ok?: string; enlace?: { texto: string;
 
 const NO_CONFIG = 'Falta configurar Supabase (variables NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY, o las de la integración de Vercel).'
 
+// Mensajes de Supabase en español (vienen en inglés)
+function errorRegistro(e: { code?: string; status?: number; message: string }) {
+  if (e.status === 429 || e.code?.startsWith('over_')) {
+    const seg = e.message.match(/after (\d+) seconds?/)?.[1]
+    return seg ? `Por seguridad, espera ${seg} segundos antes de volver a intentarlo.` : 'Has hecho varios intentos seguidos. Espera unos minutos y vuelve a intentarlo.'
+  }
+  if (e.code === 'weak_password') return 'La contraseña es demasiado fácil. Usa al menos 8 caracteres mezclando letras y números.'
+  if (e.code === 'email_address_invalid' || e.code === 'validation_failed') return 'Revisa el email: no parece válido.'
+  if (e.code === 'user_already_exists' || e.code === 'email_exists') return 'Ya hay una cuenta con este email. Inicia sesión o recupera tu contraseña.'
+  return 'No hemos podido crear tu cuenta. Inténtalo de nuevo en unos minutos.'
+}
+
 export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   const supabase = await createClient()
   if (!supabase) return { error: NO_CONFIG }
@@ -22,7 +34,7 @@ export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   if (password.length < 8) return { error: 'La contraseña debe tener al menos 8 caracteres.' }
   if (!fd.get('privacidad')) return { error: 'Debes aceptar la política de privacidad y los términos del servicio.' }
   const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { nombre, apellidos, telefono, plan } } })
-  if (error) return { error: error.message }
+  if (error) return { error: errorRegistro(error) }
   // Si el email ya tiene cuenta, Supabase responde sin error pero no envía ningún email (identities vacío)
   if (data.user && !data.session && data.user.identities?.length === 0) return { error: 'Ya hay una cuenta con este email. Inicia sesión con tu contraseña o, si no la recuerdas, crea una nueva.', enlace: { texto: 'Recuperar mi contraseña', href: `/recuperar?email=${encodeURIComponent(email)}` } }
   if (!data.session) return { ok: 'Te hemos enviado un email para confirmar tu cuenta. Después podrás iniciar sesión.' }
@@ -48,7 +60,7 @@ export async function recuperarContrasena(_: FormState, fd: FormData): Promise<F
   const h = await headers()
   const origen = h.get('origin') || `https://${h.get('host')}`
   const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${origen}/auth/callback?next=/nueva-contrasena` })
-  if (error && error.status === 429) return { error: 'Has pedido varios enlaces seguidos. Espera unos minutos y vuelve a intentarlo.' }
+  if (error && (error.status === 429 || error.code?.startsWith('over_'))) return { error: errorRegistro(error) }
   // Mismo mensaje exista o no la cuenta
   return { ok: 'Si hay una cuenta con ese email, te hemos enviado un enlace para crear una contraseña nueva. Revisa también la carpeta de spam. El enlace funciona en este mismo navegador.' }
 }
