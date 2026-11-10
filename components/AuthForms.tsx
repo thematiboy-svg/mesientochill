@@ -1,12 +1,13 @@
 'use client'
 import Link from 'next/link'
 import { useActionState } from 'react'
-import { signIn, signUp, type FormState } from '../app/actions'
+import { nuevaContrasena, recuperarContrasena, signIn, signUp, type FormState } from '../app/actions'
 
 function Msg({ s }: { s: FormState }) {
   if (!s) return null
-  if (s.error) return <p className="alert err" role="alert">{s.error}</p>
-  if (s.ok) return <p className="alert ok" role="status">{s.ok}</p>
+  const enlace = s.enlace && <> <Link href={s.enlace.href} style={{ fontWeight: 700, color: 'inherit', textDecoration: 'underline' }}>{s.enlace.texto}</Link></>
+  if (s.error) return <p className="alert err" role="alert">{s.error}{enlace}</p>
+  if (s.ok) return <p className="alert ok" role="status">{s.ok}{enlace}</p>
   return null
 }
 
@@ -22,7 +23,7 @@ export function LoginForm({ configError }: { configError?: boolean }) {
       <Msg s={state} />
       <div className="field"><label htmlFor="l-e">Email</label><input id="l-e" name="email" className="in-t" type="email" autoComplete="email" placeholder="tu@email.com" required /></div>
       <div className="field"><label htmlFor="l-p">Contraseña</label><input id="l-p" name="password" className="in-t" type="password" autoComplete="current-password" placeholder="Tu contraseña" required /></div>
-      <Link href="/ayuda" className="small" style={{ fontWeight: 700 }}>¿Has olvidado tu contraseña?</Link>
+      <Link href="/recuperar" className="small" style={{ fontWeight: 700 }}>¿Has olvidado tu contraseña?</Link>
       <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Entrando…' : 'Entrar'}</button>
       <hr className="hr" />
       <p className="small muted" style={{ textAlign: 'center' }}>¿Todavía no tienes cuenta? <Link href="/registro" style={{ fontWeight: 700 }}>Empezar</Link></p>
@@ -62,6 +63,40 @@ export function RegisterForm() {
           <p className="small muted" style={{ textAlign: 'center' }}>El pago con Stripe se activará en la siguiente fase. ¿Ya tienes cuenta? <Link href="/login">Inicia sesión</Link></p>
         </div>
       </div>
+    </form>
+  )
+}
+
+export function RecuperarForm({ email = '' }: { email?: string }) {
+  const [state, action, pending] = useActionState(recuperarContrasena, undefined)
+  return (
+    <form className="card stack g20" style={{ padding: 40 }} action={action}>
+      <div className="stack g8">
+        <h1 className="t2" style={{ fontSize: 34 }}>Recuperar contraseña</h1>
+        <p className="muted" style={{ fontSize: 17 }}>Escribe tu email y te enviamos un enlace para crear una contraseña nueva.</p>
+      </div>
+      <Msg s={state} />
+      <div className="field"><label htmlFor="rc-e">Email</label><input id="rc-e" name="email" className="in-t" type="email" autoComplete="email" placeholder="tu@email.com" defaultValue={email} required /></div>
+      <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Enviando…' : 'Enviar enlace'}</button>
+      <hr className="hr" />
+      <p className="small muted" style={{ textAlign: 'center' }}>¿Ya la recuerdas? <Link href="/login" style={{ fontWeight: 700 }}>Iniciar sesión</Link></p>
+    </form>
+  )
+}
+
+export function NuevaContrasenaForm({ error }: { error?: boolean }) {
+  const [state, action, pending] = useActionState(nuevaContrasena, undefined)
+  return (
+    <form className="card stack g20" style={{ padding: 40 }} action={action}>
+      <div className="stack g8">
+        <h1 className="t2" style={{ fontSize: 34 }}>Nueva contraseña</h1>
+        <p className="muted" style={{ fontSize: 17 }}>Elige una contraseña nueva para entrar en MeSientoChill.</p>
+      </div>
+      {error && !state && <p className="alert err" role="alert">El enlace ha caducado o ya se ha usado. <Link href="/recuperar" style={{ fontWeight: 700, color: 'inherit', textDecoration: 'underline' }}>Pedir un enlace nuevo</Link></p>}
+      <Msg s={state} />
+      <div className="field"><label htmlFor="nc-p">Contraseña nueva</label><input id="nc-p" name="password" className="in-t" type="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
+      <div className="field"><label htmlFor="nc-p2">Repite la contraseña</label><input id="nc-p2" name="password2" className="in-t" type="password" autoComplete="new-password" placeholder="La misma contraseña" minLength={8} required /></div>
+      <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Guardando…' : 'Guardar y entrar'}</button>
     </form>
   )
 }
