@@ -50,7 +50,9 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
                   </div>
                   {c.cancelada ? <span className="chip warn">Cancelada</span> : empezada ? <span className="chip">Ya ha empezado</span> : <CancelarClaseBtn action={cancelarClase} sessionId={c.id} aviso={aviso} />}
                 </div>
-                {(plaza.length > 0 || lista.length > 0) && (
+                {plaza.length === 0 && lista.length === 0 ? (
+                  <p className="small muted">Todavía no se ha apuntado nadie.</p>
+                ) : (
                   <details>
                     <summary className="small" style={{ cursor: 'pointer', fontWeight: 700, color: 'var(--teal)' }}>Ver quién se ha apuntado</summary>
                     <div className="wrapr g24" style={{ marginTop: 12, alignItems: 'flex-start' }}>
