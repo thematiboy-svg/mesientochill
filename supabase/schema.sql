@@ -199,3 +199,25 @@ alter table public.class_zoom enable row level security;
 drop policy if exists "zoom: leer con reserva" on public.class_zoom;
 create policy "zoom: leer con reserva" on public.class_zoom for select to authenticated
   using (exists (select 1 from public.reservations r where r.session_id = class_zoom.session_id and r.user_id = auth.uid() and r.estado = 'reservada'));
+
+-- Cancelación por parte de Mónica: al marcar cancelada = true en una clase,
+-- las reservas pasan a 'cancelada_monica' (devuelven el crédito) y se avisa a la web,
+-- que envía los emails, vacía la lista de espera y borra la reunión de Zoom (una sola vez: avisada_at).
+create extension if not exists pg_net with schema extensions;
+alter table public.class_sessions add column if not exists avisada_at timestamptz;
+create or replace function public.al_cancelar_clase() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if new.cancelada and not old.cancelada then
+    update reservations set estado = 'cancelada_monica' where session_id = new.id and estado = 'reservada';
+    perform net.http_post(
+      url := 'https://www.mesientochill.com/api/clases/cancelada',
+      body := jsonb_build_object('session_id', new.id),
+      headers := '{"Content-Type":"application/json"}'::jsonb
+    );
+  end if;
+  return new;
+end $$;
+drop trigger if exists on_class_cancelada on public.class_sessions;
+create trigger on_class_cancelada after update of cancelada on public.class_sessions
+  for each row execute function public.al_cancelar_clase();

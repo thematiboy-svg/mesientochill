@@ -81,3 +81,17 @@ export async function enlacesZoom(
   }
   return mapa
 }
+
+/** Borra la reunión de Zoom de una clase (si la hay) y su enlace guardado. */
+export async function borrarZoom(sessionId: string) {
+  const admin = createAdminClient()
+  if (!admin) return
+  const { data } = await admin.from('class_zoom').select('meeting_id').eq('session_id', sessionId).maybeSingle()
+  if (!data) return
+  try {
+    if (zoomConfigurado()) await zoom(`/meetings/${data.meeting_id}`, { method: 'DELETE' })
+    await admin.from('class_zoom').delete().eq('session_id', sessionId)
+  } catch (e) {
+    console.error('Zoom (borrar):', e)
+  }
+}

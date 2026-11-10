@@ -49,6 +49,11 @@ Al reservar una clase, la web crea la reunión de Zoom de esa clase (solo la pri
 
 Configuración (una vez): en marketplace.zoom.us → Develop → Build App → **Server-to-Server OAuth**, con los permisos `meeting:write:meeting:admin` y `meeting:delete:meeting:admin`, y activarla. Después, en Vercel (marcadas como Sensitive): `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET` y, si la app no la crea la cuenta de Mónica, `ZOOM_USER` con su email de Zoom. Sin estas variables las reservas funcionan y el email dice que el enlace estará en Mis reservas.
 
+## Cancelar una clase (Mónica) y lista de espera
+
+- **Cancelar una clase:** en Supabase → Table Editor → `class_sessions`, marca `cancelada` en la clase. Las reservas pasan a «Cancelada por Mónica» (el crédito se devuelve), a quien tenía plaza o estaba en lista de espera le llega un email, la lista se vacía y se borra la reunión de Zoom. No borres la fila: márcala como cancelada.
+- **Plaza libre:** cuando alguien cancela su reserva, las tres primeras personas de la lista de espera reciben un email con el enlace para reservar; se la queda quien reserve primero.
+
 ## Pendiente (no incluido todavía)
 
 El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
@@ -56,7 +61,7 @@ El plan completo por fases está en [ROADMAP.md](ROADMAP.md).
 - **Horario de las clases en directo**: días y horas aún por decidir. Las de `supabase/seed.sql` son de ejemplo; cuando se fijen, crear las clases reales y añadir las horas a Chillsi (`lib/chillsi.ts`, tema «horarios»).
 - Pagos con Stripe (alta de suscripción, cambio de plan con cobro, método de pago y baja).
 - Panel de administración para Mónica (crear clases, cancelar una clase y devolver créditos, subir vídeos).
-- Emails (recordatorios, aviso a las tres primeras personas de la lista de espera, cancelación por parte de Mónica).
-- Marcar asistencia (`asistio` / `no_asistio`) tras cada clase y avisar a la lista de espera al liberarse una plaza.
+- Emails de recordatorio antes de cada clase.
+- Marcar asistencia (`asistio` / `no_asistio`) tras cada clase.
 - Página de eventos con reserva.
 - Textos legales (aviso legal, privacidad, cookies, términos) y revisión legal antes de cobrar.

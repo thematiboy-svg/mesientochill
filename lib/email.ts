@@ -59,3 +59,41 @@ ${boton}
   ].join('\r\n')
   return { html, text, attachments: [{ filename: 'clase-mesientochill.ics', content: Buffer.from(ics).toString('base64') }] }
 }
+
+function plantilla(titulo: string, nombre: string, cuerpo: string[], boton?: { texto: string; href: string }, nota?: string) {
+  const html = `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#0E2F2B">
+<h2 style="color:#006B5E">${esc(titulo)}</h2>
+<p>Hola${nombre ? `, ${esc(nombre)}` : ''}:</p>
+${cuerpo.map((p) => `<p>${p}</p>`).join('\n')}
+${boton ? `<p style="margin:28px 0"><a href="${esc(boton.href)}" style="background:#006B5E;color:#fff;padding:14px 26px;border-radius:999px;text-decoration:none;font-weight:bold">${esc(boton.texto)}</a></p>` : ''}
+${nota ? `<p style="font-size:14px;color:#3B5753">${nota}</p>` : ''}
+<p>El equipo de MeSientoChill</p>
+</div>`
+  const plano = (s: string) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
+  const text = [`Hola${nombre ? `, ${nombre}` : ''}:`, '', ...cuerpo.map(plano), ...(boton ? ['', `${boton.texto}: ${boton.href}`] : []), ...(nota ? ['', plano(nota)] : []), '', 'El equipo de MeSientoChill'].join('\n')
+  return { html, text }
+}
+
+/** Mónica ha cancelado la clase. enLista: la persona estaba en la lista de espera (no gastó crédito). */
+export function emailCancelacion(d: { nombre: string; disciplina: string; cuando: string; enLista: boolean; web: string }) {
+  return plantilla(
+    'Clase cancelada',
+    d.nombre,
+    [
+      `Lo sentimos: Mónica ha tenido que cancelar la clase de <b>${esc(d.disciplina)}</b> del <b>${esc(d.cuando)}</b>.`,
+      d.enLista ? 'Estabas en la lista de espera de esta clase, así que ya no hace falta que hagas nada.' : 'No pierdes nada: el crédito de esta clase vuelve a estar disponible para que reserves otra.',
+    ],
+    { texto: 'Reservar otra clase', href: `${d.web}/app/directos` },
+  )
+}
+
+/** Se ha liberado una plaza en una clase en la que la persona está en lista de espera. */
+export function emailPlazaLibre(d: { nombre: string; disciplina: string; cuando: string; sessionId: string; web: string }) {
+  return plantilla(
+    '¡Se ha liberado una plaza!',
+    d.nombre,
+    [`Hay una plaza libre en <b>${esc(d.disciplina)}</b> con Mónica el <b>${esc(d.cuando)}</b>, la clase en la que estás en lista de espera.`],
+    { texto: 'Reservar la plaza', href: `${d.web}/app/directos?sel=${d.sessionId}` },
+    'Hemos avisado también a otras personas de la lista: se queda la plaza quien la reserve primero.',
+  )
+}
