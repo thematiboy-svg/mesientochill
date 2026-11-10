@@ -6,6 +6,7 @@ import { after } from 'next/server'
 import { cap, fmtDiaMes, fmtHora } from '../lib/data'
 import { emailReserva, enviarEmail } from '../lib/email'
 import { asegurarZoom } from '../lib/zoom'
+import { avisarListaEspera } from '../lib/avisos'
 import { createClient } from '../lib/supabase/server'
 
 export type FormState = { error?: string; ok?: string; enlace?: { texto: string; href: string } } | undefined
@@ -132,7 +133,15 @@ export async function unirseLista(fd: FormData) {
 export async function cancelarReserva(fd: FormData) {
   const supabase = await createClient()
   if (!supabase) return
-  const { data } = await supabase.rpc('cancelar_reserva', { p_reserva: String(fd.get('reserva')) })
+  const reserva = String(fd.get('reserva'))
+  const { data: antes } = await supabase.from('reservations').select('session_id, estado').eq('id', reserva).maybeSingle()
+  const { data } = await supabase.rpc('cancelar_reserva', { p_reserva: reserva })
+  // Se ha liberado una plaza: avisar a la lista de espera después de responder
+  if ((data === 'ok' || data === 'tarde') && antes?.estado === 'reservada') {
+    const h = await headers()
+    const web = h.get('origin') || `https://${h.get('host')}`
+    after(() => avisarListaEspera(antes.session_id, web))
+  }
   revalidatePath('/app', 'layout')
   redirect(`/app/reservas?${data === 'ok' ? 'ok=cancelada' : data === 'tarde' ? 'ok=cancelada_tarde' : 'error=' + encodeURIComponent(String(data))}`)
 }
