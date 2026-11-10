@@ -1,6 +1,6 @@
 import { RegisterForm } from '../../../components/AuthForms'
 
-export const metadata = { title: 'Empieza con MeSientoChill' }
+export const metadata = { title: 'Empieza con MeSientoChill', robots: { index: false, follow: true } }
 
 export default function Page() {
   return (

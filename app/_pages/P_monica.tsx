@@ -4,7 +4,7 @@ export default function P_monica() {
   return (
     <>
 <section className="sec"><div className="in wrapr center" style={{ gap: "48px 72px" }}>
-<div className="img" style={{ flex: "1 1 360px", minWidth: "0", aspectRatio: "4/5" }}><img src="/monica-estudio.jpg" alt="M\xF3nica Mu\xF1oz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ objectPosition: "55% 40%" }} /></div>
+<div className="img" style={{ flex: "1 1 360px", minWidth: "0", aspectRatio: "4/5" }}><img src="/monica-estudio.jpg" alt="Mónica Muñoz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ objectPosition: "55% 40%" }} /></div>
 <div className="stack g20" style={{ flex: "1 1 420px", minWidth: "0", alignItems: "flex-start" }}><span className="eyebrow">Tu instructora</span><h1 className="t1" style={{ fontSize: "clamp(34px,4vw,52px)" }}>Hola, soy M&oacute;nica Mu&ntilde;oz</h1>
 <p className="lead">M&aacute;s de 20 a&ntilde;os acompa&ntilde;ando a las personas a cuidar su salud y su bienestar. Empec&eacute; en las terapias alternativas y hol&iacute;sticas, y con el tiempo mi camino evolucion&oacute; hacia la mente y el cuerpo.</p>
 <ul className="list stack g12" style={{ fontWeight: "600" }}><li>M&aacute;s de 20 a&ntilde;os de experiencia en salud y bienestar</li><li>Pilates, Total Barre, Yoga, Mindfulness y gesti&oacute;n emocional</li><li>Empat&iacute;a y energ&iacute;a positiva para lograr cambios visibles</li></ul><Link className="btn b1" href="/registro">Reservar mi pausa</Link></div></div></section>

@@ -1,13 +1,13 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { supabaseUrl, supabaseAnonKey } from './lib/supabase/env'
+import { WEB_PUBLICA } from './lib/site'
 
 // Mientras solo esté publicada la landing, la web queda oculta:
 // - Quien entra en cualquier página de la web va a /landing.
 // - /web1 (o /web1/lo-que-sea) guarda un permiso en el navegador y abre la web; dura 90 días.
 // - /web1/salir quita el permiso.
-// Para publicar la web, pon WEB_PUBLICA a true.
-const WEB_PUBLICA = false
+// Para publicar la web, pon WEB_PUBLICA a true en lib/site.ts.
 const PERMISO_WEB = 'msc_web'
 
 function landingOWeb(request: NextRequest): NextResponse | null {
