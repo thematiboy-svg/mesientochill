@@ -198,10 +198,10 @@ export const TEMAS: Tema[] = [
     titulo: 'No puedo entrar',
     claves: ['contrasena', 'password', 'no puedo entrar', 'iniciar sesion', 'login', 'olvide', 'acceder', 'confirmar', 'email de confirmacion'],
     respuesta:
-      'Para entrar, usa tu email y tu contraseña en Iniciar sesión. Si acabas de registrarte, antes tienes que confirmar la cuenta con el enlace que te enviamos por email (mira también en spam). Si has olvidado la contraseña, escríbenos desde Contacto y te ayudamos.',
+      'Para entrar, usa tu email y tu contraseña en Iniciar sesión. Si acabas de registrarte, antes tienes que confirmar la cuenta con el enlace que te enviamos por email (mira también en spam). Si has olvidado la contraseña, pide un enlace en Recuperar contraseña y crea una nueva.',
     enlaces: [
       { texto: 'Iniciar sesión', href: '/login' },
-      { texto: 'Ir a Contacto', href: '/contacto' },
+      { texto: 'Recuperar contraseña', href: '/recuperar' },
     ],
   },
   {

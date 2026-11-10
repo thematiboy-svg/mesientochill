@@ -1,9 +1,10 @@
 'use server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { headers } from 'next/headers'
 import { createClient } from '../lib/supabase/server'
 
-export type FormState = { error?: string; ok?: string } | undefined
+export type FormState = { error?: string; ok?: string; enlace?: { texto: string; href: string } } | undefined
 
 const NO_CONFIG = 'Falta configurar Supabase (variables NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY, o las de la integración de Vercel).'
 
@@ -23,7 +24,7 @@ export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { nombre, apellidos, telefono, plan } } })
   if (error) return { error: error.message }
   // Si el email ya tiene cuenta, Supabase responde sin error pero no envía ningún email (identities vacío)
-  if (data.user && !data.session && data.user.identities?.length === 0) return { error: 'Ya hay una cuenta con este email. Inicia sesión con tu contraseña o escríbenos si no la recuerdas.' }
+  if (data.user && !data.session && data.user.identities?.length === 0) return { error: 'Ya hay una cuenta con este email. Inicia sesión con tu contraseña o, si no la recuerdas, crea una nueva.', enlace: { texto: 'Recuperar mi contraseña', href: `/recuperar?email=${encodeURIComponent(email)}` } }
   if (!data.session) return { ok: 'Te hemos enviado un email para confirmar tu cuenta. Después podrás iniciar sesión.' }
   redirect('/app/perfil?bienvenida=1')
 }
@@ -36,6 +37,32 @@ export async function signIn(_: FormState, fd: FormData): Promise<FormState> {
     password: String(fd.get('password') || ''),
   })
   if (error) return { error: 'Email o contraseña incorrectos.' }
+  redirect('/app/inicio')
+}
+
+export async function recuperarContrasena(_: FormState, fd: FormData): Promise<FormState> {
+  const supabase = await createClient()
+  if (!supabase) return { error: NO_CONFIG }
+  const email = String(fd.get('email') || '').trim()
+  if (!email) return { error: 'Escribe tu email.' }
+  const h = await headers()
+  const origen = h.get('origin') || `https://${h.get('host')}`
+  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${origen}/auth/callback?next=/nueva-contrasena` })
+  if (error && error.status === 429) return { error: 'Has pedido varios enlaces seguidos. Espera unos minutos y vuelve a intentarlo.' }
+  // Mismo mensaje exista o no la cuenta
+  return { ok: 'Si hay una cuenta con ese email, te hemos enviado un enlace para crear una contraseña nueva. Revisa también la carpeta de spam. El enlace funciona en este mismo navegador.' }
+}
+
+export async function nuevaContrasena(_: FormState, fd: FormData): Promise<FormState> {
+  const supabase = await createClient()
+  if (!supabase) return { error: NO_CONFIG }
+  const password = String(fd.get('password') || '')
+  if (password.length < 8) return { error: 'La contraseña debe tener al menos 8 caracteres.' }
+  if (password !== String(fd.get('password2') || '')) return { error: 'Las dos contraseñas no coinciden.' }
+  const { data } = await supabase.auth.getUser()
+  if (!data.user) return { error: 'El enlace ha caducado o se abrió en otro navegador. Pide uno nuevo.', enlace: { texto: 'Pedir un enlace nuevo', href: '/recuperar' } }
+  const { error } = await supabase.auth.updateUser({ password })
+  if (error) return { error: error.code === 'same_password' ? 'La contraseña nueva tiene que ser distinta de la anterior.' : 'No hemos podido guardar la contraseña. Inténtalo de nuevo.' }
   redirect('/app/inicio')
 }
 
