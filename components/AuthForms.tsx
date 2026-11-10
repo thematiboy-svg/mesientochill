@@ -1,7 +1,24 @@
 'use client'
 import Link from 'next/link'
-import { useActionState } from 'react'
+import { useActionState, useState } from 'react'
 import { nuevaContrasena, recuperarContrasena, signIn, signUp, type FormState } from '../app/actions'
+
+// Campo de contraseña con botón para mostrarla u ocultarla mientras se escribe
+function Clave(props: React.InputHTMLAttributes<HTMLInputElement>) {
+  const [ver, setVer] = useState(false)
+  return (
+    <span style={{ position: 'relative', display: 'block' }}>
+      <input {...props} className="in-t" type={ver ? 'text' : 'password'} style={{ paddingRight: 56 }} />
+      <button type="button" onClick={() => setVer((v) => !v)} aria-label={ver ? 'Ocultar contraseña' : 'Mostrar contraseña'} aria-pressed={ver} aria-controls={props.id}
+        style={{ position: 'absolute', right: 4, top: '50%', transform: 'translateY(-50%)', width: 44, height: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 0, borderRadius: 10, color: 'var(--teal)', cursor: 'pointer' }}>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" />
+          {ver && <path d="M3 3l18 18" />}
+        </svg>
+      </button>
+    </span>
+  )
+}
 
 function Msg({ s }: { s: FormState }) {
   if (!s) return null
@@ -22,7 +39,7 @@ export function LoginForm({ configError }: { configError?: boolean }) {
       {configError && <p className="alert err">Falta configurar Supabase. Revisa el archivo .env.local.</p>}
       <Msg s={state} />
       <div className="field"><label htmlFor="l-e">Email</label><input id="l-e" name="email" className="in-t" type="email" autoComplete="email" placeholder="tu@email.com" required /></div>
-      <div className="field"><label htmlFor="l-p">Contraseña</label><input id="l-p" name="password" className="in-t" type="password" autoComplete="current-password" placeholder="Tu contraseña" required /></div>
+      <div className="field"><label htmlFor="l-p">Contraseña</label><Clave id="l-p" name="password" autoComplete="current-password" placeholder="Tu contraseña" required /></div>
       <Link href="/recuperar" className="small" style={{ fontWeight: 700 }}>¿Has olvidado tu contraseña?</Link>
       <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Entrando…' : 'Entrar'}</button>
       <hr className="hr" />
@@ -57,7 +74,7 @@ export function RegisterForm() {
           <div className="field"><label htmlFor="r-a">Apellidos</label><input id="r-a" name="apellidos" className="in-t" type="text" autoComplete="family-name" placeholder="Tus apellidos" required /></div>
           <div className="field"><label htmlFor="r-e">Email</label><input id="r-e" name="email" className="in-t" type="email" autoComplete="email" placeholder="tu@email.com" required /></div>
           <div className="field"><label htmlFor="r-t">WhatsApp</label><input id="r-t" name="telefono" className="in-t" type="tel" inputMode="tel" autoComplete="tel" placeholder="+34 600 000 000" /></div>
-          <div className="field"><label htmlFor="r-p">Contraseña</label><input id="r-p" name="password" className="in-t" type="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
+          <div className="field"><label htmlFor="r-p">Contraseña</label><Clave id="r-p" name="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
           <label className="opt" style={{ alignItems: 'flex-start', fontSize: 14 }}><input type="checkbox" name="privacidad" /><span>He leído y acepto la <Link href="/privacidad" style={{ color: 'inherit', textDecoration: 'underline' }}>política de privacidad</Link> y los términos del servicio.</span></label>
           <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Creando tu cuenta…' : 'Crear mi cuenta'}</button>
           <p className="small muted" style={{ textAlign: 'center' }}>El pago con Stripe se activará en la siguiente fase. ¿Ya tienes cuenta? <Link href="/login">Inicia sesión</Link></p>
@@ -94,8 +111,8 @@ export function NuevaContrasenaForm({ error }: { error?: boolean }) {
       </div>
       {error && !state && <p className="alert err" role="alert">El enlace ha caducado o ya se ha usado. <Link href="/recuperar" style={{ fontWeight: 700, color: 'inherit', textDecoration: 'underline' }}>Pedir un enlace nuevo</Link></p>}
       <Msg s={state} />
-      <div className="field"><label htmlFor="nc-p">Contraseña nueva</label><input id="nc-p" name="password" className="in-t" type="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
-      <div className="field"><label htmlFor="nc-p2">Repite la contraseña</label><input id="nc-p2" name="password2" className="in-t" type="password" autoComplete="new-password" placeholder="La misma contraseña" minLength={8} required /></div>
+      <div className="field"><label htmlFor="nc-p">Contraseña nueva</label><Clave id="nc-p" name="password" autoComplete="new-password" placeholder="Mínimo 8 caracteres" minLength={8} required /></div>
+      <div className="field"><label htmlFor="nc-p2">Repite la contraseña</label><Clave id="nc-p2" name="password2" autoComplete="new-password" placeholder="La misma contraseña" minLength={8} required /></div>
       <button className="btn b1 full" type="submit" disabled={pending}>{pending ? 'Guardando…' : 'Guardar y entrar'}</button>
     </form>
   )
