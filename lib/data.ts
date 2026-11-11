@@ -13,6 +13,7 @@ export type Profile = {
   consentimiento_salud: boolean
   objetivos: string[]
   franjas: string[]
+  avisos_whatsapp?: boolean
 }
 export type Session = { id: string; disciplina: 'Pilates' | 'Total Barre' | 'Mindfulness'; starts_at: string; capacidad: number; cancelada: boolean }
 export type Reservation = { id: string; session_id: string; estado: string; class_sessions: Session }

@@ -2,16 +2,18 @@ import { cap, fmtDiaMes, fmtHora } from './data'
 import { emailCancelacion, emailPlazaLibre, enviarEmail } from './email'
 import { createAdminClient } from './supabase/admin'
 import { borrarZoom } from './zoom'
+import { telefonoAvisos, whatsappCancelacion, whatsappPlazaLibre } from './whatsapp'
 
 type Admin = NonNullable<ReturnType<typeof createAdminClient>>
 const cuando = (iso: string) => `${fmtDiaMes(iso)} a las ${fmtHora(iso)}`
 
 async function destinatario(admin: Admin, userId: string) {
-  const [{ data: u }, { data: p }] = await Promise.all([
+  const [{ data: u }, { data: p }, tel] = await Promise.all([
     admin.auth.admin.getUserById(userId),
     admin.from('profiles').select('nombre').eq('id', userId).maybeSingle(),
+    telefonoAvisos(admin, userId),
   ])
-  return u.user?.email ? { email: u.user.email, nombre: (p?.nombre as string | undefined) ?? '' } : null
+  return u.user?.email ? { email: u.user.email, nombre: (p?.nombre as string | undefined) ?? '', tel } : null
 }
 
 /** Mónica ha cancelado una clase: email a quien tenía plaza o estaba en lista de espera, se vacía la lista y se borra la reunión de Zoom. Solo una vez por clase. */
@@ -37,6 +39,7 @@ export async function avisarCancelacion(sessionId: string, web: string) {
     if (!d) continue
     const m = emailCancelacion({ nombre: d.nombre, disciplina: s.disciplina, cuando: cuando(s.starts_at), enLista: r.estado === 'lista_espera', web })
     if (await enviarEmail({ to: d.email, subject: `Clase cancelada: ${s.disciplina}, ${cap(cuando(s.starts_at))}`, ...m })) enviados++
+    if (d.tel) await whatsappCancelacion(d.tel, { nombre: d.nombre, disciplina: s.disciplina, cuando: cuando(s.starts_at), enlace: `${web}/app/directos` })
   }
   await admin.from('reservations').delete().eq('session_id', s.id).eq('estado', 'lista_espera')
   return { ok: true, enviados }
@@ -55,6 +58,9 @@ export async function avisarListaEspera(sessionId: string, web: string) {
     const d = await destinatario(admin, r.user_id)
     if (!d) continue
     const m = emailPlazaLibre({ nombre: d.nombre, disciplina: s.disciplina, cuando: cuando(s.starts_at), sessionId: s.id, web })
-    await enviarEmail({ to: d.email, subject: `Plaza libre: ${s.disciplina}, ${cap(cuando(s.starts_at))}`, ...m })
+    await Promise.all([
+      enviarEmail({ to: d.email, subject: `Plaza libre: ${s.disciplina}, ${cap(cuando(s.starts_at))}`, ...m }),
+      d.tel ? whatsappPlazaLibre(d.tel, { nombre: d.nombre, disciplina: s.disciplina, cuando: cuando(s.starts_at), enlace: `${web}/app/directos?sel=${s.id}` }) : null,
+    ])
   }
 }

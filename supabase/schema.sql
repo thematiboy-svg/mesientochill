@@ -17,8 +17,12 @@ create table if not exists public.profiles (
   consentimiento_salud boolean not null default false,
   objetivos text[] not null default '{}',
   franjas text[] not null default '{}',
+  avisos_whatsapp boolean not null default false,
   created_at timestamptz not null default now()
 );
+
+-- Para bases de datos creadas antes de los avisos por WhatsApp
+alter table public.profiles add column if not exists avisos_whatsapp boolean not null default false;
 
 -- Clases en directo programadas (20 min, máximo 10 personas)
 create table if not exists public.class_sessions (
@@ -68,13 +72,14 @@ create policy "vídeos: leer (autenticadas)" on public.videos for select to auth
 create or replace function public.handle_new_user() returns trigger
 language plpgsql security definer set search_path = public as $$
 begin
-  insert into public.profiles (id, nombre, apellidos, telefono, plan)
+  insert into public.profiles (id, nombre, apellidos, telefono, plan, avisos_whatsapp)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'nombre', ''),
     coalesce(new.raw_user_meta_data->>'apellidos', ''),
     new.raw_user_meta_data->>'telefono',
-    coalesce(nullif(new.raw_user_meta_data->>'plan', ''), 'directo')
+    coalesce(nullif(new.raw_user_meta_data->>'plan', ''), 'directo'),
+    coalesce((new.raw_user_meta_data->>'avisos_whatsapp')::boolean, false)
   );
   return new;
 end $$;
