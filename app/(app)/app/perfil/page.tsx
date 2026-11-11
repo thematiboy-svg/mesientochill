@@ -28,6 +28,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             <div className="field"><label htmlFor="p-e">Email</label><input id="p-e" className="in-t" type="email" value={user.email ?? ''} readOnly /></div>
             <div className="field"><label htmlFor="p-t">WhatsApp</label><input id="p-t" name="telefono" className="in-t" type="tel" inputMode="tel" autoComplete="tel" placeholder="+34 600 000 000" defaultValue={p?.telefono ?? ''} /></div>
           </div>
+          <label className="opt" style={{ alignItems: 'flex-start', fontSize: 14 }}><input type="checkbox" name="avisos_whatsapp" defaultChecked={!!p?.avisos_whatsapp} /><span>Quiero recibir también por WhatsApp los avisos de mis clases: reservas, clases canceladas y plazas libres. Puedes desactivarlo cuando quieras en tu perfil.</span></label>
         </section>
         <section className="card stack g20">
           <h2 className="t3">Tu nivel</h2>
