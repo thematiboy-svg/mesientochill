@@ -1,6 +1,6 @@
 # MeSientoChill: roadmap del proyecto
 
-Actualizado el 3 de noviembre de 2026. Las fases van en orden de dependencia; no hay fechas porque todavía no se han fijado.
+Actualizado el 11 de noviembre de 2026. Las fases van en orden de dependencia; no hay fechas porque todavía no se han fijado.
 
 ## Fase 0 · Hecho
 
@@ -10,6 +10,13 @@ Actualizado el 3 de noviembre de 2026. Las fases van en orden de dependencia; no
 - Footer con enlaces legales e iconos de redes sociales (Instagram, TikTok, Facebook, YouTube).
 - Prototipos navegables de la web/app y de la landing.
 - App Next.js con todas las páginas públicas y legales, y formulario de contacto con endpoint `/api/contacto`.
+- Landing del piloto como portada, con páginas legales, Chillsi y email de respuesta propios; la web queda oculta tras `/web1`.
+- Enlaces reales a Instagram, TikTok, Facebook y YouTube.
+- Zona privada con Supabase: registro (con WhatsApp), login, recuperar contraseña, reservas, lista de espera, créditos y RLS.
+- Zoom automático por clase y emails de confirmación, clase cancelada y plaza libre.
+- Biblioteca de vídeos con YouTube y panel de Mónica para gestionar y cancelar clases.
+- Plan de integración con Stripe (`docs/STRIPE.md`).
+- SEO técnico: sitemap, robots.txt, metadatos, Open Graph, datos estructurados y verificación en Google Search Console.
 
 ## Fase 1 · Cerrar la web pública (antes de publicar)
 
@@ -19,13 +26,13 @@ Bloquea el lanzamiento de la parte pública.
 2. **Revisión legal** de Privacidad, Aviso legal y Cookies por un abogado (los textos son una plantilla basada en RGPD y LSSI). Decidir si el formulario basta como medio de contacto en el Aviso legal.
 3. **Cookies:** listar las cookies reales que usará la web y, si hay opcionales, añadir el banner de consentimiento.
 4. **Accesibilidad:** completar los datos de la auditoría y de los subtítulos.
-5. **Redes sociales:** sustituir los enlaces provisionales por los perfiles reales.
+5. ~~**Redes sociales:** sustituir los enlaces provisionales por los perfiles reales.~~ Hecho.
 6. **Formulario de contacto:** configurar `RESEND_API_KEY` y `CONTACT_TO_EMAIL` (y opcionalmente `CONTACT_FROM_EMAIL`) en el entorno de producción y probar un envío.
 7. **Figma de la landing:** actualizarlo con el diseño actual (pendiente por el límite de llamadas del plan Starter de Figma).
 
 ## Fase 2 · Zona privada con Supabase
 
-Es el mayor bloque de desarrollo.
+Casi terminada: hechos los puntos 1, 2, 4 (salvo eventos) y 5, y casi todas las pantallas. Falta el horario real, eventos con reserva, crear clases y subir vídeos desde el panel de Mónica y marcar asistencia.
 
 1. Autenticación: registro, inicio de sesión y recuperación de contraseña, con el campo WhatsApp en el registro.
 2. Base de datos: usuarias, planes, créditos, reservas, clases, eventos y vídeos.
@@ -49,12 +56,14 @@ Es el mayor bloque de desarrollo.
 
 1. Pruebas de extremo a extremo de los flujos clave: registro, reserva, pago, cancelación.
 2. Revisión de accesibilidad (WCAG 2.2 AA) y rendimiento en móvil.
-3. Entorno de producción: dominio, variables de entorno, copias de seguridad y monitorización.
-4. Compilar, comprobar y entregar.
+3. Entorno de producción: variables de entorno, copias de seguridad y monitorización (dominio y SEO ya hechos).
+4. Google Search Console: enviar `sitemap.xml` y pedir la indexación de `/landing`. Al publicar la web, poner `WEB_PUBLICA` a `true` en `lib/site.ts`.
+5. Compilar, comprobar y entregar.
 
 ## Fase 5 · Después del lanzamiento
 
 - Medir y ajustar: uso de créditos, asistencia a clases, bajas.
+- Contenido para SEO: artículos sobre lo que busca la gente (pilates en casa, estrés laboral) y Perfil de Empresa en Google.
 - Mejoras de contenido (biblioteca de vídeos, eventos) según lo que pida la comunidad.
 - Revisar los textos legales cuando cambien los servicios o las cookies.
 
