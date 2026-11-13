@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import EventosGaleria from '../../components/EventosGaleria'
 
 export default function P_eventos() {
   return (
@@ -15,7 +16,7 @@ export default function P_eventos() {
 <div className="card stack g12"><h3 className="t3">Mindfulness y actividades</h3><p className="muted" style={{ fontSize: 17 }}>Pr&aacute;cticas guiadas por M&oacute;nica y actividades para hacer en grupo.</p></div>
 <div className="card stack g12"><h3 className="t3">Comida sana</h3><p className="muted" style={{ fontSize: 17 }}>Comemos y bebemos juntos algo rico y saludable.</p></div>
 <div className="card stack g12"><h3 className="t3">Haz comunidad</h3><p className="muted" style={{ fontSize: 17 }}>Un encuentro para conocer a las personas de MeSientoChill.&nbsp;<br />Aunque cualquier persona ser&aacute; bienvenida.</p></div></div>
-<div className="ph" style={{ height: 240, borderRadius: 28 }}>[FOTOS DE EVENTOS ANTERIORES]</div></div></section>
+<EventosGaleria /></div></section>
     </>
   )
 }
