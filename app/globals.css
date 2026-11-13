@@ -310,3 +310,26 @@ button.chip.coral:hover{background:#FF7F66;border-color:#FF7F66}
 @media (max-width:900px){.galeria{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px;gap:12px}.galeria a{border-radius:16px}}
 @media (max-width:520px){.galeria{grid-auto-rows:130px;gap:8px}.galeria a{border-radius:14px}}
 @media (prefers-reduced-motion:reduce){.galeria img{transition:none}.galeria a:hover img{transform:none}}
+/* Lightbox de la galería de eventos */
+.lightbox{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:24px 88px;border:0;background:rgba(14,47,43,.94);color:#fff;display:none;align-items:center;justify-content:center}
+.lightbox[open]{display:flex}
+.lightbox::backdrop{background:transparent}
+.lb-fig{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:100%;max-height:100%}
+.lb-fig img{display:block;max-width:100%;max-height:calc(100dvh - 110px);width:auto;height:auto;border-radius:16px;animation:lb-in .25s ease}
+.lb-fig figcaption{font-size:15px;line-height:1.4;text-align:center;opacity:.9;max-width:720px}
+.lb-nav,.lb-cerrar{position:absolute;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;transition:background .18s ease}
+.lb-nav:hover,.lb-cerrar:hover{background:rgba(255,255,255,.28)}
+.lb-nav:focus-visible,.lb-cerrar:focus-visible{outline:3px solid #FF9782;outline-offset:2px}
+.lb-nav{top:50%;transform:translateY(-50%);width:56px;height:56px}
+.lb-prev{left:20px}.lb-next{right:20px}
+.lb-cerrar{top:16px;right:16px;width:48px;height:48px}
+@keyframes lb-in{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+@media (max-width:700px){
+.lightbox{padding:64px 12px 24px}
+.lb-nav{top:auto;bottom:16px;transform:none;width:48px;height:48px}
+.lb-prev{left:16px}.lb-next{right:16px}
+.lb-fig img{max-height:calc(100dvh - 190px)}
+.lb-fig figcaption{padding:0 56px;font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){.lb-fig img{animation:none}}
+html:has(dialog.lightbox[open]){overflow:hidden}
