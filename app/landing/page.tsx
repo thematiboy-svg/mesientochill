@@ -141,7 +141,7 @@ export default function Landing() {
 <section id="monica" style={{ padding: "96px 40px" }}>
 <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "48px 72px" }}>
 <div style={{ flex: "1 1 360px", minWidth: "0", minHeight: 480, aspectRatio: "4 / 5", borderRadius: 36, background: "#E6F6F3", overflow: "hidden" }}>
-<img src="/monica-estudio.jpg" alt="Mónica Muñoz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "55% 40%", display: "block" }} />
+<img src="/monica-estudio.jpg" alt="Mónica Muñoz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%", display: "block" }} />
 </div>
 <div style={{ flex: "1 1 420px", minWidth: "0", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20 }}>
 <span style={{ fontSize: 13, fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: "#006B5E" }}>Tu instructora</span>

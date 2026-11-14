@@ -47,7 +47,7 @@ export default function P_home() {
 </div><Link className="btn b4" href="/precios" style={{ alignSelf: "flex-start" }}>Ver todos los detalles de los planes</Link></div></section>
 
 <section className="sec"><div className="in wrapr center" style={{ gap: "48px 72px" }}>
-<div className="img" style={{ flex: "1 1 320px", minWidth: "0", aspectRatio: "4/5", maxHeight: 560 }}><img src="/monica-estudio.jpg" alt="Mónica Muñoz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ objectPosition: "55% 40%" }} /></div>
+<div className="img" style={{ flex: "1 1 320px", minWidth: "0", aspectRatio: "4/5", maxHeight: 560 }}><img src="/monica-estudio.jpg" alt="Mónica Muñoz, instructora de MeSientoChill, sonriendo en un estudio de Total Barre" style={{ objectPosition: "50% 30%" }} /></div>
 <div className="stack g20" style={{ flex: "1 1 420px", minWidth: "0", alignItems: "flex-start" }}><span className="eyebrow">Tu instructora</span><h2 className="t2">Hola, soy M&oacute;nica Mu&ntilde;oz</h2>
 <p className="lead">M&aacute;s de 20 a&ntilde;os cuidando la salud y el bienestar de las personas. Hoy te acompa&ntilde;o con Pilates, Total Barre y Mindfulness para aliviar el estr&eacute;s, las dolencias y la apat&iacute;a.</p><Link className="btn b1" href="/monica">Conoce a M&oacute;nica</Link></div></div></section>
 
