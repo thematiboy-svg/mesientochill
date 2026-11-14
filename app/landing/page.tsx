@@ -133,7 +133,7 @@ export default function Landing() {
 <p style={{ margin: "0", fontSize: 17 }}>Con el cuerpo m&aacute;s suelto y la mente m&aacute;s clara.</p>
 </div>
 </div>
-<p style={{ margin: "0", display: "flex", alignItems: "center", gap: 16, background: "rgba(255, 255, 255, 0.12)", borderLeft: "4px solid #FF9782", borderRadius: 20, padding: "20px 24px", fontSize: 19, fontWeight: "600", color: "#FFFFFF" }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF9782" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: "none" }}><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z" /><path d="m9 12 2 2 4-4" /></svg>Una de las ventajas de las clases en directo online es que te pueden corregir y evitar futuras lesiones.</p>
+<p style={{ margin: "0", display: "flex", alignItems: "center", gap: 16, background: "rgba(255, 255, 255, 0.12)", borderLeft: "4px solid #FF9782", borderRadius: 20, padding: "20px 24px", fontSize: 19, fontWeight: "600", color: "#FFFFFF" }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF9782" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: "none" }}><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z" /><path d="m9 12 2 2 4-4" /></svg>Una de las ventajas de las clases en directo online frente al v&iacute;deo, es que te pueden corregir y evitar futuras lesiones.</p>
 <p style={{ margin: "0", fontSize: 22, fontWeight: "700" }}>Cuando llevas la atenci&oacute;n al cuerpo, el estr&eacute;s afloja y la mente se despeja. Una pausa tan breve como un caf&eacute;, pensada solo para ti.</p>
 </div>
 </section>
