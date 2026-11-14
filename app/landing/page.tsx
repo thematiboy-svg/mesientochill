@@ -219,7 +219,7 @@ export default function Landing() {
 </div>
 <div className="ev-card" style={{ flex: "1 1 320px", minWidth: "0", background: "#FFFFFF", borderRadius: 28, padding: 32, display: "flex", flexDirection: "column", gap: 16 }}>
 <p style={{ margin: "0", display: "flex", alignItems: "baseline", gap: 10 }}><span style={{ fontSize: 48, fontWeight: "800", lineHeight: "1" }}>38 &euro;</span><span style={{ fontSize: 16, fontWeight: "600", color: "#3B5753" }}>por persona</span></p>
-<p className="ev-dis" style={{ margin: "0", fontSize: 17, fontWeight: "700", color: "#006B5E" }}>Si est&aacute;s suscrita o suscrito: 30,40 &euro; con el plan Directo y v&iacute;deos (20 % de descuento) y 34,20 &euro; con Solo v&iacute;deos (10 % de descuento)</p>
+<p className="ev-dis" style={{ margin: "0", fontSize: 17, fontWeight: "400", color: "#006B5E" }}>Si est&aacute;s suscrita o suscrito: <strong style={{ fontWeight: 700 }}>30,40 &euro;</strong> con el plan Directo y v&iacute;deos (20 % de descuento) y <strong style={{ fontWeight: 700 }}>34,20 &euro;</strong> con Solo v&iacute;deos (10 % de descuento)</p>
 <a className="lp-btn lp-b3 ev-btn" href="#apuntate" style={{ background: "#0E2F2B", color: "#FFFFFF", textDecoration: "none", padding: "16px 32px", borderRadius: 999, fontWeight: "700", fontSize: 17, minHeight: 52, display: "inline-flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>Av&iacute;same del pr&oacute;ximo</a>
 </div>
 </div>
