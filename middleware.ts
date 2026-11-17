@@ -24,8 +24,8 @@ function landingOWeb(request: NextRequest): NextResponse | null {
     return r
   }
   if (WEB_PUBLICA) return null
-  // Siempre abiertos: la landing, las API de sus formularios y los archivos (iconos, imágenes…)
-  const abierto = path === '/landing' || path.startsWith('/landing/') || path.startsWith('/api/') || /\.[a-z0-9]+$/i.test(path)
+  // Siempre abiertos: la landing, el sistema de diseño, las API de sus formularios y los archivos (iconos, imágenes…)
+  const abierto = path === '/landing' || path.startsWith('/landing/') || path === '/design-system' || path.startsWith('/design-system/') || path.startsWith('/api/') || /\.[a-z0-9]+$/i.test(path)
   if (abierto || request.cookies.get(PERMISO_WEB)) return null
   return NextResponse.redirect(new URL('/landing', request.url))
 }
