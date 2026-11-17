@@ -8,7 +8,7 @@ import './landing.css'
 export default function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="lp">
-      <div style={{ width: '100%', background: '#FFF9F6', color: '#0E2F2B', fontFamily: "'Britanica', 'Montserrat', sans-serif", fontSize: 18, lineHeight: 1.65 }}>
+      <div style={{ width: '100%', background: '#FFF9F6', color: '#0E2F2B', fontFamily: "'Montserrat', sans-serif", fontSize: 18, lineHeight: 1.65 }}>
         <LandingHeader />
         {children}
         <LandingFooter />
