@@ -6,7 +6,7 @@ import { orgJsonLd, faqJsonLd, WEB_PUBLICA } from '../../lib/site'
 
 export const metadata: Metadata = {
   title: { absolute: 'Pilates, Total Barre y Mindfulness online en directo · MeSientoChill' },
-  description: 'Clases online en directo de Pilates, Total Barre y Mindfulness con Mónica Muñoz: pausas de 20 minutos, máximo 10 personas. Apúntate al piloto.',
+  description: 'Me Siento Chill: clases online en directo de Pilates, Total Barre y Mindfulness con Mónica Muñoz. Pausas de 20 minutos, máximo 10 personas. Apúntate al piloto.',
   // Mientras la web esté oculta, la landing se ve en la portada (/): esa es su dirección principal para Google
   alternates: { canonical: WEB_PUBLICA ? '/landing' : '/' },
   openGraph: {

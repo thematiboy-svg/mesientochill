@@ -3,6 +3,15 @@
 // Dominio principal. Se puede cambiar con NEXT_PUBLIC_SITE_URL (sin barra final).
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mesientochill.com').replace(/\/$/, '')
 export const SITE_NAME = 'MeSientoChill'
+// Otras formas de escribir la marca, para que Google las asocie a la web
+export const SITE_ALT_NAMES = ['Me Siento Chill', 'Mesientochill']
+// Perfiles oficiales en redes (los mismos que el pie de página)
+export const SITE_SOCIAL = [
+  'https://www.instagram.com/mesientochill_/',
+  'https://www.tiktok.com/@mesientochill',
+  'https://www.youtube.com/@MeSientoChill',
+  'https://www.facebook.com/share/1A94zMU8V8/',
+]
 export const SITE_DESCRIPTION =
   'Clases online de Pilates, Total Barre y Mindfulness en directo con Mónica Muñoz. Pausas de 20 minutos, máximo 10 personas, desde casa o la oficina.'
 
@@ -19,6 +28,8 @@ export function orgJsonLd() {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#org`,
         name: SITE_NAME,
+        alternateName: SITE_ALT_NAMES,
+        sameAs: SITE_SOCIAL,
         url: SITE_URL,
         logo: `${SITE_URL}/logo.svg`,
         email: 'info@mesientochill.com',
@@ -39,6 +50,7 @@ export function orgJsonLd() {
         '@id': `${SITE_URL}/#web`,
         url: SITE_URL,
         name: SITE_NAME,
+        alternateName: SITE_ALT_NAMES,
         inLanguage: 'es-ES',
         publisher: { '@id': `${SITE_URL}/#org` },
       },
