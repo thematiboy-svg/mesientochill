@@ -1,5 +1,6 @@
 import P from '../../_pages/P_cookies'
-export const metadata = { title: 'Política de cookies' }
+// Páginas legales: accesibles desde el pie, pero fuera de los resultados de Google
+export const metadata = { title: 'Política de cookies', robots: { index: false, follow: true } }
 export default function Page() {
   return <P />
 }
