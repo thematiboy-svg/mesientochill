@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './tokens.css'
 import { SIDE_ITEMS, ADMIN_ITEM } from '../../components/side-items'
 import { intro, secciones, componentes, colores, tipos, espacios, radios, sombras } from './data'
+import { NORMAS, NORMAS_COLOR, EJEMPLOS_COLOR } from './normas'
 
 // Sistema de diseño de MeSientoChill: colores, tipografía, espacios y componentes reales de la web.
 // El contenido sale de ./data.ts (generado a partir del sistema de diseño) y los componentes
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 
 const NAV = [
   ['marca', 'Marca'],
+  ['normas', 'Normas de uso'],
   ['color', 'Color'],
   ['tipografia', 'Tipografía'],
   ['espacio', 'Espacio y forma'],
@@ -63,6 +65,72 @@ export default function DesignSystemPage() {
           </div>
         </section>
 
+        <section className="sec blush" id="normas">
+          <div className="in stack g48">
+            <div className="stack g8" style={{ maxWidth: 820 }}>
+              <span className="eyebrow">Normas de uso</span>
+              <h2 className="t2">Qué sí y qué no</h2>
+              <p className="lead">Reglas para que todo lo que se haga con la marca se vea igual. Los contrastes son los medidos con la paleta real.</p>
+            </div>
+
+            <div className="stack g16">
+              <h3 className="t4">Combinaciones de color</h3>
+              <div className="ds-ej">
+                {EJEMPLOS_COLOR.map((e) => (
+                  <div key={e.nota} className="card stack g12">
+                    <div className="ds-ej-par">
+                      <div>
+                        <span className="ds-tag si">Sí</span>
+                        <span className="ds-ej-m" style={{ color: e.bien.fg, background: e.bien.bg }}>{e.bien.txt}</span>
+                      </div>
+                      <div>
+                        <span className="ds-tag no">No</span>
+                        <span className="ds-ej-m" style={{ color: e.mal.fg, background: e.mal.bg }}>{e.mal.txt}</span>
+                      </div>
+                    </div>
+                    <p className="small muted">{e.nota}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="stack g16">
+              <h3 className="t4">Color por color</h3>
+              <div className="ds-tabla">
+                {Object.entries(NORMAS_COLOR).map(([token, n]) => {
+                  const c = colores.find((x) => x.name === token)
+                  return (
+                    <div key={token}>
+                      <div className="ds-tabla-c">
+                        <i style={{ background: c?.value }} />
+                        <b>{token}</b>
+                      </div>
+                      <ul className="ds-reglas si">{n.si.map((r) => <li key={r}>{r}</li>)}</ul>
+                      <ul className="ds-reglas no">{n.no.map((r) => <li key={r}>{r}</li>)}</ul>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="grid c2" style={{ gap: 24 }}>
+              {NORMAS.map((a) => (
+                <article key={a.area} className="card stack g16">
+                  <h3 className="t3">{a.area}</h3>
+                  <div className="stack g8">
+                    <span className="ds-tag si">Sí</span>
+                    <ul className="ds-reglas si">{a.si.map((r) => <li key={r}>{r}</li>)}</ul>
+                  </div>
+                  <div className="stack g8">
+                    <span className="ds-tag no">No</span>
+                    <ul className="ds-reglas no">{a.no.map((r) => <li key={r}>{r}</li>)}</ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="sec white" id="color">
           <div className="in stack g32">
             <div className="stack g8">
@@ -78,6 +146,13 @@ export default function DesignSystemPage() {
                     <b>{c.name}</b>
                     <span className="ds-hex">{c.value}</span>
                     <span className="muted">{c.usage}</span>
+                    {NORMAS_COLOR[c.name] && (
+                      <ul className="ds-no">
+                        {NORMAS_COLOR[c.name].no.map((n) => (
+                          <li key={n}>{n}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               ))}
