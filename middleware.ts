@@ -4,7 +4,8 @@ import { supabaseUrl, supabaseAnonKey } from './lib/supabase/env'
 import { WEB_PUBLICA } from './lib/site'
 
 // Mientras solo esté publicada la landing, la web queda oculta:
-// - Quien entra en cualquier página de la web va a /landing.
+// - La portada (/) muestra la landing sin cambiar la dirección, para que Google tenga una sola URL principal.
+// - Quien entra en cualquier otra página de la web va a la portada.
 // - /web1 (o /web1/lo-que-sea) guarda un permiso en el navegador y abre la web; dura 90 días.
 // - /web1/salir quita el permiso.
 // Para publicar la web, pon WEB_PUBLICA a true en lib/site.ts.
@@ -13,7 +14,7 @@ const PERMISO_WEB = 'msc_web'
 function landingOWeb(request: NextRequest): NextResponse | null {
   const path = request.nextUrl.pathname
   if (path === '/web1/salir') {
-    const r = NextResponse.redirect(new URL('/landing', request.url))
+    const r = NextResponse.redirect(new URL('/', request.url))
     r.cookies.delete(PERMISO_WEB)
     return r
   }
@@ -27,7 +28,8 @@ function landingOWeb(request: NextRequest): NextResponse | null {
   // Siempre abiertos: la landing, el sistema de diseño, las API de sus formularios y los archivos (iconos, imágenes…)
   const abierto = path === '/landing' || path.startsWith('/landing/') || path === '/design-system' || path.startsWith('/design-system/') || path.startsWith('/api/') || /\.[a-z0-9]+$/i.test(path)
   if (abierto || request.cookies.get(PERMISO_WEB)) return null
-  return NextResponse.redirect(new URL('/landing', request.url))
+  if (path === '/') return NextResponse.rewrite(new URL('/landing' + request.nextUrl.search, request.url))
+  return NextResponse.redirect(new URL('/', request.url))
 }
 
 export async function middleware(request: NextRequest) {
