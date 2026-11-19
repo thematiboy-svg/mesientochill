@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   })
   if (!WEB_PUBLICA) {
     return [
-      url('/landing', 1, 'weekly'),
+      url('/', 1, 'weekly'),
       url('/landing/contacto', 0.5),
       url('/landing/aviso-legal', 0.1, 'yearly'),
       url('/landing/privacidad', 0.1, 'yearly'),

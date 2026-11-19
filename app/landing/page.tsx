@@ -2,14 +2,15 @@ import type { Metadata } from 'next'
 import LandingForm from './LandingForm'
 import Faqs, { FAQS } from '../../components/Faqs'
 import JsonLd from '../../components/JsonLd'
-import { orgJsonLd, faqJsonLd } from '../../lib/site'
+import { orgJsonLd, faqJsonLd, WEB_PUBLICA } from '../../lib/site'
 
 export const metadata: Metadata = {
   title: { absolute: 'Pilates, Total Barre y Mindfulness online en directo · MeSientoChill' },
   description: 'Clases online en directo de Pilates, Total Barre y Mindfulness con Mónica Muñoz: pausas de 20 minutos, máximo 10 personas. Apúntate al piloto.',
-  alternates: { canonical: '/landing' },
+  // Mientras la web esté oculta, la landing se ve en la portada (/): esa es su dirección principal para Google
+  alternates: { canonical: WEB_PUBLICA ? '/landing' : '/' },
   openGraph: {
-    type: 'website', locale: 'es_ES', siteName: 'MeSientoChill', url: '/landing',
+    type: 'website', locale: 'es_ES', siteName: 'MeSientoChill', url: WEB_PUBLICA ? '/landing' : '/',
     title: '20 minutos para cambiar tu energía · MeSientoChill',
     description: 'Pilates, Total Barre y Mindfulness en directo con Mónica Muñoz. Apúntate al piloto: clases de 20 minutos, máximo 10 personas.',
     images: [{ url: '/monica-estudio.jpg', alt: 'Mónica Muñoz, instructora de MeSientoChill' }],

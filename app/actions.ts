@@ -5,6 +5,7 @@ import { headers } from 'next/headers'
 import { after } from 'next/server'
 import { cap, fmtDiaMes, fmtHora } from '../lib/data'
 import { emailReserva, enviarEmail } from '../lib/email'
+import { telefonoAvisos, whatsappReserva } from '../lib/whatsapp'
 import { asegurarZoom } from '../lib/zoom'
 import { avisarListaEspera } from '../lib/avisos'
 import { createAdminClient } from '../lib/supabase/admin'
@@ -35,11 +36,12 @@ export async function signUp(_: FormState, fd: FormData): Promise<FormState> {
   const apellidos = String(fd.get('apellidos') || '').trim()
   const telefono = String(fd.get('telefono') || '').trim()
   const plan = fd.get('plan') === 'videos' ? 'videos' : 'directo'
+  const avisos_whatsapp = fd.get('avisos_whatsapp') === 'on' && !!telefono
   if (!nombre || !apellidos) return { error: 'Escribe tu nombre y tus apellidos.' }
   if (!email) return { error: 'Escribe tu email.' }
   if (password.length < 8) return { error: 'La contraseña debe tener al menos 8 caracteres.' }
   if (!fd.get('privacidad')) return { error: 'Debes aceptar la política de privacidad y los términos del servicio.' }
-  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { nombre, apellidos, telefono, plan } } })
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { nombre, apellidos, telefono, plan, avisos_whatsapp } } })
   if (error) return { error: errorRegistro(error) }
   // Si el email ya tiene cuenta, Supabase responde sin error pero no envía ningún email (identities vacío)
   if (data.user && !data.session && data.user.identities?.length === 0) return { error: 'Ya hay una cuenta con este email. Inicia sesión con tu contraseña o, si no la recuerdas, crea una nueva.', enlace: { texto: 'Recuperar mi contraseña', href: `/recuperar?email=${encodeURIComponent(email)}` } }
@@ -98,7 +100,10 @@ async function avisarReserva(supabase: NonNullable<Awaited<ReturnType<typeof cre
     supabase.from('class_sessions').select('id, disciplina, starts_at').eq('id', sessionId).single(),
   ])
   if (!u.user?.email || !s) return
-  const { data: p } = await supabase.from('profiles').select('nombre').eq('id', u.user.id).maybeSingle()
+  const [{ data: p }, tel] = await Promise.all([
+    supabase.from('profiles').select('nombre').eq('id', u.user.id).maybeSingle(),
+    telefonoAvisos(supabase, u.user.id),
+  ])
   const h = await headers()
   const web = h.get('origin') || `https://${h.get('host')}`
   const email = u.user.email
@@ -106,7 +111,10 @@ async function avisarReserva(supabase: NonNullable<Awaited<ReturnType<typeof cre
     const zoom = await asegurarZoom(s)
     const cuando = `${fmtDiaMes(s.starts_at)} a las ${fmtHora(s.starts_at)}`
     const m = emailReserva({ nombre: p?.nombre ?? '', disciplina: s.disciplina, cuando, inicio: s.starts_at, zoom, web })
-    await enviarEmail({ to: email, subject: `Reserva confirmada: ${s.disciplina}, ${cap(cuando)}`, ...m })
+    await Promise.all([
+      enviarEmail({ to: email, subject: `Reserva confirmada: ${s.disciplina}, ${cap(cuando)}`, ...m }),
+      tel ? whatsappReserva(tel, { nombre: p?.nombre ?? '', disciplina: s.disciplina, cuando, enlace: zoom || `${web}/app/reservas` }) : null,
+    ])
   })
 }
 
@@ -158,21 +166,24 @@ export async function guardarPerfil(fd: FormData) {
   if (tieneSalud && fd.get('consentimiento') !== 'on') {
     redirect('/app/perfil?error=' + encodeURIComponent('Para guardar tus datos de salud necesitamos tu consentimiento explícito.'))
   }
-  await supabase
-    .from('profiles')
-    .update({
+  const telefono = String(fd.get('telefono') || '').trim() || null
+  const cambios = {
       nombre: String(fd.get('nombre') || ''),
       apellidos: String(fd.get('apellidos') || ''),
-      telefono: String(fd.get('telefono') || '') || null,
+      telefono,
       nivel: ['nunca', 'algo', 'regular'].includes(nivel) ? nivel : null,
       molestias,
       notas_salud: String(fd.get('notas_salud') || '') || null,
       consentimiento_salud: fd.get('consentimiento') === 'on',
       objetivos: fd.getAll('objetivos').map(String),
       franjas: fd.getAll('franjas').map(String),
-    })
-    .eq('id', u.user.id)
+  }
+  const avisos_whatsapp = fd.get('avisos_whatsapp') === 'on' && !!telefono
+  const { error } = await supabase.from('profiles').update({ ...cambios, avisos_whatsapp }).eq('id', u.user.id)
+  // Si la base de datos aún no tiene la columna avisos_whatsapp, guarda el resto igualmente
+  if (error) await supabase.from('profiles').update(cambios).eq('id', u.user.id)
   revalidatePath('/app', 'layout')
+  if (fd.get('avisos_whatsapp') === 'on' && !telefono) redirect('/app/perfil?ok=guardado&error=' + encodeURIComponent('Para recibir los avisos por WhatsApp, escribe tu número.'))
   redirect('/app/perfil?ok=guardado')
 }
 

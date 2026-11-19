@@ -57,6 +57,10 @@ Al reservar una clase, la web crea la reunión de Zoom de esa clase (solo la pri
 
 Configuración (una vez): en marketplace.zoom.us → Develop → Build App → **Server-to-Server OAuth**, con los permisos `meeting:write:meeting:admin` y `meeting:delete:meeting:admin`, y activarla. Después, en Vercel (marcadas como Sensitive): `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET` y, si la app no la crea la cuenta de Mónica, `ZOOM_USER` con su email de Zoom. Sin estas variables las reservas funcionan y el email dice que el enlace estará en Mis reservas.
 
+## WhatsApp
+
+Quien marque la casilla (en el registro o en Mi perfil) recibe también por WhatsApp los avisos de reserva, clase cancelada y plaza libre. Usa la API oficial de Meta; sin `WHATSAPP_TOKEN` y `WHATSAPP_PHONE_ID` solo se envían emails. Puesta en marcha (base de datos, cuenta de Meta, plantillas y variables): [docs/WHATSAPP.md](docs/WHATSAPP.md).
+
 ## Panel de Mónica, cancelar una clase y lista de espera
 
 Los emails de la tabla `admins` (hoy, monica@mesientochill.com, con el email confirmado) ven en la zona privada **Gestionar clases**: las clases de las próximas 4 semanas, quién tiene plaza, la lista de espera y el botón para cancelar.
