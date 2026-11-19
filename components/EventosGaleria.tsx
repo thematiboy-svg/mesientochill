@@ -2,17 +2,18 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 // Fotos de eventos anteriores (public/eventos). Cuadrícula; las verticales ocupan dos filas. Al pulsar se abre en una lightbox con navegación (flechas, teclado y deslizar en móvil).
-const FOTOS: { src: string; w: number; h: number; alt: string }[] = [
-  { src: '/eventos/evento-01.jpg', w: 666, h: 1185, alt: 'Mónica guía una clase de Pilates con piernas elevadas en una sala luminosa con velas y plantas' },
-  { src: '/eventos/evento-02.jpg', w: 788, h: 575, alt: 'Grupo sentado en esterillas escuchando en una sala con plantas' },
-  { src: '/eventos/evento-03.jpg', w: 790, h: 368, alt: 'Grupo sonriente con pelotas de playa tras una clase' },
-  { src: '/eventos/evento-04.jpg', w: 789, h: 566, alt: 'Grupo haciendo un ejercicio de Total Barre en fila en un estudio con barra' },
-  { src: '/eventos/evento-05.jpg', w: 792, h: 480, alt: 'Relajación final en una gran sala de madera con techo de cañizo' },
+// alt: descripción de la foto (lectores de pantalla). pie: texto bajo la foto ampliada (si falta, se usa alt).
+const FOTOS: { src: string; w: number; h: number; alt: string; pie?: string }[] = [
+  { src: '/eventos/evento-01.jpg', w: 666, h: 1185, alt: 'Mónica guía una clase de Pilates con piernas elevadas en una sala luminosa con velas y plantas', pie: 'En esta clase trabajamos con las piernas elevadas para activar el centro, soltar tensión lumbar y sentirnos más ligeras y presentes.' },
+  { src: '/eventos/evento-02.jpg', w: 788, h: 575, alt: 'Grupo sentado en esterillas escuchando en una sala con plantas', pie: 'Sin prisas. Sin pantallas. Sin tener que demostrar nada. Solo un círculo, unas esterillas, luz natural, plantas, respiración y personas presentes escuchándose.' },
+  { src: '/eventos/evento-03.jpg', w: 790, h: 368, alt: 'Grupo sonriente con pelotas de playa tras una clase', pie: 'Taller de Pilates en el Centro de Alto Rendimiento: movimiento, respiración, fuerza, risas y un grupo maravilloso. Gracias por crear este ambiente tan chill.' },
+  { src: '/eventos/evento-04.jpg', w: 789, h: 566, alt: 'Grupo haciendo un ejercicio de Total Barre en fila en un estudio con barra', pie: '¿Sabes esa clase en la que tiemblan las piernas, te ríes y sales más alta? Eso es Total Barre.' },
+  { src: '/eventos/evento-05.jpg', w: 792, h: 480, alt: 'Relajación final en una gran sala de madera con techo de cañizo', pie: 'Mi recomendación: MeSientoChill si necesitas parar, respirar y volver a ti, este es tu evento.' },
   { src: '/eventos/evento-06.jpg', w: 788, h: 581, alt: 'Relajación tumbados en esterillas en un parque entre árboles' },
   { src: '/eventos/evento-07.jpg', w: 632, h: 970, alt: 'Clase al aire libre sobre césped con equilibrio y pierna extendida' },
   { src: '/eventos/evento-08.jpg', w: 1400, h: 1047, alt: 'Relajación sobre toallas en el césped a la sombra de los árboles' },
   { src: '/eventos/evento-09.jpg', w: 1400, h: 873, alt: 'Relajación en círculo en un pabellón amplio' },
-  { src: '/eventos/evento-10.jpg', w: 790, h: 565, alt: 'Grupo con los brazos en alto en una clase en la playa' },
+  { src: '/eventos/evento-10.jpg', w: 790, h: 565, alt: 'Grupo con los brazos en alto en una clase en la playa', pie: 'Respirar, estirarse y soltar. Así se siente practicar yoga al aire libre en Murcia, con los pies en la arena, el mar de frente y el sol acariciando la piel.' },
 ]
 
 export default function EventosGaleria({ titulo = 'Fotos de eventos anteriores' }: { titulo?: string }) {
@@ -90,7 +91,7 @@ export default function EventosGaleria({ titulo = 'Fotos de eventos anteriores' 
             <figure className="lb-fig">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img key={f.src} src={f.src} alt={f.alt} width={f.w} height={f.h} />
-              <figcaption><span aria-live="polite">{abierta! + 1} / {n}</span> · {f.alt}</figcaption>
+              <figcaption><span aria-live="polite">{abierta! + 1} / {n}</span> · {f.pie ?? f.alt}</figcaption>
             </figure>
             <button type="button" className="lb-nav lb-next" onClick={() => ir(1)} aria-label="Foto siguiente">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
