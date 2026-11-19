@@ -9,7 +9,7 @@ export default function Copyright({ className, style }: { className?: string; st
   return (
     <p className={className} style={style}>
       © MeSientoChill {year}, creado con amor por{' '}
-      <a href="https://wabisabu.com" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3 }}>Carlos Matilla</a>
+      <a href="https://carlosmatilla.com" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3 }}>Carlos Matilla</a>
     </p>
   )
 }
