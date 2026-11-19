@@ -8,7 +8,7 @@ const FOTOS: { src: string; w: number; h: number; alt: string; pie?: string }[] 
   { src: '/eventos/evento-02.jpg', w: 788, h: 575, alt: 'Grupo sentado en esterillas escuchando en una sala con plantas', pie: 'Sin prisas. Sin pantallas. Sin tener que demostrar nada. Solo un círculo, unas esterillas, luz natural, plantas, respiración y personas presentes escuchándose.' },
   { src: '/eventos/evento-03.jpg', w: 790, h: 368, alt: 'Grupo sonriente con pelotas de playa tras una clase', pie: 'Taller de Pilates en el Centro de Alto Rendimiento: movimiento, respiración, fuerza, risas y un grupo maravilloso. Gracias por crear este ambiente tan chill.' },
   { src: '/eventos/evento-04.jpg', w: 789, h: 566, alt: 'Grupo haciendo un ejercicio de Total Barre en fila en un estudio con barra', pie: '¿Sabes esa clase en la que tiemblan las piernas, te ríes y sales más alta? Eso es Total Barre.' },
-  { src: '/eventos/evento-05.jpg', w: 792, h: 480, alt: 'Relajación final en una gran sala de madera con techo de cañizo', pie: 'Mi recomendación: MeSientoChill si necesitas parar, respirar y volver a ti, este es tu evento.' },
+  { src: '/eventos/evento-05.jpg', w: 792, h: 480, alt: 'Relajación final en una gran sala de madera con techo de cañizo', pie: 'Mi recomendación: MeSientoChill. Si necesitas parar, respirar y volver a ti, este es tu evento.' },
   { src: '/eventos/evento-06.jpg', w: 788, h: 581, alt: 'Relajación tumbados en esterillas en un parque entre árboles' },
   { src: '/eventos/evento-07.jpg', w: 632, h: 970, alt: 'Clase al aire libre sobre césped con equilibrio y pierna extendida' },
   { src: '/eventos/evento-08.jpg', w: 1400, h: 1047, alt: 'Relajación sobre toallas en el césped a la sombra de los árboles' },
