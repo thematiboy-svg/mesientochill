@@ -213,3 +213,5 @@ main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:150px}
   .ds-nav a{flex:none}
   main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:128px}
 }
+.ds-disc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.ds-disc img{width:72px;height:72px}

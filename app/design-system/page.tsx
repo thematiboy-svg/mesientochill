@@ -27,6 +27,12 @@ const NAV = [
   ['logos', 'Logos e iconos'],
 ] as const
 
+const DISCIPLINAS = [
+  { id: 'pilates', nombre: 'Pilates', fondo: 'tint', idea: 'Fuerza, control y postura.', forma: 'Círculo mint con eje vertical coral: el centro y la columna.' },
+  { id: 'total-barre', nombre: 'Total Barre', fondo: 'blush', idea: 'Tonificación sin impacto de forma dinámica.', forma: 'Barra ink, arco coral y cabeza coral: el cuerpo en la barra.' },
+  { id: 'mindfulness', nombre: 'Mindfulness', fondo: 'sand', idea: 'Respiración y atención plena.', forma: 'Círculos concéntricos mint con punto coral: la respiración.' },
+] as const
+
 const px = (v: string | number) => (typeof v === 'number' ? `${v}px` : v)
 
 export default function DesignSystemPage() {
@@ -299,6 +305,21 @@ export default function DesignSystemPage() {
               <div style={{ background: 'var(--white)' }}>
                 <img src="/simbolo.svg" alt="Símbolo de MeSientoChill" width={96} height={96} style={{ maxHeight: 96 }} />
                 <span className="small muted">simbolo.svg · hero y favicon</span>
+              </div>
+            </div>
+            <div className="stack g16" id="iconos-disciplina">
+              <h3 className="t4">Iconos de disciplina</h3>
+              <p className="small muted">Uno por disciplina, en una rejilla de 96×96 con trazo grueso (8px; 6px en Mindfulness) y los colores de marca: mint, coral e ink. Se usan a 72px sobre las tarjetas de disciplina, encima del título. No se recolorean ni se usan como icono de interfaz.</p>
+              <div className="ds-disc">
+                {DISCIPLINAS.map((d) => (
+                  <div key={d.id} className={`card ${d.fondo} stack g12`}>
+                    <img src={`/iconos/${d.id}.svg`} alt="" width={72} height={72} />
+                    <h4 className="t3">{d.nombre}</h4>
+                    <p className="small muted">{d.idea}</p>
+                    <p className="ds-meta">{d.forma}</p>
+                    <a className="small" href={`/iconos/${d.id}.svg`} download>Descargar {d.id}.svg</a>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="stack g16">

@@ -28,7 +28,7 @@ export const secciones = [
  },
  {
   "titulo": "Iconografía",
-  "html": "<ul><li>Iconos de trazo en una rejilla de 24×24, trazo de 2px, extremos y uniones redondeados, sin relleno, a 22px en el menú lateral y en <code>currentColor</code>. Los archivos de <code>Iconos/</code> llevan el trazo en <code>ink</code> porque se ven con <code>&lt;img&gt;</code>.</li><li>El icono de reproducción es un círculo blanco al 92% con triángulo <code>teal</code>.</li><li>No hay librería de iconos ni emojis: añade los nuevos dibujados con las mismas reglas.</li></ul>"
+  "html": "<ul><li>Iconos de trazo en una rejilla de 24×24, trazo de 2px, extremos y uniones redondeados, sin relleno, a 22px en el menú lateral y en <code>currentColor</code>. Los archivos de <code>Iconos/</code> llevan el trazo en <code>ink</code> porque se ven con <code>&lt;img&gt;</code>.</li><li>Iconos de disciplina (Pilates, Total Barre, Mindfulness): rejilla de 96×96, trazo de 8px (6px en Mindfulness), en mint, coral e ink, a 72px encima del título de cada disciplina. Archivos en <code>/iconos/</code>.</li><li>El icono de reproducción es un círculo blanco al 92% con triángulo <code>teal</code>.</li><li>No hay librería de iconos ni emojis: añade los nuevos dibujados con las mismas reglas.</li></ul>"
  }
 ] as const
 
