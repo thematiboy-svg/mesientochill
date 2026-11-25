@@ -215,3 +215,7 @@ main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:150px}
 }
 .ds-disc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .ds-disc img{width:72px;height:72px}
+/* Estados de foco mostrados en estático */
+.ds-estado{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--table-head);min-width:56px}
+.mk .ds-focus{outline:3px solid var(--coral);outline-offset:3px}
+.mk .ds-focus-in{border-color:var(--teal);outline:3px solid var(--coral);outline-offset:2px}
