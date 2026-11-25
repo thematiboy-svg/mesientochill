@@ -201,3 +201,15 @@
 @media (max-width:900px){.ds-tscale>div{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ds-tscale-h{display:none!important}.ds-tscale .ds-sample{grid-column:1/-1}.ds-tabla>div{grid-template-columns:minmax(0,1fr)!important}.ds-grid-demo{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.ds-grid-demo i:nth-child(n+5){display:none}}
 .ds-sem-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 @media (max-width:900px){.ds-sem-grid{grid-template-columns:minmax(0,1fr)}}
+/* Cabecera del sistema de diseño fija al hacer scroll */
+.ds-top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:150px}
+.ds-top{overflow-x:clip}
+@media (max-width:900px){
+  .ds-top .in{flex-wrap:nowrap;flex-direction:column;align-items:stretch;gap:10px}
+  .ds-top img{height:36px;align-self:flex-start}
+  .ds-nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -24px;padding:0 24px 2px}
+  .ds-nav::-webkit-scrollbar{display:none}
+  .ds-nav a{flex:none}
+  main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:128px}
+}
