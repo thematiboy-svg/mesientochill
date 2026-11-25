@@ -116,7 +116,7 @@ const ICONOS = [
 
 const A11Y = [
   ['Contraste', 'Texto normal ≥ 4,5:1 y texto grande (≥ 24px, o ≥ 19px en negrita) ≥ 3:1. Toda la paleta de texto pasa AA; ink y muted llegan a AAA.'],
-  ['Foco visible', 'Anillo coral de 3px con 3px de separación en botones, enlaces, FAQ y lightbox. Sobre cream da 2,0:1: acompáñalo siempre del cambio de color del propio control.'],
+  ['Foco visible', 'Anillo coral de 3px en botones, chips, campos, casillas, FAQ y lightbox (3px de separación; 2px en campos, que además pasan a borde teal). Sobre cream da 2,0:1: acompáñalo siempre del cambio de color del propio control.'],
   ['Área táctil', 'Mínimo 44 × 44px. Botón 52px de alto, botón pequeño 44px, campos 52px.'],
   ['Movimiento', 'Con prefers-reduced-motion se quitan las transiciones y el botón deja de subir en hover.'],
   ['Texto', 'Nunca menos de 13px. Nunca blanco sobre coral (2,1:1). Mint como texto solo a 24px o más.'],
