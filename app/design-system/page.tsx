@@ -3,6 +3,7 @@ import './tokens.css'
 import { SIDE_ITEMS, ADMIN_ITEM } from '../../components/side-items'
 import { intro, secciones, componentes, colores, tipos, espacios, radios, sombras } from './data'
 import { NORMAS, NORMAS_COLOR, EJEMPLOS_COLOR } from './normas'
+import Fundamentos from './Fundamentos'
 
 // Sistema de diseño de MeSientoChill: colores, tipografía, espacios y componentes reales de la web.
 // El contenido sale de ./data.ts (generado a partir del sistema de diseño) y los componentes
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 const NAV = [
   ['marca', 'Marca'],
   ['normas', 'Normas de uso'],
+  ['fundamentos', 'Fundamentos'],
   ['color', 'Color'],
   ['tipografia', 'Tipografía'],
   ['espacio', 'Espacio y forma'],
@@ -130,6 +132,8 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </section>
+
+        <Fundamentos />
 
         <section className="sec white" id="color">
           <div className="in stack g32">
