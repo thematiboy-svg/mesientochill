@@ -219,3 +219,10 @@ main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:150px}
 .ds-estado{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--table-head);min-width:56px}
 .mk .ds-focus{outline:3px solid var(--coral);outline-offset:3px}
 .mk .ds-focus-in{border-color:var(--teal);outline:3px solid var(--coral);outline-offset:2px}
+/* Estados hover mostrados en estático */
+.mk button.chip.ds-hover{background:var(--tint);border-color:var(--teal)}
+.mk button.chip.on.ds-hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.mk button.chip.coral.ds-hover{background:var(--coral-hover);border-color:var(--coral-hover)}
+.mk .ds-hover-in{border-color:var(--ink)}
+.mk .ds-hover-faq summary h3{color:var(--teal)}
+.mk .ds-hover-faq summary::after{background:var(--ink)}
