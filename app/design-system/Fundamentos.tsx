@@ -111,7 +111,7 @@ const ICONOS = [
   ['22px', 'Menú lateral y botones con icono'],
   ['24px', 'Tamaño base de la rejilla; acciones del lightbox'],
   ['26–28px', 'Avisos destacados y navegación del lightbox'],
-  ['72px', 'Iconos de disciplina (rejilla 96)'],
+  ['72px', 'Iconos de disciplina: rejilla 96, trazo 8px (6px en Mindfulness), colores de marca'],
 ] as const
 
 const A11Y = [
