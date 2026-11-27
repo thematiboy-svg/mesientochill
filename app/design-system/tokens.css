@@ -226,3 +226,18 @@ main section[id],main [id^="f-"],main [id^="c-"]{scroll-margin-top:150px}
 .mk .ds-hover-in{border-color:var(--ink)}
 .mk .ds-hover-faq summary h3{color:var(--teal)}
 .mk .ds-hover-faq summary::after{background:var(--ink)}
+/* Voz y contenido */
+.ds-voz{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.mk .ds-cita{font-size:15px;line-height:1.5;color:var(--teal);font-weight:600}
+.ds-tabla-voz>div{grid-template-columns:200px minmax(0,1fr) minmax(0,1.2fr)}
+.ds-tabla-vocab>div{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);align-items:center}
+.ds-tabla-h{background:var(--sand)}
+.mk .ds-tachado{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--error-fg);text-decoration-thickness:2px}
+.ds-formato{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.ds-formato .card{padding:24px}
+.mk .ds-ejf{font-family:var(--font-sans);font-size:14px;font-weight:600;background:var(--tint);color:var(--ink);padding:8px 10px;border-radius:10px;overflow-wrap:anywhere}
+.ds-check{display:flex;flex-direction:column;gap:10px;font-size:16px;line-height:1.5}
+.ds-check li{position:relative;padding-left:34px}
+.ds-check li::before{content:"";position:absolute;left:0;top:1px;width:22px;height:22px;border:2px solid var(--teal);border-radius:6px}
+@media (max-width:900px){.ds-tabla-voz>div,.ds-tabla-vocab>div{grid-template-columns:minmax(0,1fr)}.ds-tabla-h{display:none!important}}
+.ds-tabla-h .ds-tag{justify-self:start}

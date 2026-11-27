@@ -200,7 +200,7 @@ export default function Fundamentos() {
           <div className="grid c2" style={{ gap: 24 }}>
             <div className="card tint stack g12">
               <span className="eyebrow">Familia única</span>
-              <p style={{ fontSize: 64, fontWeight: 700, lineHeight: 1 }}>Montserrat</p>
+              <p style={{ fontSize: 'clamp(40px, 11vw, 64px)', fontWeight: 700, lineHeight: 1, overflowWrap: 'anywhere' }}>Montserrat</p>
               <p className="small muted">Google Fonts. Respaldo: sans-serif. Una sola familia para titulares, texto e interfaz: la jerarquía se hace con tamaño y peso, no con otra fuente.</p>
               <p style={{ fontSize: 22, letterSpacing: '.02em' }}>Aa Bb Cc Ññ 0123456789 € · ¿?¡!</p>
             </div>
